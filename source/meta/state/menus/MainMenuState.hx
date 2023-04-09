@@ -76,7 +76,7 @@ class MainMenuState extends MusicBeatState
 		Discord.changePresence('MAIN MENU', 'Main Menu');
 
 		// POKEMON YELLOW LOL
-		backdrop = new FlxBackdrop(Paths.image('menus/menu/pokemon_yellow_noise'), XY, 1, 1);
+		backdrop = new FlxBackdrop(Paths.image('menus/menu/pokemon_yellow_noise'), 1, 1, true, true, 1, 1);
 		add(backdrop);
 
 		var allCharacters:Array<String> = ['hypno'];
