@@ -206,7 +206,7 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 		background.cameras = [camHUD];
 
 		// POKEMON YELLOW LOL
-		backdrop = new FlxBackdrop(Paths.image('menus/menu/pokemon_yellow_noise'), XY, 1, 1);
+		backdrop = new FlxBackdrop(Paths.image('menus/menu/pokemon_yellow_noise'), 1, 1, true, true, 1, 1);
 		background.add(backdrop);
 
 		// background shis
