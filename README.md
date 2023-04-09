@@ -7,5 +7,5 @@ This Android Port Made By 3 Porters
 # Port Things
 - Currently on Porting/Fixing Bugs
 # Special Thanks
-- (Starmapo)[https://github.com/Starmapo] - fixing lullaby
-- (M.A. Jigsaw)[https://github.com/MAJigsaw77] - androidtools creator
+- [Starmapo](https://github.com/Starmapo) - fixing lullaby
+- [M.A. Jigsaw](https://github.com/MAJigsaw77) - androidtools creator
