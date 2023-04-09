@@ -6,3 +6,6 @@ This Android Port Made By 3 Porters
 - Stefan2008 - The Third Susmogus
 # Port Things
 - Currently on Porting/Fixing Bugs
+# Special Thanks
+- - fixing lullaby
+- @MAJigsaw77 - androidtools creator
