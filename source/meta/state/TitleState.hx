@@ -86,14 +86,14 @@ class TitleState extends MusicBeatState
 		staticBG = new FlxSprite(0, 0).loadGraphic(Paths.image('menus/title/staticBG'));
 		add(staticBG);
 
-		bgTreesFar = new FlxBackdrop(Paths.image('menus/title/bgTreesfar'), XY, 1, 1);
+		bgTreesFar = new FlxBackdrop(Paths.image('menus/title/bgTreesfar'), 1, 1, true, true, 1, 1);
 		add(bgTreesFar);
 
-		bgTrees = new FlxBackdrop(Paths.image('menus/title/bgTrees'), XY, 1, 1);
+		bgTrees = new FlxBackdrop(Paths.image('menus/title/bgTrees'), 1, 1, true, true, 1, 1);
 		bgTrees.x += 350;
 		add(bgTrees);
 
-		bgGrass = new FlxBackdrop(Paths.image('menus/title/bgGrass'), XY, 1, 1);
+		bgGrass = new FlxBackdrop(Paths.image('menus/title/bgGrass'), 1, 1, true, true, 1, 1);
 		add(bgGrass);
 
 		var vintage:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('menus/title/darknessOverlay'));
