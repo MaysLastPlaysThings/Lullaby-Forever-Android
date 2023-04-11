@@ -29,7 +29,7 @@
 	<assets path="dlls/" rename='' />
 	<assets path="plugins/" rename='' />
 	<assets path="FE-CrashDialog.exe" type="template" if="windows release" />
-	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits"/>
+	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="windows 32bits"/>
 	<!--<assets path="mods" />-->
 
 	<!-- _______________________________ Libraries ______________________________ -->
