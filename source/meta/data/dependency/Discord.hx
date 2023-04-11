@@ -1,5 +1,6 @@
 package meta.data.dependency;
 
+#if desktop
 import discord_rpc.DiscordRpc;
 import lime.app.Application;
 import meta.state.PlayState;
@@ -13,7 +14,8 @@ class Discord
 	// set up the rich presence initially
 	public static function initializeRPC()
 	{
-	#if desktop
+
+
 		DiscordRpc.start({
 			clientID: "975119671005155408",
 			onReady: onReady,
@@ -34,7 +36,6 @@ class Discord
 			largeImageKey: 'iconog',
 			largeImageText: "Hypno's Lullaby v2"
 		});
-	#end
 	}
 
 	static function onError(_code:Int, _message:String)
@@ -57,7 +58,7 @@ class Discord
 			endTimestamp = startTimestamp + endTimestamp;
 		if (PlayState.SONG != null && PlayState.SONG.song.toLowerCase() == 'sansno')
 			endTimestamp = Math.POSITIVE_INFINITY;
-
+        
 		DiscordRpc.presence({
 			details: details,
 			state: state,
@@ -78,3 +79,4 @@ class Discord
 		DiscordRpc.shutdown();
 	}
 }
+#end
