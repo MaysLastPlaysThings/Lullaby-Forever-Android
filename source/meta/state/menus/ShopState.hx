@@ -153,7 +153,7 @@ class ShopState extends MusicBeatState
 			Discord.changePresence('CHOOSING A SONG', 'Freeplay Menu');
 		#end
 
-		var rawJson = openfl.utils.Assets.getText(Paths.getPath('images/shop/shopText.json', TEXT)).trim();
+		var rawJson = Assets.getText(Paths.getPath('images/shop/shopText.json', TEXT)).trim();
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
 		shopLines = cast Json.parse(rawJson).shopLines;
