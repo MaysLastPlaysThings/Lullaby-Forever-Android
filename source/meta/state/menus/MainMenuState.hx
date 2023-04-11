@@ -73,7 +73,9 @@ class MainMenuState extends MusicBeatState
 		super.create();
 
 		ForeverTools.resetMenuMusic();
+		#if desktop
 		Discord.changePresence('MAIN MENU', 'Main Menu');
+		#end
 
 		// POKEMON YELLOW LOL
 		backdrop = new FlxBackdrop(Paths.image('menus/menu/pokemon_yellow_noise'), 1, 1, true, true, 1, 1);

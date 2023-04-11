@@ -158,7 +158,7 @@ class Main extends Sprite
 		// addChild(new FPS(10, 3, 0xFFFFFF));
 
 		// begin the discord rich presence
-		#if !html5
+		#if desktop
 		Discord.initializeRPC();
 		Discord.changePresence('');
 		#end

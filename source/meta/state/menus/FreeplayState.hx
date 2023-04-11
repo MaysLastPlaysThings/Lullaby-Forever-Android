@@ -87,8 +87,9 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD MUSIC
 		// ForeverTools.resetMenuMusic();
-
+        #if desktop
 		Discord.changePresence('FREEPLAY MENU', 'Main Menu');
+		#end
 
 		// LOAD CHARACTERS
 		bg = new FlxSprite().loadGraphic(Paths.image('menus/base/menuDesat'));

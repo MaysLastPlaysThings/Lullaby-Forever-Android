@@ -45,7 +45,7 @@ class OptionsMenuState extends MusicBeatState
 
 		// NOTE : Make sure to check Init.hx if you are trying to add options.
 
-		#if !html5
+		#if desktop
 		Discord.changePresence('OPTIONS MENU', 'Main Menu');
 		#end
 

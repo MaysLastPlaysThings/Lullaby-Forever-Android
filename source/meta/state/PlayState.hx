@@ -3403,7 +3403,9 @@ class PlayState extends MusicBeatState
 	{
 		var displayRPC:String = (pausedRPC) ? detailsPausedText : songDetails;
 		if (health > 0)
+		    #if desktop
 			Discord.changePresence(displayRPC, detailsSub, iconRPC);
+			#end
 	}
 
 	var animationsPlay:Array<Note> = [];

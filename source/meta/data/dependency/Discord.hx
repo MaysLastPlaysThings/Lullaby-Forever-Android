@@ -13,6 +13,7 @@ class Discord
 	// set up the rich presence initially
 	public static function initializeRPC()
 	{
+	#if desktop
 		DiscordRpc.start({
 			clientID: "975119671005155408",
 			onReady: onReady,
@@ -33,6 +34,7 @@ class Discord
 			largeImageKey: 'iconog',
 			largeImageText: "Hypno's Lullaby v2"
 		});
+	#end
 	}
 
 	static function onError(_code:Int, _message:String)
