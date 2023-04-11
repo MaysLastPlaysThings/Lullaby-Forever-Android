@@ -11,6 +11,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
+import openfl.utils.Assets;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
@@ -36,7 +37,7 @@ import meta.subState.UnlockSubstate.LockSprite;
 import openfl.display.GraphicsShader;
 import openfl.events.MouseEvent;
 import openfl.filters.ShaderFilter;
-import sys.FileSystem;
+import sys.Assets;
 import sys.io.File;
 import sys.thread.Mutex;
 import sys.thread.Thread;
@@ -154,7 +155,7 @@ class ShopState extends MusicBeatState
 			Discord.changePresence('CHOOSING A SONG', 'Freeplay Menu');
 		#end
 
-		var rawJson = File.getContent(Paths.getPath('images/shop/shopText.json', TEXT)).trim();
+		var rawJson = Assets.getText(Paths.getPath('images/shop/shopText.json', TEXT)).trim();
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
 		shopLines = cast Json.parse(rawJson).shopLines;
@@ -315,9 +316,9 @@ class ShopState extends MusicBeatState
 		for (i in folderList)
 		{
 			trace('found folder: ' + i);
-			if (FileSystem.exists(Paths.getPath('images/shop/${i}/${i}.json', TEXT)))
+			if (Assets.exists(Paths.getPath('images/shop/${i}/${i}.json', TEXT)))
 			{
-				var rawJson = File.getContent(Paths.getPath('images/shop/${i}/${i}.json', TEXT));
+				var rawJson = Assets.getText(Paths.getPath('images/shop/${i}/${i}.json', TEXT));
 				var swagShit:ShopItem = cast Json.parse(rawJson).itemDetail;
 				itemArray.push(swagShit);
 
@@ -619,7 +620,7 @@ class ShopState extends MusicBeatState
 		{
 			var old:Bool = j == 0 ? true : false;
 			var icon:String = 'gf';
-			var chartExists:Bool = FileSystem.exists(Paths.songJson(i, i + '-hard', old, library));
+			var chartExists:Bool = Assets.exists(Paths.songJson(i, i + '-hard', old, library));
 			if (library != null)
 				chartExists = openfl.utils.Assets.exists(Paths.songJson(i, i + '-hard', old, library), TEXT);
 			if (chartExists)
@@ -1617,7 +1618,7 @@ class ShopState extends MusicBeatState
 						if (portrait != null && portrait != curPortrait)
 						{
 							//  get the new portrait
-							if (!FileSystem.exists(Paths.getPath('images/menus/freeplay/$portrait.png', IMAGE)))
+							if (!Assets.exists(Paths.getPath('images/menus/freeplay/$portrait.png', IMAGE)))
 								portrait = 'unknown';
 							mutex.acquire();
 							switchingPortraits = true;
