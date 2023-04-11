@@ -50,7 +50,7 @@ class StoryMenuState extends MusicBeatState {
 
 		// "Simply use setProperty()" - BAnims
 
-		#id desktop
+		#if desktop
 		Discord.changePresence('STORY MODE', 'Main Menu');
 		#end
 		ForeverTools.resetMenuMusic(true);
