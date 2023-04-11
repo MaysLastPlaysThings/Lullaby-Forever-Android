@@ -27,7 +27,9 @@ import meta.MusicBeat.MusicBeatState;
 import meta.data.Conductor;
 import meta.data.Highscore;
 import meta.data.Song;
+#if desktop
 import meta.data.dependency.Discord;
+#end
 import meta.data.font.Alphabet;
 import meta.state.menus.FreeplayState;
 import meta.subState.UnlockSubstate.LockSprite;
@@ -145,12 +147,13 @@ class ShopState extends MusicBeatState
 	override public function create()
 	{
 		super.create();
-
+    #if desktop
 		if (!freeplaySelected)
 			Discord.changePresence('BROWSING THE SHOP', 'Freeplay Menu');
 		else
 			Discord.changePresence('CHOOSING A SONG', 'Freeplay Menu');
-
+   #end
+ 
 		var rawJson = File.getContent(Paths.getPath('images/shop/shopText.json', TEXT)).trim();
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
@@ -730,14 +733,18 @@ class ShopState extends MusicBeatState
 			if (left && freeplaySelected)
 			{
 				freeplaySelected = false;
+				#if desktop
 				Discord.changePresence('BROWSING THE SHOP', 'Freeplay Menu');
+				#end
 				shopSign.animation.play('signThing', true);
 				shuffleCartridgeIdle(true);
 				cartridgePlayIdle(true);
 			}
 			if (right && !freeplaySelected)
 			{
+			  #if discord
 				Discord.changePresence('CHOOSING A SONG', 'Freeplay Menu');
+				#end
 				freeplaySelected = true;
 			}
 		}
