@@ -148,8 +148,8 @@ class ShopState extends MusicBeatState
 	{
 		super.create();
 
-		if (!freeplaySelected)
 		#if desktop
+		if (!freeplaySelected)
 			Discord.changePresence('BROWSING THE SHOP', 'Freeplay Menu');
 		else
 			Discord.changePresence('CHOOSING A SONG', 'Freeplay Menu');
