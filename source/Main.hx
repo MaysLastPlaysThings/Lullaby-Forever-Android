@@ -15,7 +15,10 @@ import lime.app.Application;
 import meta.*;
 import meta.data.PlayerSettings;
 import meta.data.ScriptHandler;
+#if desktop
 import meta.data.dependency.Discord;
+#end
+import meta.state.DisclaimerState;
 import meta.data.dependency.FNFTransition;
 import meta.data.dependency.FNFUIState;
 import openfl.Assets;
