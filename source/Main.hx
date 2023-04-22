@@ -18,7 +18,6 @@ import meta.data.ScriptHandler;
 #if desktop
 import meta.data.dependency.Discord;
 #end
-import meta.state.DisclaimerState;
 import meta.data.dependency.FNFTransition;
 import meta.data.dependency.FNFUIState;
 import openfl.Assets;
@@ -73,7 +72,7 @@ class Main extends Sprite
 	public static var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	public static var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 
-	public static var mainClassState:Class<FlxState> = DisclaimerState; // Determine the main class state of the game
+	public static var mainClassState:Class<FlxState> = Init; // Determine the main class state of the game
 	public static var framerate:Int = 60; // How many frames per second the game should run at.
 
 	public static var gameVersion:String = '0.3.1';
