@@ -129,7 +129,9 @@ class Main extends Sprite
 			note studders and shit its weird.
 		**/
 
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		//Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash); //this cant send to SUtil onError ig
+
+		SUtil.gameCrashCheck(); //loll
 
 		// simply said, a state is like the 'surface' area of the window where everything is drawn.
 		// if you've used gamemaker you'll probably understand the term surface better
