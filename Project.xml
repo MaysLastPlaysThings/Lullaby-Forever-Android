@@ -25,6 +25,7 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="source" />
 	<assets path="assets" />
+        <assets path="mobile" rename="assets/mobile" if="mobile"/>
 	<assets path="shitpost" library="shitpost" embed="true"/>
 	<assets path="dlls/" rename='' />
 	<assets path="plugins/" rename='' />
@@ -83,7 +84,6 @@
 	<haxedef name="HXCPP_CHECK_POINTER" />
 	<haxedef name="HXCPP_STACK_LINE" />
 
-	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 
