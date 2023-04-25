@@ -236,7 +236,7 @@ class Paths
 
 	static public function video(key:String)
 	{
-		return 'assets/cutscenes/$key.mp4';
+		return Generic.returnPath() + 'assets/cutscenes/$key.mp4';
 	}
 
 	static public function xml(key:String, ?library:String)
