@@ -239,6 +239,11 @@ class Paths
 		return Generic.returnPath() + 'assets/cutscenes/$key.mp4';
 	}
 
+	static public function _video(key:String)
+	{
+		return 'assets/cutscenes/$key.mp4';
+	}
+
 	static public function xml(key:String, ?library:String)
 	{
 		return getPath('data/$key.xml', TEXT, library);
