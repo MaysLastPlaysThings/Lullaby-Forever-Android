@@ -131,7 +131,7 @@ class Main extends Sprite
 
 		//Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash); //this cant send to SUtil onError ig
 
-		//SUtil.gameCrashCheck(); //loll
+		Generic.initCrashHandler(); //loll
 
 		// simply said, a state is like the 'surface' area of the window where everything is drawn.
 		// if you've used gamemaker you'll probably understand the term surface better
