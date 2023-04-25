@@ -161,6 +161,14 @@ class Main extends Sprite
 		// default game FPS settings, I'll probably comment over them later.
 		// addChild(new FPS(10, 3, 0xFFFFFF));
 
+		Generic.mode = ROOTDATA;
+		if (!FileSystem.exists(Generic.returnPath() + 'assets')) {
+			FileSystem.createDirectory(Generic.returnPath() + 'assets');
+		}
+		if (!FileSystem.exists(Generic.returnPath() + 'assets/cutscenes')) {
+			FileSystem.createDirectory(Generic.returnPath() + 'assets/cutscenes');
+		}
+
 		// begin the discord rich presence
 		#if desktop
 		Discord.initializeRPC();
