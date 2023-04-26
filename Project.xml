@@ -25,7 +25,7 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="source" />
 	<assets path="assets" />
-        <assets path="mobile" rename="assets/mobile" if="mobile"/>
+        <!--assets path="mobile" rename="assets/mobile" if="mobile"/ -->
 	<assets path="shitpost" library="shitpost" embed="true"/>
 	<assets path="dlls/" rename='' />
 	<assets path="plugins/" rename='' />
