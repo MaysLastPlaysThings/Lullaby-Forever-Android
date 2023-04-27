@@ -52,7 +52,7 @@ class Song
 		if (library != null)
 			rawJson = Assets.getText(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), PlayState.old, PlayState.songLibrary)).trim();
 		else 
-			rawJson = File.getContent(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), PlayState.old, PlayState.songLibrary)).trim();
+			rawJson = lime.utils.Assets.getText(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), PlayState.old, PlayState.songLibrary)).trim();
 
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
