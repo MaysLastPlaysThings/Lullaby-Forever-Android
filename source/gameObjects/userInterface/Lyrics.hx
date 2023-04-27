@@ -7,7 +7,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import haxe.Json;
 import meta.state.PlayState;
 import sys.io.File;
-
+import lime.utils.Assets;
 using StringTools;
 
 /**
@@ -28,7 +28,7 @@ typedef LyricMeasure = {
 class Lyrics extends FlxTypedGroup<FlxText> {
     public static function parseLyrics(song:String) {
         if (!PlayState.old) {
-            var lyricsFile = File.getContent(Paths.songJson(song.toLowerCase(), 'lyrics', false, PlayState.songLibrary)).trim();
+            var lyricsFile = Assets.getText(Paths.songJson(song.toLowerCase(), 'lyrics', false, PlayState.songLibrary)).trim();
             while (!lyricsFile.endsWith("}"))
                 lyricsFile = lyricsFile.substr(0, lyricsFile.length - 1);
 
