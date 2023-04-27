@@ -47,10 +47,10 @@ class ForeverTools
 			?defaultChangeableSkin:String = 'default', ?defaultBaseAsset:String = 'base'):String
 	{
 		var realAsset = '$baseLibrary/$assetModifier/$asset';
-		if (!FileSystem.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
+		if (!Assets.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
 		{
 			realAsset = '$baseLibrary/$assetModifier/$asset';
-			if (!FileSystem.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
+			if (!Assets.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
 				realAsset = '$baseLibrary/$defaultBaseAsset/$asset';
 		}
 
@@ -87,27 +87,27 @@ class ForeverTools
 	static function optimizeFolder(folder:String)
 	{
 		var count = 0;
-		for (file in FileSystem.readDirectory(folder))
+		for (file in HSys.readDirectory(folder))
 		{
 			var fullPath = Path.join([folder, file]);
-			if (FileSystem.isDirectory(fullPath))
+			if (FileSystem.exists(Main.path + fullPath)) // FileSystem.exists works almost the same as isDirectory 
 			{
 				optimizeFolder(fullPath);
 			}
 			else if (file.endsWith('.png'))
 			{
 				var fileName = Path.withoutExtension(fullPath);
-				if (FileSystem.exists('$fileName.xml'))
+				if (Assets.exists('$fileName.xml'))
 				{
 					var graphic = FlxG.bitmap.add(BitmapData.fromFile(fullPath), false, fullPath);
-					optimizeImage(fullPath, FlxAtlasFrames.fromSparrow(graphic, File.getContent('$fileName.xml')));
+					optimizeImage(fullPath, FlxAtlasFrames.fromSparrow(graphic, Assets.getText('$fileName.xml')));
 					count++;
 				}
-				else if (FileSystem.exists('$fileName.json'))
+				else if (Assets.exists('$fileName.json'))
 				{
 					var graphic = FlxG.bitmap.add(BitmapData.fromFile(fullPath), false, fullPath);
 					var frames = new FlxAtlasFrames(graphic);
-					var curJson:AnimateAtlas = Json.parse(File.getContent('$fileName.json').replace(String.fromCharCode(0xFEFF), ""));
+					var curJson:AnimateAtlas = Json.parse(Assets.getText('$fileName.json').replace(String.fromCharCode(0xFEFF), ""));
 					if (curJson != null && curJson.ATLAS != null && curJson.ATLAS.SPRITES != null)
 					{
 						for (curSprite in curJson.ATLAS.SPRITES)
