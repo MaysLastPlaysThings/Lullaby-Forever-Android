@@ -14,8 +14,7 @@ import openfl.media.Sound;
 import openfl.system.System;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
-import sys.FileSystem;
-import sys.io.File;
+import lime.utils.Assets;
 
 using StringTools;
 
@@ -138,7 +137,7 @@ class Paths
 		}
 		else
 		{
-			if (FileSystem.exists(path))
+			if (Assets.exists(path))
 			{
 				if (!currentTrackedAssets.exists(key))
 				{
@@ -183,7 +182,7 @@ class Paths
 			if (library != null)
 				currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 			else
-				currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
+				currentTrackedSounds.set(gottenPath, Sound.fromFile(gottenPath));
 		}
 		localTrackedAssets.push(key);
 		return currentTrackedSounds.get(gottenPath);
@@ -213,13 +212,13 @@ class Paths
 
 	static public function shader(name:String)
 	{
-		return File.getContent('./assets/shaders/$name.frag');
+		return Assets.getText('./assets/shaders/$name.frag');
 	}
 
 	static function getPreloadPath(file:String)
 	{
 		var returnPath:String = '$currentLevel/$file';
-		if (!FileSystem.exists(returnPath))
+		if (!Assets.exists(returnPath))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
@@ -309,7 +308,7 @@ class Paths
 		var graphic:FlxGraphic = returnGraphic(key, library, compression);
 		var fileContents;
 		if (library == null)
-			fileContents = File.getContent(file('images/$key.xml', library));
+			fileContents = lime.utils.Assets.getText(file('images/$key.xml', library));
 		else
 			fileContents = Assets.getText(file('images/$key.xml', library));
 		return (FlxAtlasFrames.fromSparrow(graphic, fileContents));
