@@ -25,7 +25,8 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="source" />
 	<assets path="assets" />
-        <!--assets path="mobile" rename="assets/mobile" if="mobile"/ -->
+	<!-- why the "if"? we will only make a build for mobiles -->
+  <assets path="mobile" rename="assets/mobile" if="mobile"/>
 	<assets path="shitpost" library="shitpost" embed="true"/>
 	<assets path="dlls/" rename='' />
 	<assets path="plugins/" rename='' />
