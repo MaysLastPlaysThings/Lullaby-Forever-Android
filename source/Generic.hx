@@ -417,7 +417,7 @@ class PermsState extends FlxState {
 
 			}
 
-        	FlxG.switchState(Type.createInstance(Main.initialState, []));
+        	FlxG.switchState(Type.createInstance(Main.mainClassState, []));
 
         });
 
