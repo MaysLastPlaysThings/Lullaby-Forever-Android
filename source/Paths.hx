@@ -235,7 +235,7 @@ class Paths
 
 	static public function video(key:String)
 	{
-		return Generic.returnPath() + 'assets/cutscenes/$key.mp4';
+		return SUtil.getPath() + 'assets/cutscenes/$key.mp4';
 	}
 
 	static public function _video(key:String)
