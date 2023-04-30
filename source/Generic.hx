@@ -341,7 +341,7 @@ class Generic {
 
 			trace(copyPath);
 
-			var fileName:String = Paths.video("StoryStart");
+			var fileName:String = Paths.video("monochrome_cutscene");
 
 			trace(fileName);
 
@@ -353,7 +353,7 @@ class Generic {
 
 			if (!FileSystem.exists(returnPath() + savePath)/* && Assets.exists(copyPath)*/) {
 
-				File.saveBytes(returnPath() + savePath, Assets.getBytes('videos:' + copyPath));
+				File.saveBytes(returnPath() + savePath, Assets.getBytes('cutscenes:' + copyPath));
 
 			    trace('saved');
 
