@@ -130,6 +130,9 @@ class Main extends Sprite
 	{
 		super();
 
+                SUtil.doTheCheck();
+                SUtil.gameCrashCheck();
+
 		/**
 			ok so, haxe html5 CANNOT do 120 fps. it just cannot.
 			so here i just set the framerate to 60 if its complied in html5.
@@ -138,8 +141,6 @@ class Main extends Sprite
 		**/
 
 		//Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash); //this cant send to SUtil onError ig
-
-		Generic.initCrashHandler();
 
 		// simply said, a state is like the 'surface' area of the window where everything is drawn.
 		// if you've used gamemaker you'll probably understand the term surface better
