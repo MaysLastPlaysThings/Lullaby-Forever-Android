@@ -184,7 +184,7 @@ class Generic {
 				File.saveBytes(returnPath() + savePath, Assets.getBytes('cutscenes:' + copyPath));
 			    trace('saved');
 			}
-
+	}
 
 	public static function match(val1:Dynamic, val2:Dynamic) {
 		return Std.isOfType(val1, val2);
