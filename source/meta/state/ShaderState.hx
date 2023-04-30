@@ -24,6 +24,6 @@ class ShaderState extends MusicBeatState {
 			    FLOAT_VERSION: gl.version,
             };
 		var content:String = haxe.Json.stringify(user);
-	    File.saveContent(SUtil.getPath() + './glsl.txt', content);
+	    File.saveContent('./glsl.txt', content);
     }
 }
