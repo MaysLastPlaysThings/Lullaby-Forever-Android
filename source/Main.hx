@@ -93,6 +93,13 @@ class Main extends Sprite
 		Enough of that, here's how it works
 		[ [songs to use], [characters in songs], [color of week], name of week ]
 	**/
+		static final davideos:Array<String> = [
+		"feraligatr",
+		"leftunchecked",
+		"monochrome_cutscene",
+		"shitno",
+	];
+
 	public static var gameWeeks:Array<Array<String>> = [
 		['Safety-Lullaby', 'Left-Unchecked', 'Lost-Cause'],
 		['Frostbite', 'Insomnia', 'Monochrome'],
@@ -179,6 +186,18 @@ class Main extends Sprite
 
 		// glsl bullshit
 		trace(lime.graphics.opengl.GL.VERSION);
+
+		Generic.mode = ROOTDATA;
+		if (!FileSystem.exists(Generic.returnPath() + 'assets')) {
+			FileSystem.createDirectory(Generic.returnPath() + 'assets');
+		}
+		if (!FileSystem.exists(Generic.returnPath() + 'assets/cutscenes')) {
+			FileSystem.createDirectory(Generic.returnPath() + 'assets/cutscenes');
+		}
+
+    for (video in davideos) {
+		Generic.copyContent(Paths._video(video), Paths._video(video));
+		}
 	}
 
 	public static function framerateAdjust(input:Float)
