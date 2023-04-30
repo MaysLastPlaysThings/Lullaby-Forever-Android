@@ -137,7 +137,7 @@ class Generic {
 		dateNow = dateNow.replace(":", "'");
 		var fp:String = returnPath() + "logs/" + var_name + dateNow + ".txt";
 
-		var thingToSave:String = forceToString(thing)
+		var thingToSave:String = forceToString(thing);
 
 		if (alert) {
 			Application.current.window.alert(thingToSave, 'FileTrace');
