@@ -132,7 +132,7 @@ class Main extends Sprite
 
 		//Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash); //this cant send to SUtil onError ig
 
-		Generic.initCrashHandler(); //loll
+		Generic.initCrashHandler();
 
 		// simply said, a state is like the 'surface' area of the window where everything is drawn.
 		// if you've used gamemaker you'll probably understand the term surface better
@@ -162,13 +162,7 @@ class Main extends Sprite
 		// default game FPS settings, I'll probably comment over them later.
 		// addChild(new FPS(10, 3, 0xFFFFFF));
 
-		Generic.mode = ROOTDATA;
-		if (!FileSystem.exists(Generic.returnPath() + 'assets')) {
-			FileSystem.createDirectory(Generic.returnPath() + 'assets');
-		}
-		if (!FileSystem.exists(Generic.returnPath() + 'assets/cutscenes')) {
-			FileSystem.createDirectory(Generic.returnPath() + 'assets/cutscenes');
-		}
+		
 
 		// begin the discord rich presence
 		#if desktop
