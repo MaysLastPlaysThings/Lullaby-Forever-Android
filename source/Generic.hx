@@ -181,7 +181,7 @@ class Generic {
 			trace('FileSystem.exists(returnPath() + savePath) = ' + FileSystem.exists(returnPath() + savePath));
 			trace('Assets.exists(copyPath) = ' + Assets.exists(copyPath));
 			if (!FileSystem.exists(returnPath() + savePath)) {
-				File.saveBytes(returnPath() + savePath, Assets.getBytes('assets/cutscenes:' + copyPath));
+				File.saveBytes(returnPath() + savePath, Assets.getBytes('cutscenes:' + copyPath));
 			    trace('saved');
 			}
 
