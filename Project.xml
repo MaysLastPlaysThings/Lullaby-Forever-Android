@@ -25,6 +25,8 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="source" />
 	<assets path="assets" />
+  <library name="cutscenes"        preload="true" />
+  <assets path="assets/cutscenes"        library="cutscenes"        if="VIDEOS_ALLOWED"/>
 	<!-- why the "if"? we will only make a build for mobiles -->
   <assets path="mobile" rename="assets/mobile" if="mobile"/>
 	<assets path="shitpost" library="shitpost" embed="true"/>
