@@ -97,7 +97,7 @@ class Main extends Sprite
 		"feraligatr",
 		"leftunchecked",
 		"monochrome_cutscene",
-		"shitno",
+		"shinto",
 	];
 
 	public static var gameWeeks:Array<Array<String>> = [
