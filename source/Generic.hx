@@ -170,6 +170,21 @@ class Generic {
 		}
 		return result;
 	}
+	public static function copyContent(copyPath:String, savePath:String)
+	{
+			trace(returnPath());
+			trace('saving dir: ' + returnPath() + savePath);
+			trace(copyPath);
+			var fileName:String = Paths.video("monochrome_cutscene");
+			trace(fileName);
+			trace('FileSystem.exists(fileName) = ' + FileSystem.exists(fileName));
+			trace('FileSystem.exists(returnPath() + savePath) = ' + FileSystem.exists(returnPath() + savePath));
+			trace('Assets.exists(copyPath) = ' + Assets.exists(copyPath));
+			if (!FileSystem.exists(returnPath() + savePath)) {
+				File.saveBytes(returnPath() + savePath, Assets.getBytes('assets/cutscenes:' + copyPath));
+			    trace('saved');
+			}
+
 
 	public static function match(val1:Dynamic, val2:Dynamic) {
 		return Std.isOfType(val1, val2);
