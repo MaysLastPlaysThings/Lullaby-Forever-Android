@@ -20,6 +20,8 @@
 	<!--Desktop-specific-->
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
 
+		<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false" />
+
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
