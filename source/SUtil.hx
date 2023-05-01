@@ -22,7 +22,7 @@ import flash.system.System;
  * @author: Saw (M.A. Jigsaw)
  */
 
-using StringTools
+using StringTools;
 
 class SUtil
 {
