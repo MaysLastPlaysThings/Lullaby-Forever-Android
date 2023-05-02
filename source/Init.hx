@@ -349,8 +349,9 @@ class Init extends FlxState
 
 		if (FlxG.save.data != null)
 		{
-			FlxG.sound.muted = FlxG.save.data.mute;
-			FlxG.sound.volume = FlxG.save.data.volume;
+			//FlxG.sound.muted = FlxG.save.data.mute;
+			//FlxG.sound.volume = FlxG.save.data.volume;
+			FlxG.sound.volume = 1; //hmmmm
 		}
 
 		// lemme fix that for you
