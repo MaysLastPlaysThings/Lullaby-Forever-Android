@@ -14,6 +14,7 @@ import meta.MusicBeat;
 import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
 import sys.FileSystem;
+import lime.utils.Assets;
 
 using StringTools;
 typedef Credits = {
@@ -227,7 +228,7 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 				iconList.push(icon);
 				background.add(icon);
 			
-				var rawJson = File.getContent(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT));
+				var rawJson = Assets.getText(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT));
 				var credits:Credits = cast Json.parse(rawJson).info;
 				credits.name = person;
 				personList.push(credits);
