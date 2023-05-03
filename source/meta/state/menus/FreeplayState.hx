@@ -73,7 +73,7 @@ class FreeplayState extends MusicBeatState
 				for (j in 0...2) {
 					var old:Bool = j == 0 ? true : false;
 					var icon:String = 'gf';
-					var chartExists:Bool = FileSystem.exists(Paths.songJson(i, i, old));
+					var chartExists:Bool = lime.utils.Assets.exists(Paths.songJson(i, i, old));
 					if (chartExists)
 					{
 						var castSong:SwagSong = Song.loadFromJson(i, i, old);
