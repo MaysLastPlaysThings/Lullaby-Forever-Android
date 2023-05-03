@@ -3,7 +3,7 @@
 /**
 * Source: https://www.shadertoy.com/view/wllBDM
 */
-uniform float time = 1.0;
+uniform float time;
 
 float scanSpeedAdd = 1.0;
 float lineCut = 0.1;
