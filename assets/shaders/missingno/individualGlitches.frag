@@ -1,6 +1,6 @@
 #pragma header
 
-uniform float binaryIntensity = 0.0;
+uniform float binaryIntensity;
 
 void main() {
 	vec2 uv = openfl_TextureCoordv.xy;
