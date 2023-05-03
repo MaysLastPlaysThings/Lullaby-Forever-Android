@@ -9,13 +9,13 @@
 #define validuv(v) (abs(v.x-0.5)<0.5&&abs(v.y-0.5)<0.5)
 #define SAMPLES 3
 
-uniform float aberration = 0.0;
-uniform float effectTime = 0.0;
+uniform float aberration;
+uniform float effectTime;
 uniform sampler2D noiseTexture; 
 
 vec3 tex2D(sampler2D _tex,vec2 _p)
 {
-    vec3 col=texture(_tex,_p).xyz;
+    vec3 col=texture2D(_tex,_p).xyz;
     if(.5<abs(_p.x-.5)){
         col=vec3(.1);
     }
@@ -24,7 +24,7 @@ vec3 tex2D(sampler2D _tex,vec2 _p)
 
 float noise(vec2 p)
 {
-	float s = texture(noiseTexture,vec2(1.,2.*cos( effectTime))* effectTime*8. + p*1.).x;
+	float s = texture2D(noiseTexture,vec2(1.,2.*cos( effectTime))* effectTime*8. + p*1.).x;
 	s *= s;
 	return s;
 }
@@ -38,7 +38,7 @@ vec2 screenDistort(vec2 uv)
 }
 
 float v2random( vec2 uv ) {
-  return texture( noiseTexture, mod( uv, vec2( 1.0 ) ) ).x;
+  return texture2D( noiseTexture, mod( uv, vec2( 1.0 ) ) ).x;
 }
 
 mat2 rotate2D( float t ) {
@@ -58,7 +58,7 @@ vec3 vhsTex2D( vec2 uv, float rot ) {
     vec3 yiq = vec3( 0.0 );
     for ( int i = 0; i < SAMPLES; i ++ ) {
       yiq += (
-        rgb2yiq( texture( bitmap, uv - vec2( float( i ), 0.0 ) / VHSRES ).xyz ) *
+        rgb2yiq( texture2D( bitmap, uv - vec2( float( i ), 0.0 ) / VHSRES ).xyz ) *
         vec2( float( i ), float( SAMPLES - 1 - i ) ).yxx / float( SAMPLES - 1 )
       ) / float( SAMPLES ) * 2.0;
     }
