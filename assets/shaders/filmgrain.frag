@@ -1,6 +1,6 @@
 #pragma header
 
-uniform float time = 0.0;
+uniform float time;
 
 vec2 ShakeUV(vec2 uv, float time) {
     uv.x += 0.002 * sin(time*3.141) * sin(time*14.14);
