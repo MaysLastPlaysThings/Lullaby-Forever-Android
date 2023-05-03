@@ -1,7 +1,7 @@
 #pragma header
 
 float threshold = 0.125; // Threshold for dithering (0.0045 found to be optimal)
-uniform float intensity = 0.0;
+uniform float intensity;
 mat2 dither_2 = mat2(0.,1.,1.,0.);
 
 struct dither_tile {
@@ -126,7 +126,7 @@ void main() {
         gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
 
     /*
-    vec3 gbColor = vec3(closest_gb(texture(bitmap, openfl_TextureCoordv).rgb));
+    vec3 gbColor = vec3(closest_gb(texture2D(bitmap, openfl_TextureCoordv).rgb));
     // Output to screen
     gl_FragColor = vec4(
         mix(texture2D(bitmap, openfl_TextureCoordv).rgb * texture2D(bitmap, openfl_TextureCoordv).a, gbColor.rgb, intensity),
