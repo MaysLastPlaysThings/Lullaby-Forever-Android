@@ -216,9 +216,9 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 
 		var list:Array<String> = CoolUtil.coolTextFile(Paths.txt('images/menus/credit/iconorder'));
 		for (person in list) {
-			if (FileSystem.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT))) {
+			if (Assets.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT))) {
 				var icon:FlxSprite = new FlxSprite();
-				if (FileSystem.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.png', IMAGE)))
+				if (Assets.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.png', IMAGE)))
 					icon.loadGraphic(Paths.image('menus/credit/icon/${person.replace(' ', '_')}'));
 				else icon.loadGraphic(Paths.image('menus/credit/icon/placeholder'));
 				icon.setGraphicSize(Std.int(icon.width * (3 / 5)));
