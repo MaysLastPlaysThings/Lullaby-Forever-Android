@@ -1,9 +1,9 @@
 #pragma header
 
-uniform float desaturationAmount = 0.0;
-uniform float distortionTime = 0.0;
-uniform float amplitude = -0.1;
-uniform float frequency = 8.0;
+uniform float desaturationAmount;
+uniform float distortionTime;
+uniform float amplitude;
+uniform float frequency;
 
 void main() {
     vec4 desatTexture = texture2D(bitmap, vec2(openfl_TextureCoordv.x + sin((openfl_TextureCoordv.y * frequency) + distortionTime) * amplitude, openfl_TextureCoordv.y));
