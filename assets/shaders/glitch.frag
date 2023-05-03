@@ -1,11 +1,9 @@
-// https://www.shadertoy.com/view/XtyXzW
-
 #pragma header
 #extension GL_EXT_gpu_shader4 : enable
 
-uniform float time = 0.0;
-uniform float prob = 0.0;
-uniform float intensityChromatic = 0.0;
+uniform float time;
+uniform float prob;
+uniform float intensityChromatic;
 const int sampleCount = 50;
 
 float _round(float n) {
@@ -18,7 +16,7 @@ vec2 _round(vec2 n) {
 
 vec3 tex2D(sampler2D _tex,vec2 _p)
 {
-    vec3 col=texture(_tex,_p).xyz;
+    vec3 col=texture2D(_tex,_p).xyz;
     if(.5<abs(_p.x-.5)){
         col=vec3(.1);
     }
@@ -244,9 +242,9 @@ vec4 transverseChromatic(vec2 p) {
     vec3 accumulator = vec3(0);
     mat3x2 offsets = mat3x2(0); 
     for (int i = 0; i < sampleCount; i++) {
-        accumulator.r += texture(bitmap, destCoord + offsets[0]).r; 
-        accumulator.g += texture(bitmap, destCoord + offsets[1]).g; 
-        accumulator.b += texture(bitmap, destCoord + offsets[2]).b;         
+        accumulator.r += texture2D(bitmap, destCoord + offsets[0]).r; 
+        accumulator.g += texture2D(bitmap, destCoord + offsets[1]).g; 
+        accumulator.b += texture2D(bitmap, destCoord + offsets[2]).b;         
         offsets -= increments;
     }
     vec4 newColor = vec4(accumulator / float(sampleCount), 1.0);
