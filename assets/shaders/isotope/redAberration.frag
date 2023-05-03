@@ -1,9 +1,9 @@
 #pragma header
 
 #define PI 3.14159265
-uniform float time = 0.0;
-uniform float intensity = 0.0;
-uniform float initial = 0.0;
+uniform float time;
+uniform float intensity;
+uniform float initial;
 
 float sat( float t ) {
 	return clamp( t, 0.0, 1.0 );
@@ -30,7 +30,7 @@ void main() {
 	{
         float t = float(i) * sampleinverse;
 		uv.x = sat( uv.x + ofs * t );
-		vec4 samplecol = texture2D( bitmap, uv, -10.0 );
+		vec4 samplecol = texture2D(bitmap, uv, -10.0 );
 		vec3 s = spectrum_offset( t );
 		samplecol.rgb = samplecol.rgb * s;
 		sum += samplecol;
