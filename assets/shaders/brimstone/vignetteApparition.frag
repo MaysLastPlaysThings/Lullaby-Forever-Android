@@ -1,8 +1,8 @@
 #pragma header
 
 #define PI 3.14159265
-uniform float time = 0.0;
-uniform float vignetteIntensity = 0.75;
+uniform float time;
+uniform float vignetteIntensity;
 
 void main() {
     float amount = (0.25 * sin(time * PI) + vignetteIntensity);
