@@ -19,7 +19,7 @@ import meta.MusicBeat.MusicBeatSubState;
 import meta.data.Song;
 import meta.state.PlayState;
 import sys.io.File;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 
 using StringTools;
 
