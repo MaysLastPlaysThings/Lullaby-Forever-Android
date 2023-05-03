@@ -1,8 +1,8 @@
 #pragma header
 
-uniform float intensity = 0.0;
-uniform int amount = 200;
-uniform float time = 0.0;
+uniform int amount;
+uniform float intensity;
+uniform float time;
 
 vec2 uv;
 
