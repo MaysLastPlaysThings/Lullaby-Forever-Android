@@ -4,7 +4,7 @@
 * https://www.shadertoy.com/view/wsdBWM
 **/
 
-uniform float distort = 0.0;
+uniform float distort;
 
 vec2 pincushionDistortion(in vec2 uv, float strength) {
 	vec2 st = uv - 0.5;
