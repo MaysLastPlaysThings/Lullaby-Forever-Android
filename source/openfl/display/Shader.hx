@@ -472,20 +472,23 @@ class Shader
 			__processGLData(glFragmentSource, "uniform");
 		}
 
-		if (__context != null && program == null)
-		{
-			var gl = __context.gl;
+		if (__context != null && program == null) {
+                var gl = __context.gl;
+                var prefix = "#ifdef GL_ES\n";
+    
+                if (precisionHint == FULL) {
+                prefix += "#ifdef GL_FRAGMENT_PRECISION_HIGH\n";
+                prefix += "precision highp float;\n";
+                prefix += "#else\n";
+                prefix += "precision mediump float;\n";
+                prefix += "#endif\n";
+            } else {
+                prefix += "precision lowp float;\n";
+            }
+    
+            prefix += "#endif\n";
+           }
 
-			var prefix = "#ifdef GL_ES
-				"
-				+ (precisionHint == FULL ? "#ifdef GL_FRAGMENT_PRECISION_HIGH
-				precision highp float;
-				#else
-				precision mediump float;
-				#endif" : "precision lowp float;")
-				+ "
-				#endif
-				";
 
 			var vertex = prefix + glVertexSource;
 			var fragment = prefix + glFragmentSource;
