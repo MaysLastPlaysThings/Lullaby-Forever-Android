@@ -69,11 +69,8 @@ class SUtil
 					SUtil.copyContent(cutscene, SUtil.getPath() + cutscene);
 			}
 	}
-		}
 		#end
 	}
-
-
 
 	public static function gameCrashCheck()
 	{
