@@ -59,28 +59,16 @@ class SUtil
 
 				FileSystem.createDirectory(Tools.getExternalStorageDirectory() + '/' + '.' + Application.current.meta.get('file'));
 
-			if (!FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.exists(SUtil.getPath() + 'mods'))
+			if (!FileSystem.exists(SUtil.getPath() + 'assets'))
+				FileSystem.createDirectory(SUtil.getPath() + 'assets');
+			if (!FileSystem.exists(SUtil.getPath() + 'assets/cutscenes'))
+				FileSystem.createDirectory(SUtil.getPath() + 'assets/cutscenes');
+			for (cutscene in Assets.list().filter(list -> list.contains('assets/cutscenes')))
 			{
-				SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the files from the .APK!\nPlease watch the tutorial by pressing OK.");
-				FlxG.openURL('https://youtu.be/zjvkTmdWvfU');
-				System.exit(0);
+				if (cutscene.endsWith('.mp4'))
+					SUtil.copyContent(cutscene, SUtil.getPath() + cutscene);
 			}
-			else
-			{
-				if (!FileSystem.exists(SUtil.getPath() + 'assets'))
-				{
-					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the assets/assets folder from the .APK!\nPlease watch the tutorial by pressing OK.");
-					FlxG.openURL('https://youtu.be/zjvkTmdWvfU');
-					System.exit(0);
-				}
-
-				if (!FileSystem.exists(SUtil.getPath() + 'mods'))
-				{
-					SUtil.applicationAlert('Uncaught Error :(!', "Whoops, seems you didn't extract the assets/mods folder from the .APK!\nPlease watch the tutorial by pressing OK.");
-					FlxG.openURL('https://youtu.be/zjvkTmdWvfU');
-					System.exit(0);
-				}
-			}
+	}
 		}
 		#end
 	}
