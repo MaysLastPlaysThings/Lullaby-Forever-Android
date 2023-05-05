@@ -63,7 +63,7 @@ class SUtil
 				FileSystem.createDirectory(SUtil.getPath() + 'assets');
 			if (!FileSystem.exists(SUtil.getPath() + 'assets/cutscenes'))
 				FileSystem.createDirectory(SUtil.getPath() + 'assets/cutscenes');
-			for (cutscene in Assets.list().filter(list -> list.contains('assets/cutscenes')))
+			for (cutscene in OpenFlAssets.list().filter(list -> list.contains('assets/cutscenes')))
 			{
 				if (cutscene.endsWith('.mp4'))
 					SUtil.copyContent(cutscene, SUtil.getPath() + cutscene);
