@@ -1540,7 +1540,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var cameraValueMissingno(default, set):Float = defaultCamZoom;
+	//public var cameraValueMissingno(default, set):Float = defaultCamZoom;
 	public var missingnoZoomIn:Bool = false;
 	public var missingnoZoomIntensity(default, set):Float = 0;
 
@@ -1562,7 +1562,7 @@ class PlayState extends MusicBeatState
 	{
 		cameraValueMissingno = newValue;
 		if (missingnoZoomIn)
-			FlxG.camera.zoom = cameraValueMissingno;
+			FlxG.camera.zoom = ;
 		return newValue;
 	}*/ //test №1
 
