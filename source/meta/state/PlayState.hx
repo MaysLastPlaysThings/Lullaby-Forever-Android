@@ -2282,12 +2282,12 @@ class PlayState extends MusicBeatState
 
 			var easeLerp = 1 - (elapsed * 3.125);
 			// camera stuffs
-   			if (camZooming)
+/*   			if (camZooming)
 			{
 				FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom + forceZoom[0] + characterZoom, FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(1 + forceZoom[1], hud.zoom, easeLerp);
-			} //test №3
+			}*/ //test №3
 
 			// not even forcezoom anymore but still
 			FlxG.camera.angle = FlxMath.lerp(0 + forceZoom[2], FlxG.camera.angle, easeLerp);
@@ -3883,7 +3883,7 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
- 		/*if (bopFrequency != 0)
+ 		if (bopFrequency != 0)
 		{
 			if ((FlxG.camera.zoom < 1.35 && curBeat % (4 / bopFrequency) == 0)
 				&& camZooming
@@ -3894,7 +3894,7 @@ class PlayState extends MusicBeatState
 				for (hud in strumHUD)
 					hud.zoom += 0.05 * bopIntensity;
 			}
-		}*/ //test №2
+		} //test №2
 
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
