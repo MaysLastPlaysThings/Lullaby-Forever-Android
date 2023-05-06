@@ -3883,7 +3883,7 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
-  		if (bopFrequency != 0)
+ /* 		if (bopFrequency != 0)
 		{
 			if ((FlxG.camera.zoom < 1.35 && curBeat % (4 / bopFrequency) == 0)
 				&& camZooming
@@ -3894,7 +3894,7 @@ class PlayState extends MusicBeatState
 				for (hud in strumHUD)
 					hud.zoom += 0.05 * bopIntensity;
 			}
-		} //test №2
+		}*/ //test №2
 
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
