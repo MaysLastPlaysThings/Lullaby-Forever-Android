@@ -1540,7 +1540,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var cameraValueMissingno(default, set):Float = defaultCamZoom;
+	//public var cameraValueMissingno(default, set):Float = defaultCamZoom;
 	public var missingnoZoomIn:Bool = false;
 	public var missingnoZoomIntensity(default, set):Float = 0;
 
@@ -1558,13 +1558,13 @@ class PlayState extends MusicBeatState
 		return newValue;
 	}
 
-	 function set_cameraValueMissingno(newValue:Float)
+/*	 function set_cameraValueMissingno(newValue:Float)
 	{
 		cameraValueMissingno = newValue;
 		if (missingnoZoomIn)
 			FlxG.camera.zoom = cameraValueMissingno;
 		return newValue;
-	} //test №1
+	}*/ //test №1
 
 	public function flipCharacters()
 	{
@@ -2282,12 +2282,12 @@ class PlayState extends MusicBeatState
 
 			var easeLerp = 1 - (elapsed * 3.125);
 			// camera stuffs
-/*  			if (camZooming)
+   			if (camZooming)
 			{
 				FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom + forceZoom[0] + characterZoom, FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(1 + forceZoom[1], hud.zoom, easeLerp);
-			}*/ //test №3
+			} //test №3
 
 			// not even forcezoom anymore but still
 			FlxG.camera.angle = FlxMath.lerp(0 + forceZoom[2], FlxG.camera.angle, easeLerp);
