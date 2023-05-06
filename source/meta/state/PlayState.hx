@@ -1558,13 +1558,13 @@ class PlayState extends MusicBeatState
 		return newValue;
 	}
 
-	function set_cameraValueMissingno(newValue:Float)
+	/*function set_cameraValueMissingno(newValue:Float)
 	{
 		cameraValueMissingno = newValue;
 		if (missingnoZoomIn)
 			FlxG.camera.zoom = cameraValueMissingno;
 		return newValue;
-	}
+	}*/ //test №1
 
 	public function flipCharacters()
 	{
