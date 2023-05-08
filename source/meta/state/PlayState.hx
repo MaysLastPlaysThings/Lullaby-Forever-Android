@@ -1804,7 +1804,7 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		//for update cam num
-		//textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom; //hope this show the value
+		uiHUD.scoreBar.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom; //hope this show the value
 		
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
