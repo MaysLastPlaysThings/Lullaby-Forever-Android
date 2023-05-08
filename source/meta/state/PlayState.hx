@@ -424,8 +424,10 @@ class PlayState extends MusicBeatState
 		// create the hud camera (separate so the hud stays on screen)
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
-
-		//FlxG.cameras.reset(camGame);
+		
+		camGame.zoom == defaultCamZoom; //try to add cuz no ome exists
+		
+		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		allUIs.push(camHUD);
 
