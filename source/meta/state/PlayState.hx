@@ -425,7 +425,7 @@ class PlayState extends MusicBeatState
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		
-		camGame.zoom == defaultCamZoom; //try to add cuz no ome exists
+		//camGame.zoom == defaultCamZoom; //not working
 		
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
@@ -1137,6 +1137,8 @@ class PlayState extends MusicBeatState
 
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
+		
+		addCustomCode();
 	}
 
 	public var minHealth:Float = 0;
@@ -1799,6 +1801,9 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		//for update cam num
+		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom; //hope this show the value
+		
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
 			if (startingSong)
@@ -2285,7 +2290,7 @@ class PlayState extends MusicBeatState
 			var easeLerp = 1; //1 - (elapsed * 3.125);
 			// camera stuffs
 			if (camZooming) {
-				FlxG.camera.zoom = 1;//FlxMath.lerp(defaultCamZoom + forceZoom[0] + characterZoom, FlxG.camera.zoom, easeLerp);
+				FlxG.camera.zoom = 1;//FlxMath.lerp( + forceZoom[0] + characterZoom, FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(1 + forceZoom[1], hud.zoom, easeLerp);
 			} // Under Testing Cameras - Ralsei
@@ -4445,5 +4450,13 @@ class PlayState extends MusicBeatState
 			}
 			//
 		}
+	}
+	
+	var dText:Int = 0;
+	
+	function addCustomCode() {
+		var textDebug:FlxText = new FlxText(5, 300, 0, dText, 8, false);
+		textDebug.cameras = [camHUD];
+		add(textDebug);
 	}
 }
