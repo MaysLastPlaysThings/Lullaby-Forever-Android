@@ -198,7 +198,7 @@ class ClassHUD extends FlxSpriteGroup
 		var importSongScore = PlayState.songScore;
 		var importPlayStateCombo = PlayState.combo;
 		var importMisses = PlayState.misses;
-		scoreBar.text = 'Score: $importSongScore' + "\nCamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom; //hope this show the value;
+		scoreBar.text = 'Score: $importSongScore' + "\nCamGame: " + PlayState.camGame.zoom + "\nCamHUD: " + PlayState.camHUD.zoom; //hope this show the value;
 		accuracyBar.text = '';
 		// testing purposes
 		var displayAccuracy:Bool = Init.trueSettings.get('Display Accuracy');
