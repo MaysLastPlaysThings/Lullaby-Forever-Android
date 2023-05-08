@@ -428,6 +428,7 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		allUIs.push(camHUD);
+		FlxCamera.defaultCameras = [camGame];
 
 		// default song
 		if (SONG == null)
