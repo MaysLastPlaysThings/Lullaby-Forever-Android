@@ -104,6 +104,8 @@ class PlayState extends MusicBeatState
 	public var botplayText:FlxText;
 	public var botplaySubtext:FlxText;
 
+	var dText:String = "Whaaaa";
+
 	public static var botplayQuotes:Map<String, Array<String>> = [
 		'safety-lullaby' => ['you took the safety part too seriously'],
 		'left-unchecked' => [
@@ -4451,8 +4453,6 @@ class PlayState extends MusicBeatState
 			//
 		}
 	}
-	
-	var dText:Int = 0;
 	
 	function addCustomCode() {
 		var textDebug:FlxText = new FlxText(5, 300, 0, dText, 8, false);
