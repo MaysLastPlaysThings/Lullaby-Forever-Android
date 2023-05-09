@@ -427,10 +427,12 @@ class PlayState extends MusicBeatState
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		
-		camGame.zoom == defaultCamZoom; //not working
+		//camGame.zoom == defaultCamZoom; //not working
 		
-		//FlxG.cameras.reset(camGame);
-		FlxG.cameras.add(camGame, false);
+		FlxG.cameras.reset(camGame);
+		
+		//FlxG.cameras.add(camGame, false);
+		
 		FlxG.cameras.add(camHUD, false);
 		allUIs.push(camHUD);
 
@@ -1805,7 +1807,7 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		//for update cam num
-		uiHUD.scoreBar.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom; //hope this show the value
+		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height:, " + camGame.width + " | " + camGame.height; //hope this show the value
 		
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
@@ -4456,7 +4458,7 @@ class PlayState extends MusicBeatState
 	}
 	
 	function addCustomCode() {
-		var textDebug:FlxText = new FlxText(5, 300, 0, dText, 8, false);
+		var textDebug:FlxText = new FlxText(20, 300, 0, dText, 20, false);
 		textDebug.cameras = [camHUD];
 		add(textDebug);
 	}
