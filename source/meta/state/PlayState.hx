@@ -427,9 +427,10 @@ class PlayState extends MusicBeatState
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		
-		//camGame.zoom == defaultCamZoom; //not working
+		camGame.zoom == defaultCamZoom; //not working
 		
-		FlxG.cameras.reset(camGame);
+		//FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camGame, false);
 		FlxG.cameras.add(camHUD, false);
 		allUIs.push(camHUD);
 
