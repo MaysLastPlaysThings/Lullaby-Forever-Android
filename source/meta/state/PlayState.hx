@@ -1810,8 +1810,8 @@ class PlayState extends MusicBeatState
 		//for update cam num
 		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height; //hope this show the value
 		
-		camGame.zoom = 60.0;
-		camHUD.zoom = 60.0;
+		camGame.zoom = defaultCamZoom;
+		camHUD.zoom = defaultCamZoom;
 		
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
