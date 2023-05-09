@@ -104,6 +104,7 @@ class PlayState extends MusicBeatState
 	public var botplayText:FlxText;
 	public var botplaySubtext:FlxText;
 
+	var textDebug:FlxText;
 	var dText:String = "Whaaaa";
 
 	public static var botplayQuotes:Map<String, Array<String>> = [
@@ -4458,7 +4459,7 @@ class PlayState extends MusicBeatState
 	}
 	
 	function addCustomCode() {
-		var textDebug:FlxText = new FlxText(20, 300, 0, dText, 20, false);
+		textDebug:FlxText = new FlxText(20, 300, 0, dText, 20, false);
 		textDebug.cameras = [camHUD];
 		add(textDebug);
 	}
