@@ -1808,7 +1808,10 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		//for update cam num
-		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height:, " + camGame.width + " | " + camGame.height; //hope this show the value
+		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height; //hope this show the value
+		
+		camGame.zoom = defaultCamZoom;
+		camHUD.zoom = defaultCamZoom;
 		
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
@@ -2293,13 +2296,13 @@ class PlayState extends MusicBeatState
 			if (!brimstoneShaking)
 				camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-			var easeLerp = 1; //1 - (elapsed * 3.125);
+			var easeLerp = 1 - (elapsed * 3.125);
 			// camera stuffs
-			if (camZooming) {
-				FlxG.camera.zoom = 1;//FlxMath.lerp( + forceZoom[0] + characterZoom, FlxG.camera.zoom, easeLerp);
+			/*if (camZooming) {
+				FlxG.camera.zoom = FlxMath.lerp( + forceZoom[0] + characterZoom, FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(1 + forceZoom[1], hud.zoom, easeLerp);
-			} // Under Testing Cameras - Ralsei
+			}*/ // Under Testing Cameras - Ralsei
 
 			// not even forcezoom anymore but still
 			FlxG.camera.angle = FlxMath.lerp(0 + forceZoom[2], FlxG.camera.angle, easeLerp);
