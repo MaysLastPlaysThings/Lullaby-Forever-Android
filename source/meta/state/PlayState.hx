@@ -4459,7 +4459,7 @@ class PlayState extends MusicBeatState
 	}
 	
 	function addCustomCode() {
-		textDebug:FlxText = new FlxText(20, 300, 0, dText, 20, false);
+		textDebug = new FlxText(20, 300, 0, dText, 20, false);
 		textDebug.cameras = [camHUD];
 		add(textDebug);
 	}
