@@ -79,6 +79,9 @@ enum abstract GameModes(String) to String
 
 class PlayState extends MusicBeatState
 {
+	//additions
+	public var defaultForeverZoom:Bool = 60.0;
+	
 	public var startTimer:FlxTimer;
 
 	public static var curStage:String = '';
@@ -1104,7 +1107,7 @@ class PlayState extends MusicBeatState
 
 		// actually set the camera up
 		FlxG.camera.follow(camFollowPos, LOCKON, 1);
-		FlxG.camera.zoom = defaultCamZoom;
+		FlxG.camera = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
@@ -1572,7 +1575,7 @@ class PlayState extends MusicBeatState
 	{
 		cameraValueMissingno = newValue;
 		if (missingnoZoomIn)
-			FlxG.camera.zoom = cameraValueMissingno;
+			FlxG.camera.zoom = defaultForeverZoom * cameraValueMissingno;
 		return newValue;
 	}
 
@@ -1808,10 +1811,10 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		//for update cam num
-		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height; //hope this show the value
+		textDebug.text = "CamGame: " + camGame + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height; //hope this show the value
 		
-		camGame.zoom = 60 * (defaultCamZoom - 0.8);
-		camHUD.zoom = 60 * (defaultCamZoom - 0.8);
+		/*camGame.zoom = 60 * (defaultCamZoom - 0.8);
+		camHUD.zoom = 60 * (defaultCamZoom - 0.8);*/
 		
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
@@ -2298,11 +2301,11 @@ class PlayState extends MusicBeatState
 
 			var easeLerp = 1 - (elapsed * 3.125);
 			// camera stuffs
-			/*if (camZooming) {
-				FlxG.camera.zoom = FlxMath.lerp( + forceZoom[0] + characterZoom, FlxG.camera.zoom, easeLerp);
+			if (camZooming) {
+				FlxG.camera.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
-					hud.zoom = FlxMath.lerp(1 + forceZoom[1], hud.zoom, easeLerp);
-			}*/ // Under Testing Cameras - Ralsei
+					hud.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[1]), hud.zoom, easeLerp);
+			} // Under Testing Cameras - Ralsei
 
 			// not even forcezoom anymore but still
 			FlxG.camera.angle = FlxMath.lerp(0 + forceZoom[2], FlxG.camera.angle, easeLerp);
@@ -3900,7 +3903,7 @@ class PlayState extends MusicBeatState
 
  		if (bopFrequency != 0)
 		{
-			if ((FlxG.camera.zoom < 1.35 && curBeat % (4 / bopFrequency) == 0)
+			if ((FlxG.camera.zoom < (defaultForeverZoom * 1.35) && curBeat % (4 / bopFrequency) == 0)
 				&& camZooming
 				&& (!Init.trueSettings.get('Reduced Movements')))
 			{
@@ -4191,13 +4194,13 @@ class PlayState extends MusicBeatState
 				add(ds1);
 
 				camZooming = false;
-				FlxG.camera.zoom = 0.55;
+				FlxG.camera.zoom = defaultForeverZoom * 0.55;
 				uiHUD.alpha = 0;
 				iconP1.alpha = 0;
 				iconP2.alpha = 0;
 				for (i in 0...strumHUD.length)
 				{
-					strumHUD[i].zoom = 0.65;
+					strumHUD[i].zoom = defaultForeverZoom * 0.65;
 				}
 				for (i in 0...strumHUD.length)
 				{
