@@ -1107,7 +1107,7 @@ class PlayState extends MusicBeatState
 
 		// actually set the camera up
 		FlxG.camera.follow(camFollowPos, LOCKON, 1);
-		FlxG.camera = defaultCamZoom;
+		FlxG.camera.zoom = defaultForeverZoom * defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
