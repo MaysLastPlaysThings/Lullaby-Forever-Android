@@ -2299,7 +2299,7 @@ class PlayState extends MusicBeatState
 			if (!brimstoneShaking)
 				camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-			var easeLerp = 1 - (elapsed * 3.125);
+			var easeLerp = defaultForeverZoom * (1 - (elapsed * 3.125));
 			// camera stuffs
 			if (camZooming) {
 				FlxG.camera.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
