@@ -70,12 +70,10 @@ class InfoHud extends TextField
 		if (visible)
 		{
 			text = '' // set up the text itself
-				+ (displayFps ? times.length + " FPS\n" : '') // Framerate
-				+ (displayExtra ? Main.mainClassState + "\n" : '') // Current Game State
-				+ (displayMemory ? mem
-					+ ' ${intervalArray[memInterval]} / ' // Current Memory Usage
-					+ memPeak
-					+ ' ${intervalArray[memPeakInterval]}\n' : ''); // Total Memory Usage
+			+ (displayFps ? times.length + " FPS\n" : '') // Framerate
+			+ (displayExtra ? Main.mainClassState + "\n" : '') // Current Game State
+			+ (displayMemory ? mem + ' ${intervalArray[memInterval]} / ' // Current Memory Usage
+			+ memPeak + ' ${intervalArray[memPeakInterval]}\n' : ''); // Total Memory Usage
 		}
 	}
 

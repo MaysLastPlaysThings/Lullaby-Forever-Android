@@ -1,5 +1,7 @@
 package meta.subState;
 
+import openfl.filters.ShaderFilter;
+import openfl.display.GraphicsShader;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -18,14 +20,14 @@ import meta.data.Conductor;
 import meta.data.dependency.FNFSprite;
 import meta.state.*;
 import meta.state.menus.*;
-import openfl.display.GraphicsShader;
-import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
-import vlc.MP4Handler;
+
 #if sys
 import sys.FileSystem;
 #end
+
+import vlc.MP4Handler;
 
 class GameOverSubstate extends MusicBeatSubState
 {
@@ -33,11 +35,9 @@ class GameOverSubstate extends MusicBeatSubState
 	var bf:Character;
 	var camFollow:FlxObject;
 	var stageSuffix:String = "";
-
+	
 	public static var redGraphic:FlxGraphic;
-
 	public var retry:FlxSprite;
-
 	var constantResize:Float = 5 / 4;
 
 	public static var deathSoundName = 'fnf_loss_sfx';
@@ -54,20 +54,17 @@ class GameOverSubstate extends MusicBeatSubState
 		lastCharacter = character;
 
 		Conductor.songPosition = 0;
-		if (daBf != 'gf-stand')
-		{
+		if (daBf != 'gf-stand') {
 			PlayState.boyfriend.destroy();
 			FlxG.camera.scroll.set();
 			FlxG.camera.target = null;
 		}
-
+		
 		gameoverStart(daBf, x, y);
 	}
 
 	public static var daBf:String = '';
-
-	public static function preload()
-	{
+	public static function preload() {
 		var daBoyfriendType = PlayState.boyfriend.curCharacter;
 		deathSoundName = 'fnf_loss_sfx';
 		loopSoundName = 'gameOver';
@@ -116,8 +113,7 @@ class GameOverSubstate extends MusicBeatSubState
 				daBf = 'mike-death';
 				deathSoundName = 'DissensionDeath';
 			case 'mx' | 'lord-x' | 'hypno-cards':
-				switch (PlayState.playerLane)
-				{
+				switch (PlayState.playerLane) {
 					case 0:
 						daBf = 'mx';
 					case 1:
@@ -136,26 +132,21 @@ class GameOverSubstate extends MusicBeatSubState
 		precacheSoundFile(Paths.sound(deathSoundName));
 	}
 
-	public var deathEnd:Void->Void = function() {};
-	public var onEnd:Void->Void = function() {};
+	public var deathEnd:Void->Void = function(){};
+	public var onEnd:Void->Void = function(){};
 	public var stepFunction:Void->Void = function() {};
 	public var updateFunction:Void->Void = function() {};
-	public var escapeFunction:Void->Void = function() {};
-
+	public var escapeFunction:Void->Void = function(){};
 	var gf:FlxSprite;
-
-	public function gameoverStart(character:String, x:Float, y:Float)
-	{
-		switch (character)
-		{
+	public function gameoverStart(character:String, x:Float, y:Float) {
+		switch (character) {
 			case 'gf':
 				var camHUD = new FlxCamera();
-				for (camera in FlxG.cameras.list)
-					FlxG.cameras.setDefaultDrawTarget(camera, false);
-				FlxG.cameras.add(camHUD, true);
+				FlxG.cameras.add(camHUD);
+				FlxCamera.defaultCameras = [camHUD];
 				camHUD.flash(FlxColor.RED, 0.5);
 				timeBeforeEnd = 1.35;
-
+				
 				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('characters/death/gf/sky'));
 				bg.setGraphicSize(Std.int(bg.width * 1.5));
 				bg.updateHitbox();
@@ -176,17 +167,15 @@ class GameOverSubstate extends MusicBeatSubState
 				trunk.x += (trunk.width * 0.75) + 5;
 				trunk.y -= (trunk.height * 0.15) - 1;
 				add(trunk);
-
+				
 				gf = new FlxSprite(FlxG.width / 2, FlxG.height / 2);
 				gf.frames = Paths.getSparrowAtlas('characters/death/gf/gf');
 				gf.animation.addByPrefix('deathLoopStart', 'GF_DIZZLE_OPENING instance 1', 24, false);
 				gf.animation.addByPrefix('deathLoop', 'GF_DIZZLE_LOOP instance 1', 24, true);
 				gf.animation.addByPrefix('deathConfirm', 'GF_WAKEUP instance 1', 24, false);
 				gf.animation.play('deathLoopStart');
-				gf.animation.finishCallback = function(name:String)
-				{
-					switch (name)
-					{
+				gf.animation.finishCallback = function(name:String) {
+					switch (name) {
 						case 'deathLoopStart':
 							gf.animation.play('deathLoop');
 					}
@@ -209,7 +198,7 @@ class GameOverSubstate extends MusicBeatSubState
 				hando.y += hando.height * 0.25;
 				// FlxTween.tween(hando, {x: -hando.width * 0.25}, 0.75, {ease: FlxEase.linear});
 				hando.antialiasing = true;
-
+				
 				add(hando);
 
 				var retry:FNFSprite = new FNFSprite(75, 300);
@@ -223,11 +212,10 @@ class GameOverSubstate extends MusicBeatSubState
 				// retry.updateHitbox();
 				add(retry);
 				retry.playAnim('start');
-				retry.animation.finishCallback = function(name:String)
-				{
+				retry.animation.finishCallback = function(name:String) {
 					if (name == 'start')
 						retry.playAnim('idle');
-					if (name == 'end')
+					if (name == 'end') 
 						FlxTween.tween(retry, {alpha: 0}, 1, {ease: FlxEase.linear});
 				}
 
@@ -256,130 +244,117 @@ class GameOverSubstate extends MusicBeatSubState
 				if (bf.atlasCharacter != null)
 					add(bf.atlasCharacter);
 
-				updateFunction = function()
-				{
+				updateFunction = function() {
 					camFollow.setPosition(x, y);
 					FlxG.camera.follow(camFollow, LOCKON, 0.01);
-					if (deathThingy.animation.curAnim.name == 'start' && deathThingy.animation.finished)
-					{
+					if (deathThingy.animation.curAnim.name == 'start' && deathThingy.animation.finished) {
 						FlxG.sound.playMusic(Paths.music(loopSoundName));
 						deathThingy.playAnim('loop');
 					}
 				};
 
-				new FlxTimer().start(1.5, function(tmr:FlxTimer)
-				{
-					if (!isEnding)
+				new FlxTimer().start(1.5, function(tmr:FlxTimer) {	
+					if (!isEnding) 
 						FlxTween.tween(PlayState.camGame, {zoom: PlayState.camGame.zoom + 0.05}, 2, {ease: FlxEase.quadInOut});
 				});
 
-				deathEnd = function()
-				{
+				deathEnd = function() {
 					deathThingy.playAnim('end');
 					FlxTween.cancelTweensOf(PlayState.camGame);
-					PlayState.camGame.fade(FlxColor.BLACK, timeBeforeEnd / 2, false, function()
-					{
+					PlayState.camGame.fade(FlxColor.BLACK, timeBeforeEnd / 2, false, function(){
 						PlayState.camGame.alpha = 0;
 					});
 					FlxTween.tween(PlayState.camGame, {zoom: PlayState.camGame.zoom - 0.15}, timeBeforeEnd / 2, {ease: FlxEase.quadIn});
 				};
 
 			case 'smol-hypno':
-				var retry:FNFSprite = new FNFSprite(280, 200);
+				var retry:FNFSprite = new FNFSprite(280, 200);	
 				retry.frames = Paths.getSparrowAtlas('characters/death/bygone/Retry');
-				retry.animation.addByPrefix('idle', "Retry instance 1", 24, false);
+				retry.animation.addByPrefix('idle', "Retry instance 1", 24, false);				
 				add(retry);
 				retry.playAnim('idle');
-				retry.animation.finishCallback = function(name:String)
-				{
+				retry.animation.finishCallback = function(name:String) {
 					if (name == 'idle')
 						retry.playAnim('idle');
 				}
 				retry.scale.set(0.65, 0.65);
-				retry.alpha = 0;
+				retry.alpha = 0;	
 
 				if (PlayState.alexis)
-				{
-					var alexisdies:FNFSprite = new FNFSprite(850, 100);
-					alexisdies.frames = Paths.getSparrowAtlas('characters/death/bygone/GGirl_Poof');
-					alexisdies.animation.addByPrefix('idle', "GGirlPoof", 12, false);
-					add(alexisdies);
-					alexisdies.scale.set(1.15, 1.15);
-					FlxG.sound.play(Paths.sound('bygonedeathNoise'));
-					alexisdies.playAnim('idle');
-					alexisdies.animation.finishCallback = function(name:String)
 					{
-						if (name == 'idle')
-							FlxTween.tween(alexisdies, {alpha: 0}, 0.3, {ease: FlxEase.circOut});
+						var alexisdies:FNFSprite = new FNFSprite(850, 100);
+						alexisdies.frames = Paths.getSparrowAtlas('characters/death/bygone/GGirl_Poof');
+						alexisdies.animation.addByPrefix('idle', "GGirlPoof", 12, false);				
+						add(alexisdies);
+						alexisdies.scale.set(1.15, 1.15);
+						FlxG.sound.play(Paths.sound('bygonedeathNoise'));
+						alexisdies.playAnim('idle');
+						alexisdies.animation.finishCallback = function(name:String) {
+							if (name == 'idle')
+								FlxTween.tween(alexisdies, {alpha: 0}, 0.3, {ease: FlxEase.circOut});					
+						}
+						new FlxTimer().start(1.7, function(tmr:FlxTimer)
+							{									
+								FlxG.sound.volume = 0;
+								FlxG.sound.playMusic(Paths.music(loopSoundName));
+								FlxTween.tween(FlxG.sound, {volume: 1}, 2, {ease: FlxEase.linear});
+								FlxTween.tween(retry, {alpha: 1}, 1.5, {ease: FlxEase.circIn});								
+							});
 					}
-					new FlxTimer().start(1.7, function(tmr:FlxTimer)
-					{
-						FlxG.sound.volume = 0;
-						FlxG.sound.playMusic(Paths.music(loopSoundName));
-						FlxTween.tween(FlxG.sound, {volume: 1}, 2, {ease: FlxEase.linear});
-						FlxTween.tween(retry, {alpha: 1}, 1.5, {ease: FlxEase.circIn});
-					});
-				}
 				else
-				{
-					var camHUD = new FlxCamera();
-					for (camera in FlxG.cameras.list)
-						FlxG.cameras.setDefaultDrawTarget(camera, false);
-					FlxG.cameras.add(camHUD, true);
-					camHUD.flash(FlxColor.RED, 0.5);
-					FlxG.sound.volume = 0.15;
-					FlxG.sound.playMusic(Paths.music(loopSoundName));
-					FlxTween.tween(FlxG.sound, {volume: 1}, 1.5, {ease: FlxEase.linear});
-					FlxTween.tween(retry, {alpha: 1}, 1, {ease: FlxEase.circIn});
-				}
-
-				deathEnd = function()
-				{
+					{						
+						var camHUD = new FlxCamera();
+						FlxG.cameras.add(camHUD);
+						FlxCamera.defaultCameras = [camHUD];
+						camHUD.flash(FlxColor.RED, 0.5);							
+						FlxG.sound.volume = 0.15;
+						FlxG.sound.playMusic(Paths.music(loopSoundName));
+						FlxTween.tween(FlxG.sound, {volume: 1}, 1.5, {ease: FlxEase.linear});
+						FlxTween.tween(retry, {alpha: 1}, 1, {ease: FlxEase.circIn});					
+					}						
+								
+				deathEnd = function(){
 					remove(retry);
 					FlxG.sound.play(Paths.sound(endSoundName));
 
 					var confirm:FNFSprite = new FNFSprite(420, 0);
 					confirm.frames = Paths.getSparrowAtlas('characters/death/bygone/Confirm');
-					confirm.animation.addByPrefix('idle', "Confirm instance 1", 24, false);
+					confirm.animation.addByPrefix('idle', "Confirm instance 1", 24, false);		
 					add(confirm);
-					confirm.playAnim('idle');
+					confirm.playAnim('idle');					
 				};
-			case 'cold-gold' | 'ponyta' | 'pico' | 'glitchy-bf':
-				var retry:FNFSprite = new FNFSprite(280, 200);
+			case 'cold-gold' | 'ponyta' | 'pico' | 'glitchy-red':
+				var retry:FNFSprite = new FNFSprite(280, 200);	
 				retry.frames = Paths.getSparrowAtlas('characters/death/bygone/Retry');
-				retry.animation.addByPrefix('idle', "Retry instance 1", 24, false);
+				retry.animation.addByPrefix('idle', "Retry instance 1", 24, false);				
 				add(retry);
 				retry.playAnim('idle');
-				retry.animation.finishCallback = function(name:String)
-				{
+				retry.animation.finishCallback = function(name:String) {
 					if (name == 'idle')
 						retry.playAnim('idle');
 				}
 				retry.scale.set(0.65, 0.65);
-				retry.alpha = 0.0;
-
+				retry.alpha = 0.0;	
+				
 				var camHUD = new FlxCamera();
-				for (camera in FlxG.cameras.list)
-					FlxG.cameras.setDefaultDrawTarget(camera, false);
-				FlxG.cameras.add(camHUD, true);
-				FlxG.sound.playMusic(Paths.music(loopSoundName));
-				FlxTween.tween(retry, {alpha: 1.0}, 1.0, {ease: FlxEase.linear});
-
+				FlxG.cameras.add(camHUD);
+				FlxCamera.defaultCameras = [camHUD];
+				FlxG.sound.playMusic(Paths.music(loopSoundName));	
+				FlxTween.tween(retry, {alpha: 1.0}, 1.0, {ease: FlxEase.linear});		
+				
 				retry.cameras = [camHUD];
-
-				deathEnd = function()
-				{
+								
+				deathEnd = function(){
 					remove(retry);
-					FlxG.sound.play(Paths.sound(endSoundName));
-					FlxTween.tween(retry, {alpha: 0.0}, 1.0, {ease: FlxEase.linear});
+					FlxG.sound.play(Paths.sound(endSoundName));	
+					FlxTween.tween(retry, {alpha: 0.0}, 1.0, {ease: FlxEase.linear});	
 				};
 
 			case 'buryman-death':
 				var camHUD = new FlxCamera();
 				FlxG.camera.zoom = 6;
-				for (camera in FlxG.cameras.list)
-					FlxG.cameras.setDefaultDrawTarget(camera, false);
-				FlxG.cameras.add(camHUD, true);
+				FlxG.cameras.add(camHUD);
+				FlxCamera.defaultCameras = [camHUD];
 				// camHUD.zoom = 0.6;
 				FlxG.sound.play(Paths.sound('buryman-death/buriedThud'));
 				var retry:Boyfriend = new Boyfriend();
@@ -387,11 +362,10 @@ class GameOverSubstate extends MusicBeatSubState
 				retry.playAnim('retry');
 
 				new FlxTimer().start(0.5, function(tmr:FlxTimer)
-				{
+				{						
 					var sound:Sound = Paths.sound(deathSoundName);
 					FlxG.sound.play(sound);
-					new FlxTimer().start((sound.length / 1000) - 0.05, function(tmr:FlxTimer)
-					{
+					new FlxTimer().start((sound.length / 1000) - 0.05, function(tmr:FlxTimer){
 						camHUD.flash(FlxColor.BLACK, 0.5);
 
 						bf = new Boyfriend();
@@ -410,111 +384,103 @@ class GameOverSubstate extends MusicBeatSubState
 					});
 				});
 
-				deathEnd = function()
-				{
+				deathEnd = function() {
 					retry.playAnim('accept');
 					FlxTween.tween(camHUD, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
 				};
-				stepFunction = function()
-				{
-					if (curBeat % 4 == 3)
-					{
+				stepFunction = function() {
+					if (curBeat % 4 == 3) {
 						if (curStep % 8 == 6)
 							bf.playAnim('idle');
 					}
 				}
 
 			case 'dawn':
-				var camHUD = new FlxCamera();
-				for (camera in FlxG.cameras.list)
-					FlxG.cameras.setDefaultDrawTarget(camera, false);
-				FlxG.cameras.add(camHUD, true);
+				var camHUD = new FlxCamera();				
+				FlxG.cameras.add(camHUD);
+				FlxCamera.defaultCameras = [camHUD];
 				camHUD.zoom = 1.2;
 				FlxG.sound.play(Paths.sound('DT_Loss_SFX'));
-				camHUD.flash(FlxColor.RED, 2.5);
-
-				var flicker:FlxSprite = new FlxSprite().loadGraphic(Paths.image('characters/death/hellbell/vignetteFlicker'));
-				flicker.cameras = [camHUD];
+				camHUD.flash(FlxColor.RED, 2.5);	
+				
+				var flicker:FlxSprite = new FlxSprite().loadGraphic(Paths.image('characters/death/hellbell/vignetteFlicker'));	
+				flicker.cameras = [camHUD];											
 				flicker.screenCenter();
 				flicker.y -= 25;
-				flicker.scale.set(1.35, 1.35);
-				flicker.antialiasing = true;
-				flicker.alpha = 0.2;
+				flicker.scale.set(1.35, 1.35);		
+				flicker.antialiasing = true;	
+				flicker.alpha = 0.2;				
 
-				var skillissue:FNFSprite = new FNFSprite(-225, -250);
+				var skillissue:FNFSprite = new FNFSprite(-225, -250);	
 				skillissue.frames = Paths.getSparrowAtlas('characters/death/hellbell/hellbellDeath');
-				skillissue.animation.addByPrefix('idle', "deathIdle", 24, false);
-				skillissue.animation.addByPrefix('lol', "deathLol", 24, false);
-				skillissue.animation.addByPrefix('confirm', "deathConfirm", 24, false);
-				skillissue.scale.set(1.3, 1.3);
-				skillissue.antialiasing = true;
+				skillissue.animation.addByPrefix('idle', "deathIdle", 24, false);		
+				skillissue.animation.addByPrefix('lol', "deathLol", 24, false);				
+				skillissue.animation.addByPrefix('confirm', "deathConfirm", 24, false);		
+				skillissue.scale.set(1.3, 1.3);			
+				skillissue.antialiasing = true;		
 				add(skillissue);
-				skillissue.playAnim('idle');
-				skillissue.animation.finishCallback = function(name:String)
-				{
-					switch (name)
-					{
+				skillissue.playAnim('idle');	
+				skillissue.animation.finishCallback = function(name:String) {
+					switch (name) {
 						case 'idle':
-							skillissue.animation.play('lol');
-							flicker.alpha = 0.22;
+							skillissue.animation.play('lol');	
+							flicker.alpha = 0.22;	
 							new FlxTimer().start(0.08, function(tmr:FlxTimer)
-							{
-								flicker.alpha = 0.2;
-								new FlxTimer().start(0.08, function(tmr:FlxTimer)
-								{
-									flicker.alpha = 0.22;
+								{						
+									flicker.alpha = 0.2;
 									new FlxTimer().start(0.08, function(tmr:FlxTimer)
-									{
-										flicker.alpha = 0.2;
-										new FlxTimer().start(0.08, function(tmr:FlxTimer)
-										{
+										{						
 											flicker.alpha = 0.22;
 											new FlxTimer().start(0.08, function(tmr:FlxTimer)
-											{
-												flicker.alpha = 0.2;
-												new FlxTimer().start(0.08, function(tmr:FlxTimer)
-												{
-													flicker.alpha = 0.22;
+												{						
+													flicker.alpha = 0.2;
 													new FlxTimer().start(0.08, function(tmr:FlxTimer)
-													{
-														flicker.alpha = 0.2;
-													});
-												});
-											});
-										});
-									});
-								});
-							});
+														{						
+															flicker.alpha = 0.22;
+															new FlxTimer().start(0.08, function(tmr:FlxTimer)
+																{						
+																	flicker.alpha = 0.2;
+																	new FlxTimer().start(0.08, function(tmr:FlxTimer)
+																		{						
+																			flicker.alpha = 0.22;
+																			new FlxTimer().start(0.08, function(tmr:FlxTimer)
+																				{						
+																					flicker.alpha = 0.2;
+																				});	
+																		});	
+																});	
+														});	
+												});	
+										});	
+								});										
 						case 'lol':
-							skillissue.animation.play('idle');
+							skillissue.animation.play('idle');														
 					}
-				};
+				};		
 
 				add(flicker);
 				new FlxTimer().start(1.5, function(tmr:FlxTimer)
-				{
-					FlxG.sound.playMusic(Paths.music(loopSoundName));
-					FlxTween.tween(camHUD, {zoom: 0.6}, 2, {ease: FlxEase.quadInOut});
-					FlxTween.tween(skillissue, {y: -70}, 2, {ease: FlxEase.quadInOut});
-					FlxTween.tween(skillissue, {x: -30}, 2, {ease: FlxEase.quadInOut});
-				});
-
-				deathEnd = function()
-				{
-					camHUD.flash(FlxColor.BLACK, 0.2);
+					{			
+						FlxG.sound.playMusic(Paths.music(loopSoundName));		
+						FlxTween.tween(camHUD, {zoom: 0.6}, 2, {ease: FlxEase.quadInOut});
+						FlxTween.tween(skillissue, {y: -70}, 2, {ease: FlxEase.quadInOut});
+						FlxTween.tween(skillissue, {x: -30}, 2, {ease: FlxEase.quadInOut});
+					});		
+				
+				deathEnd = function() {
+					camHUD.flash(FlxColor.BLACK, 0.2);	
 					skillissue.playAnim('confirm');
 					new FlxTimer().start(1.2, function(tmr:FlxTimer)
-					{
-						FlxTween.tween(camHUD, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
-					});
+						{						
+							FlxTween.tween(camHUD, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
+						});					
 				};
 
 			case 'mike-death':
 				var camHUD = new FlxCamera();
-				for (camera in FlxG.cameras.list)
-					FlxG.cameras.setDefaultDrawTarget(camera, false);
-				FlxG.cameras.add(camHUD, true);
-
+				FlxG.cameras.add(camHUD);
+				FlxCamera.defaultCameras = [camHUD];
+				
 				bf = new Boyfriend();
 				bf.setCharacter(x, y, character);
 				bf.setGraphicSize(Std.int(bf.width * 1.25));
@@ -523,28 +489,21 @@ class GameOverSubstate extends MusicBeatSubState
 				bf.antialiasing = true;
 				add(bf);
 				bf.playAnim('firstDeath');
-				camHUD.flash(0x6CFC0000, 0.5);
+				camHUD.flash(0x6CFC0000, 0.5);	
 
 				var sound:Sound = Paths.sound(deathSoundName);
 				FlxG.sound.play(sound);
 
-				deathEnd = function()
-				{
-					bf.playAnim('deathConfirm');
-				}
-
+				deathEnd = function() { bf.playAnim('deathConfirm'); }
+			
 			case 'mx' | 'lord-x' | 'hypno-cards':
 				FlxG.sound.play(Paths.sound(deathSoundName));
 
 				var deathCam:FlxCamera = new FlxCamera(0, 0, 768, 672);
 				FlxG.cameras.reset(deathCam);
-
-				var crt:ShaderFilter = null;
-				if (Init.trueSettings.get('Shaders'))
-				{
-					crt = new ShaderFilter(new GraphicsShader("", Paths.shader('crt')));
-					deathCam.setFilters([crt]);
-				}
+				
+				var crt:ShaderFilter = new ShaderFilter(new GraphicsShader("", Paths.shader('crt')));
+				deathCam.setFilters([crt]);
 				// lmao
 				deathCam.x += (FlxG.width / 2 - deathCam.width / 2);
 				deathCam.y += (FlxG.height / 2 - deathCam.height / 2);
@@ -552,7 +511,7 @@ class GameOverSubstate extends MusicBeatSubState
 
 				var blackBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 				add(blackBG);
-
+				
 				var gameoverGraphic:FlxSprite = new FlxSprite();
 				gameoverGraphic.frames = Paths.getSparrowAtlas('UI/base/pasta/PN_GameOver');
 				gameoverGraphic.animation.addByPrefix('idle', 'pastanight_curtains0', 0, false);
@@ -565,8 +524,7 @@ class GameOverSubstate extends MusicBeatSubState
 
 				var miniChar:FlxSprite = new FlxSprite();
 				miniChar.frames = Paths.getSparrowAtlas('UI/base/pasta/PN_LoseSprites');
-				switch (character)
-				{
+				switch (character) {
 					case 'mx':
 						miniChar.animation.addByPrefix('idle', 'pastanight_LoseMX0', 24);
 					case 'hypno-cards':
@@ -581,188 +539,170 @@ class GameOverSubstate extends MusicBeatSubState
 					miniChar.x += 24;
 				add(miniChar);
 				add(gameoverGraphic);
-
+				
 				var velocity:Float = -5;
 				var totalElapsed:Float = 0;
-				updateFunction = function()
-				{
+				updateFunction = function() {
 					totalElapsed += FlxG.elapsed;
 					if (crt != null)
 						crt.shader.data.time.value = [totalElapsed];
 
-					if (miniChar.y > gameoverGraphic.y + gameoverGraphic.height)
-					{
-						if (gameoverGraphic.animation.curAnim.name != 'moving' && gameoverGraphic.animation.curAnim.name != 'retry')
-						{
+					if (miniChar.y > gameoverGraphic.y + gameoverGraphic.height) {
+						if (gameoverGraphic.animation.curAnim.name != 'moving' 
+						&& gameoverGraphic.animation.curAnim.name != 'retry') {
 							gameoverGraphic.animation.play('moving');
-							gameoverGraphic.animation.finishCallback = function(name:String)
-							{
+							gameoverGraphic.animation.finishCallback = function(name:String) {
 								if (name == 'moving')
 									gameoverGraphic.animation.play('retry');
 							}
 							//
 						}
 					}
-
+	
 					miniChar.y += velocity * (FlxG.elapsed / (1 / 60)) * 3;
 					if (velocity < 32)
 						velocity += 0.21875 * (FlxG.elapsed / (1 / 60));
 				};
-			default:
+			default: 
 				if (PlayState.SONG.song.toLowerCase() == 'insomnia')
-				{
-					var camHUD = new FlxCamera();
-					for (camera in FlxG.cameras.list)
-						FlxG.cameras.setDefaultDrawTarget(camera, false);
-					FlxG.cameras.add(camHUD, true);
-
-					var bg:FlxSprite = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-					bg.scrollFactor.set();
-					bg.cameras = [camHUD];
-					add(bg);
-					bg.antialiasing = true;
-
-					var video:MP4Handler = new MP4Handler();
-					video.playVideo(Paths.video('feraligatr'));
-					video.finishCallback = function()
 					{
-						if (video.bitmapData != null)
-							bg.pixels = video.bitmapData;
+						var camHUD = new FlxCamera();
+						FlxG.cameras.add(camHUD);
+						FlxCamera.defaultCameras = [camHUD];
 
-						bg.setGraphicSize(Std.int(FlxG.width), Std.int(FlxG.height));
-						bg.screenCenter();
-					}
+						var bg:FlxSprite = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+						bg.scrollFactor.set();
+						bg.cameras = [camHUD];
+						add(bg);
+						bg.antialiasing = true;
 
-					deathEnd = function()
-					{
-						if (video != null)
-							video.finishVideo();
-						FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
 
-						onEnd = function()
+						var video:MP4Handler = new MP4Handler();
+						video.playVideo(Paths.video('feraligatr'));
+						video.finishCallback = function()
 						{
-							remove(bg);
-							bg.pixels.dispose();
-							bg = null;
+							if (video.bitmapData != null)
+								bg.pixels = video.bitmapData;
+
+							bg.setGraphicSize(Std.int(FlxG.width), Std.int(FlxG.height));
+							bg.screenCenter();
+						}
+	
+						deathEnd = function()
+						{
+							if (video != null) video.finishVideo();
+							FlxTween.tween(bg, {alpha: 0}, timeBeforeEnd, {ease: FlxEase.linear});
+
+							onEnd = function()
+							{
+								remove(bg);
+								bg.pixels.dispose();
+								bg = null;
+							};
+							
+							Conductor.changeBPM(100);
 						};
 
-						Conductor.changeBPM(100);
-					};
-
-					escapeFunction = function()
-					{
-						if (video != null)
-							video.finishVideo();
-					}
-				}
-				else if (PlayState.SONG.song.toLowerCase() == "monochrome")
-				{
+						escapeFunction = function ()
+							{
+								if (video != null) video.finishVideo();
+							}
+					} 
+				else if (PlayState.SONG.song.toLowerCase() == "monochrome") {
 					deathSoundName = '';
 					loopSoundName = '';
 					endSoundName = '';
 				}
-				else if (PlayState.SONG.song.toLowerCase() == "shitno")
-				{
+				else if (PlayState.SONG.song.toLowerCase() == "shitno") {
 					deathSoundName = 'Shitno-Death';
 					loopSoundName = '';
 					endSoundName = '';
 
 					var camHUD = new FlxCamera();
-					for (camera in FlxG.cameras.list)
-						FlxG.cameras.setDefaultDrawTarget(camera, false);
-					FlxG.cameras.add(camHUD, true);
+					FlxG.cameras.add(camHUD);
+					FlxCamera.defaultCameras = [camHUD];
 
-					var shaderabb:ShaderFilter = null;
-					if (Init.trueSettings.get('Shaders'))
-					{
-						shaderabb = new ShaderFilter(new GraphicsShader("", Paths.shader('aberration')));
-						camHUD.setFilters([shaderabb]);
-						if (shaderabb != null)
+					var shaderabb:ShaderFilter = new ShaderFilter(new GraphicsShader("", Paths.shader('aberration')));
+					camHUD.setFilters([shaderabb]);
+					if (shaderabb != null)
 						{
 							shaderabb.shader.data.aberration.value = [0.001];
 							shaderabb.shader.data.effectTime.value = [0.001];
 						}
-					}
 
-					var shitno:FlxSprite = new FlxSprite().loadGraphic(Paths.image('jumpscares/Shitno'));
-					shitno.cameras = [camHUD];
+					var shitno:FlxSprite = new FlxSprite().loadGraphic(Paths.image('jumpscares/Shitno'));	
+					shitno.cameras = [camHUD];											
 					shitno.screenCenter();
 					add(shitno);
 					shitno.visible = false;
 
 					var totalAbb:Float = 0.001;
-
+					
 					new FlxTimer().start(2.0, function(tmr:FlxTimer)
-					{
+					{	
 						FlxG.sound.play(Paths.sound(deathSoundName));
 						shitno.visible = true;
 						camHUD.shake(0.01, 2.0);
 
 						new FlxTimer().start(1.10, function(tmr:FlxTimer)
-						{
-							new FlxTimer().start(0.125, function(tmr:FlxTimer)
-							{
-								shitno.visible = !shitno.visible;
-								totalAbb += 0.15;
-								if (shaderabb != null)
-								{
-									shaderabb.shader.data.aberration.value = [totalAbb];
-									shaderabb.shader.data.effectTime.value = [totalAbb];
-								}
-							}, 4);
-						});
+							{	
+								new FlxTimer().start(0.125, function(tmr:FlxTimer)
+									{	
+										shitno.visible = !shitno.visible;
+										totalAbb += 0.15;
+										if (shaderabb != null)
+											{
+												shaderabb.shader.data.aberration.value = [totalAbb];
+												shaderabb.shader.data.effectTime.value = [totalAbb];
+
+											}
+									},4);
+							});
 
 						new FlxTimer().start(1.75, function(tmr:FlxTimer)
-						{
-							shitno.visible = false;
+							{	
+								shitno.visible = false;
 
-							new FlxTimer().start(1.0, function(tmr:FlxTimer)
-							{
-								Main.switchState(this, new ShopState());
+								new FlxTimer().start(1.0, function(tmr:FlxTimer)
+									{
+										Main.switchState(this, new ShopState());
+									});
 							});
-						});
 					});
+
 				}
-				else
+				else 
 				{
 					FlxG.sound.play(Paths.sound(deathSoundName));
-
+					
 					bf = new Boyfriend();
 					bf.setCharacter(x, y, character);
 					bf.y += bf.characterData.offsetY;
 					add(bf);
 
 					bf.playAnim('firstDeath');
-					updateFunction = function()
-					{
+					updateFunction = function() {
 						if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)
 							FlxG.camera.follow(camFollow, LOCKON, 0.01);
 
 						if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.finished)
 							FlxG.sound.playMusic(Paths.music(loopSoundName));
 					};
-					deathEnd = function()
-					{
+					deathEnd = function() {
 						bf.playAnim('deathConfirm');
 					};
 				}
+			
 		}
 		Conductor.changeBPM(deathSoundBPM);
-		if (bf != null)
-		{
-			camFollow = new FlxObject(bf.getGraphicMidpoint().x
-				+ 20
-				+ bf.characterData.camOffsetX,
-				bf.getGraphicMidpoint().y
-				- 40
-				+ bf.characterData.camOffsetY, 1, 1);
+		if (bf != null) {
+			camFollow = new FlxObject(bf.getGraphicMidpoint().x + 20 + bf.characterData.camOffsetX, bf.getGraphicMidpoint().y - 40 + bf.characterData.camOffsetY, 1, 1);
 			add(camFollow);
 		}
 	}
 
 	// from psych engine
-	private static function precacheSoundFile(file:Dynamic):Void
-	{
+	private static function precacheSoundFile(file:Dynamic):Void {
 		if (Assets.exists(file, SOUND) || Assets.exists(file, MUSIC))
 			Assets.getSound(file, true);
 	}
@@ -783,17 +723,14 @@ class GameOverSubstate extends MusicBeatSubState
 
 		if (controls.BACK)
 		{
-			if (escapeFunction != null)
-				escapeFunction();
+			if (escapeFunction != null) escapeFunction();
 
 			if (FlxG.sound.music != null)
 				FlxG.sound.music.stop();
 
-			if (PlayState.isStoryMode)
-			{
+			if (PlayState.isStoryMode) {
 				Main.switchState(this, new StoryMenuState());
-			}
-			else
+			} else
 				Main.switchState(this, new ShopState());
 		}
 
@@ -812,14 +749,14 @@ class GameOverSubstate extends MusicBeatSubState
 
 	var isEnding:Bool = false;
 
-	var timeBeforeEnd:Float = 0.7;
 
+	var timeBeforeEnd:Float = 0.7;
 	function endBullshit():Void
 	{
 		if (!isEnding)
 		{
 			isEnding = true;
-			if (deathEnd != null)
+			if(deathEnd != null)
 				deathEnd();
 			if (FlxG.sound.music != null)
 				FlxG.sound.music.stop();

@@ -52,14 +52,13 @@ class ForeverAssets
 				], 0, false);
 				newSprite.animation.play('base');
 
-				if (assetModifier == 'pixel')
-				{
+				if (assetModifier == 'pixel') {
 					newSprite.x += 40;
 					newSprite.y -= 60;
 				}
 		}
 
-		if (assetModifier == 'pixel')
+		if (assetModifier == 'pixel') 
 			newSprite.setGraphicSize(Std.int(newSprite.width * PlayState.daPixelZoom));
 		else
 		{
@@ -69,10 +68,9 @@ class ForeverAssets
 		newSprite.updateHitbox();
 		if (!Init.trueSettings.get('Simply Judgements'))
 		{
-			newSprite.acceleration.y = FlxG.random.int(200, 300);
-			newSprite.velocity.y = -FlxG.random.int(140, 160);
-			newSprite.velocity.x = FlxG.random.float(-5, 5);
-		}
+		newSprite.acceleration.y = FlxG.random.int(200, 300);
+		newSprite.velocity.y = -FlxG.random.int(140, 160);
+		newSprite.velocity.x = FlxG.random.float(-5, 5);}
 
 		return newSprite;
 	}
@@ -86,15 +84,13 @@ class ForeverAssets
 		{
 			width = 72;
 			height = 32;
-			if (PlayState.buriedNotes)
-			{
+			if (PlayState.buriedNotes) {
 				width = 144;
 				height = 64;
 			}
 		}
-		var rating:FlxSprite = new FlxSprite().loadGraphic(Paths.image(ForeverTools.returnSkinAsset((PlayState.buriedNotes ? 'brimstone-' : '') + 'judgements',
-			assetModifier, changeableSkin, baseLibrary)),
-			true, width, height);
+		var rating:FlxSprite = new FlxSprite().loadGraphic(Paths.image(ForeverTools.returnSkinAsset((PlayState.buriedNotes ? 'brimstone-' : '') + 'judgements', assetModifier, changeableSkin,
+			baseLibrary)), true, width, height);
 		switch (assetModifier)
 		{
 			default:
@@ -104,9 +100,9 @@ class ForeverAssets
 				rating.y -= 60;
 				if (!Init.trueSettings.get('Simply Judgements'))
 				{
-					rating.acceleration.y = 550;
-					rating.velocity.y = -FlxG.random.int(140, 175);
-					rating.velocity.x = -FlxG.random.int(0, 10);
+				rating.acceleration.y = 550;
+				rating.velocity.y = -FlxG.random.int(140, 175);
+				rating.velocity.x = -FlxG.random.int(0, 10);
 				}
 				rating.animation.add('base', [
 					Std.int((Timings.judgementsMap.get(asset)[0] * 2) + (perfectSick ? 0 : 2) + (timing == 'late' ? 1 : 0))
@@ -125,25 +121,22 @@ class ForeverAssets
 		return rating;
 	}
 
-	public static function generateNoteSplashes(asset:String, assetModifier:String = 'base', changeableSkin:String = 'default', baseLibrary:String,
-			noteData:Int):NoteSplash
+	public static function generateNoteSplashes(asset:String, assetModifier:String = 'base', changeableSkin:String = 'default', baseLibrary:String, noteData:Int):NoteSplash
 	{
 		//
 		var tempSplash:NoteSplash = new NoteSplash(noteData);
 		switch (assetModifier)
 		{
 			case 'pixel':
-				if (PlayState.buriedNotes)
-				{
-					tempSplash.loadGraphic(Paths.image(ForeverTools.returnSkinAsset('splash-brimstone', assetModifier, changeableSkin, baseLibrary)), true,
-						68, 68);
+				if (PlayState.buriedNotes) {
+					tempSplash.loadGraphic(Paths.image(ForeverTools.returnSkinAsset('splash-brimstone', assetModifier, changeableSkin, baseLibrary)), true, 68,
+						68);
 					tempSplash.setGraphicSize(Std.int(tempSplash.width * PlayState.buriedResize * PlayState.daPixelZoom));
 
 					tempSplash.addOffset('anim1', -90, -75);
 					tempSplash.addOffset('anim2', -90, -75);
-				}
-				else
-				{
+
+				} else {
 					tempSplash.loadGraphic(Paths.image(ForeverTools.returnSkinAsset('splash-pixel', assetModifier, changeableSkin, baseLibrary)), true, 34,
 						34);
 					tempSplash.setGraphicSize(Std.int(tempSplash.width * PlayState.daPixelZoom));
@@ -186,10 +179,10 @@ class ForeverAssets
 		switch (assetModifier)
 		{
 			case 'pixel':
-				switch (PlayState.SONG.song.toLowerCase())
-				{
+				switch (PlayState.SONG.song.toLowerCase()) {
 					case 'brimstone':
-						newStaticArrow.loadGraphic(Paths.image('UI/pixel/NOTES_buried'), true, 32, 32);
+						newStaticArrow.loadGraphic(Paths.image('UI/pixel/NOTES_buried'),
+							true, 32, 32);
 						newStaticArrow.animation.add('static', [staticArrowType]);
 						newStaticArrow.animation.add('pressed', [4 + staticArrowType, 8 + staticArrowType], 12, false);
 						newStaticArrow.animation.add('confirm', [12 + staticArrowType, 16 + staticArrowType], 24, false);
@@ -215,12 +208,12 @@ class ForeverAssets
 
 						newStaticArrow.addOffset('static', -66, -50);
 						newStaticArrow.addOffset('pressed', -66, -50);
-						newStaticArrow.addOffset('confirm', -66, -50);
+						newStaticArrow.addOffset('confirm', -66, -50);	
 					default:
 						var framesArgument:String = "arrows-pixels";
-						newStaticArrow.loadGraphic(Paths.image(ForeverTools.returnSkinAsset('$framesArgument', assetModifier,
-							Init.trueSettings.get("Note Skin"), 'UI')), true, 17,
-							17);
+						newStaticArrow.loadGraphic(Paths.image(ForeverTools.returnSkinAsset('$framesArgument', assetModifier, Init.trueSettings.get("Note Skin"),
+							'UI')),
+							true, 17, 17);
 						newStaticArrow.animation.add('static', [staticArrowType]);
 						newStaticArrow.animation.add('pressed', [4 + staticArrowType, 8 + staticArrowType], 12, false);
 						newStaticArrow.animation.add('confirm', [12 + staticArrowType, 16 + staticArrowType], 24, false);
@@ -231,7 +224,7 @@ class ForeverAssets
 
 						newStaticArrow.addOffset('static', -67, -50);
 						newStaticArrow.addOffset('pressed', -67, -50);
-						newStaticArrow.addOffset('confirm', -67, -50);
+						newStaticArrow.addOffset('confirm', -67, -50);				
 				}
 
 			default:
@@ -256,12 +249,12 @@ class ForeverAssets
 					newStaticArrow.animation.addByPrefix('static', 'spacebar0');
 					newStaticArrow.animation.addByPrefix('pressed', 'spacebar press0', 24, false);
 					newStaticArrow.animation.addByPrefix('confirm', 'spacebar confirm0', 24, false);
-					newStaticArrow.setGraphicSize(Std.int(newStaticArrow.width * 0.875));
-					newStaticArrow.updateHitbox();
+					newStaticArrow.setGraphicSize(Std.int(newStaticArrow.width * 0.875));				
+					newStaticArrow.updateHitbox();			
 					newStaticArrow.addOffset('static', 100, 0);
 					newStaticArrow.addOffset('pressed', 100, 0);
 					newStaticArrow.addOffset('confirm', 100, 0);
-					newStaticArrow.y -= 15;
+					newStaticArrow.y -= 15;						
 				}
 
 				newStaticArrow.antialiasing = true;
@@ -285,12 +278,12 @@ class ForeverAssets
 					}
 				}
 
-				if (staticArrowType < 4)
-				{
+				if (staticArrowType < 4) {
 					newStaticArrow.addOffset('static');
 					newStaticArrow.addOffset('pressed', -2, -2);
 					newStaticArrow.addOffset('confirm', 36 + offsetMiddleX, 36 + offsetMiddleY);
 				}
+
 		}
 
 		return newStaticArrow;
@@ -303,24 +296,22 @@ class ForeverAssets
 	{
 		var newNote = Note.returnDefaultNote(assetModifier, strumTime, noteData, noteType, noteAlt, isSustainNote, prevNote);
 
-		// hold note shit
-		if (isSustainNote && prevNote != null)
-		{
+		// hold note shit 
+		if (isSustainNote && prevNote != null) {
 			// set note offset
 			if (prevNote.isSustainNote)
 				newNote.noteVisualOffset = prevNote.noteVisualOffset;
 			else // calculate a new visual offset based on that note's width and newnote's width
 				newNote.noteVisualOffset = ((prevNote.width / 2) - (newNote.width / 2));
-			if (noteType == 2)
-			{ // shitty hell bell fix lol
+			if (noteType == 2) { //shitty hell bell fix lol
 				newNote.noteVisualOffset = ((prevNote.width / 2) - (newNote.width / 2)) + 97;
 			}
 		}
 
 		if (noteType == 2 && !isSustainNote)
-		{
-			newNote.noteVisualOffset = newNote.noteVisualOffset - 26;
-		}
+			{
+				newNote.noteVisualOffset = newNote.noteVisualOffset - 26;
+			}
 
 		return newNote;
 	}

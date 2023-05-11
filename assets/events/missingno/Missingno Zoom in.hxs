@@ -26,14 +26,12 @@ function eventFunction(params) {
 }
 
 function initFunction(params) {
-	if (Init.trueSettings.get('Shaders')) {
-		PlayState.instance.setupGlitchShader();
-		PlayState.instance.stageBuild.forEach(function(sprite:FlxSprite)
-		{
-			var desaturateShader = new FlxGraphicsShader("", Paths.shader('desaturation'));
-			sprite.shader = desaturateShader;
-		});
-	}
+	PlayState.instance.setupGlitchShader();
+	PlayState.instance.stageBuild.forEach(function(sprite:FlxSprite)
+	{
+		var desaturateShader = new FlxGraphicsShader("", Paths.shader('desaturation'));
+		sprite.shader = desaturateShader;
+	});
 	PlayState.instance.desaturateAmount = 0;
 	PlayState.instance.desaturateAmplitude = 0;
 }

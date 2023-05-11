@@ -14,7 +14,6 @@ import meta.MusicBeat;
 import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
 import sys.FileSystem;
-import lime.utils.Assets;
 
 using StringTools;
 typedef Credits = {
@@ -195,11 +194,9 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
         camHUD.x = FlxG.width / 2 - camHUD.width / 2;
 		camHUD.y = (FlxG.height / 2 - camHUD.height / 2) - 64;
 
-		if (Init.trueSettings.get('Shaders')) {
-			chromaticAberration = new ShaderFilter(new GraphicsShader("", Paths.shader('monitor')));
-			// chromaticAberration.shader.data.effectTime.value = [aberrateTimeValue];
-			camHUD.setFilters([chromaticAberration]);
-		}
+		chromaticAberration = new ShaderFilter(new GraphicsShader("", Paths.shader('monitor')));
+		// chromaticAberration.shader.data.effectTime.value = [aberrateTimeValue];
+		camHUD.setFilters([chromaticAberration]); 
 
 		// camHUD
 		var background:FlxGroup = new FlxGroup();
@@ -217,9 +214,9 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 
 		var list:Array<String> = CoolUtil.coolTextFile(Paths.txt('images/menus/credit/iconorder'));
 		for (person in list) {
-			if (Assets.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT))) {
+			if (FileSystem.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT))) {
 				var icon:FlxSprite = new FlxSprite();
-				if (Assets.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.png', IMAGE)))
+				if (FileSystem.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.png', IMAGE)))
 					icon.loadGraphic(Paths.image('menus/credit/icon/${person.replace(' ', '_')}'));
 				else icon.loadGraphic(Paths.image('menus/credit/icon/placeholder'));
 				icon.setGraphicSize(Std.int(icon.width * (3 / 5)));
@@ -228,7 +225,7 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 				iconList.push(icon);
 				background.add(icon);
 			
-				var rawJson = Assets.getText(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT));
+				var rawJson = File.getContent(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT));
 				var credits:Credits = cast Json.parse(rawJson).info;
 				credits.name = person;
 				personList.push(credits);

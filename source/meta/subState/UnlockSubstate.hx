@@ -194,8 +194,8 @@ class LockSprite extends FNFSprite {
         super();
 		this.dark = dark;
 		if (dark)
-	    	frames = Paths.getSparrowAtlas('UI/base/darkunlocked');
-		else frames = Paths.getSparrowAtlas('UI/base/unlocked');
+	    	frames = Paths.getSparrowAtlas('ui/base/darkunlocked');
+		else frames = Paths.getSparrowAtlas('ui/base/unlocked');
 		animation.addByPrefix('lock', 'lock', 24, true);
         animation.addByPrefix('unlock', 'unlock', 24, false);
         addOffset('unlock', -4, 32);

@@ -76,10 +76,8 @@ class TitleState extends MusicBeatState
 		if (!initialized)
 		{
 			///*
-			#if desktop
 			Discord.changePresence('TITLE SCREEN', 'Main Menu');
-			#end
-
+			
 			ForeverTools.resetMenuMusic(true);
 		}
 
@@ -87,7 +85,7 @@ class TitleState extends MusicBeatState
 
 		staticBG = new FlxSprite(0, 0).loadGraphic(Paths.image('menus/title/staticBG'));
 		add(staticBG);
-
+		
 		bgTreesFar = new FlxBackdrop(Paths.image('menus/title/bgTreesfar'), 1, 1, true, true, 1, 1);
 		add(bgTreesFar);
 
@@ -102,18 +100,18 @@ class TitleState extends MusicBeatState
 		add(vintage);
 
 		/*if (!FlxG.save.data.notFirstTime)
-			{
-				hypnoDance = new FlxSprite(FlxG.width * 0.6, -200);
-				hypnoDance.frames = Paths.getSparrowAtlas('menus/title/StartScreen Hypno');
-				hypnoDance.animation.addByPrefix('bop', 'Hypno StartScreen', 24, true);
-				hypnoDance.animation.play('bop');
-				hypnoDance.setGraphicSize(Std.int(hypnoDance.width * constantResize));
-				hypnoDance.updateHitbox();
-				// hypnoDance.setPosition(hypnoDance.x + FlxG.width * (1 - constantResize), hypnoDance.y + FlxG.height * (1 - constantResize));
-				hypnoDance.antialiasing = true;
-				add(hypnoDance);
-			}
-		 */
+		{
+			hypnoDance = new FlxSprite(FlxG.width * 0.6, -200);
+			hypnoDance.frames = Paths.getSparrowAtlas('menus/title/StartScreen Hypno');
+			hypnoDance.animation.addByPrefix('bop', 'Hypno StartScreen', 24, true);
+			hypnoDance.animation.play('bop');
+			hypnoDance.setGraphicSize(Std.int(hypnoDance.width * constantResize));
+			hypnoDance.updateHitbox();
+			// hypnoDance.setPosition(hypnoDance.x + FlxG.width * (1 - constantResize), hypnoDance.y + FlxG.height * (1 - constantResize));
+			hypnoDance.antialiasing = true;
+			add(hypnoDance);
+		}
+		*/
 
 		logoBl = new FlxSprite();
 		logoBl.frames = Paths.getSparrowAtlas('menus/title/Start_Screen_Assets');
@@ -130,17 +128,17 @@ class TitleState extends MusicBeatState
 		// logoBl.color = FlxColor.BLACK;
 
 		/*if (!FlxG.save.data.notFirstTime)
-			{
-				gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.45);
-				gfDance.frames = Paths.getSparrowAtlas('menus/title/StartscreenGF');
-				gfDance.animation.addByPrefix('bop', 'GF Startscreen', 24, true);
-				gfDance.animation.play('bop');
-				gfDance.setGraphicSize(Std.int(gfDance.width * constantResize));
-				gfDance.updateHitbox();
-				gfDance.antialiasing = true;
-				add(gfDance);
-			}
-		 */
+		{
+			gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.45);
+			gfDance.frames = Paths.getSparrowAtlas('menus/title/StartscreenGF');
+			gfDance.animation.addByPrefix('bop', 'GF Startscreen', 24, true);
+			gfDance.animation.play('bop');
+			gfDance.setGraphicSize(Std.int(gfDance.width * constantResize));
+			gfDance.updateHitbox();
+			gfDance.antialiasing = true;
+			add(gfDance);
+		}
+		*/
 
 		// gfDance.setPosition(gfDance.x + FlxG.width * (1 - constantResize), gfDance.y + FlxG.height * (1 - constantResize));
 		// logoBl.shader = swagShader.shader;
@@ -199,7 +197,7 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
-		// PROGRESSION DATA
+		//PROGRESSION DATA
 		if (FlxG.save.data.money == null)
 			FlxG.save.data.money = 0;
 		if (FlxG.save.data.mainMenuOptionsUnlocked == null)
@@ -211,25 +209,16 @@ class TitleState extends MusicBeatState
 		if (FlxG.save.data.playedSongs == null)
 			FlxG.save.data.playedSongs = [];
 		if (FlxG.save.data.unlockedSongs == null)
-			FlxG.save.data.unlockedSongs = [];
+			FlxG.save.data.unlockedSongs = []; 
 		//
 		if (FlxG.save.data.queuedUnlocks == null)
-			FlxG.save.data.queuedUnlocks = [];
+			FlxG.save.data.queuedUnlocks = []; 
 		if (FlxG.save.data.doneUnlocks == null)
 			FlxG.save.data.doneUnlocks = [];
 
-		if (FlxG.save.data.freeplayFirstTime == null)
-		{
-			FlxG.save.data.freeplayFirstTime = false;
-		}
-		if (FlxG.save.data.buyVinylFirstTime == null)
-		{
-			FlxG.save.data.buyVinylFirstTime = false;
-		}
-		if (FlxG.save.data.activatedPurin == null)
-		{
-			FlxG.save.data.activatedPurin = false;
-		}
+		if (FlxG.save.data.freeplayFirstTime == null) {FlxG.save.data.freeplayFirstTime = false;}
+		if (FlxG.save.data.buyVinylFirstTime == null) {FlxG.save.data.buyVinylFirstTime = false;}
+		if (FlxG.save.data.activatedPurin == null) {FlxG.save.data.activatedPurin = false;}
 
 		// credGroup.add(credTextShit);
 	}
@@ -273,7 +262,7 @@ class TitleState extends MusicBeatState
 			add(titleText);
 			titleText.blend = ADD;
 			FlxTween.tween(titleText, {'scale.x': 0.825, 'scale.y': 0.825, alpha: 0.001}, 1.5, {ease: FlxEase.quadOut});
-
+			
 			FlxG.camera.flash(FlxColor.WHITE, 1);
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
@@ -283,7 +272,8 @@ class TitleState extends MusicBeatState
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
 				// {
-				if (FlxG.save.data.notFirstTime == null || FlxG.save.data.notFirstTime == false)
+				if (FlxG.save.data.notFirstTime == null 
+				|| FlxG.save.data.notFirstTime == false)
 				{
 					FlxG.save.data.notFirstTime = true;
 					FlxG.save.flush();

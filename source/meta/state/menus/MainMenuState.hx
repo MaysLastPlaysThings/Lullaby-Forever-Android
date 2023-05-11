@@ -73,9 +73,7 @@ class MainMenuState extends MusicBeatState
 		super.create();
 
 		ForeverTools.resetMenuMusic();
-		#if desktop
 		Discord.changePresence('MAIN MENU', 'Main Menu');
-		#end
 
 		// POKEMON YELLOW LOL
 		backdrop = new FlxBackdrop(Paths.image('menus/menu/pokemon_yellow_noise'), 1, 1, true, true, 1, 1);
@@ -226,14 +224,14 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.justPressed.SEVEN) //(Main.hypnoDebug && FlxG.keys.justPressed.SEVEN) //DEBUG UNLOCKS ALL PROGRESSION
+		if (Main.hypnoDebug && FlxG.keys.justPressed.SEVEN) //DEBUG UNLOCKS ALL PROGRESSION
 			{
 				FlxG.save.data.mainMenuOptionsUnlocked = ['story', 'freeplay', 'credits', 'pokedex', 'options'];
 				FlxG.save.data.cartridgesOwned = ['HypnoWeek', 'LostSilverWeek', 'GlitchWeek'];
 				FlxG.save.data.unlockedSongs = ['safety-lullaby', 'left-unchecked', 'lost-cause', 'frostbite', 'insomnia', 'monochrome', 'missingno', 'brimstone', 'amusia', 'dissension', 'purin', 'death-toll', 'isotope', 'bygone-purpose', 'pasta-night', 'shinto', 'shitno'];
 			}
 
-		if /*(Main.hypnoDebug && */(FlxG.keys.justPressed.DELETE) {
+		if (Main.hypnoDebug && FlxG.keys.justPressed.DELETE) {
 			FlxG.save.erase();
 			FlxG.save.flush();
 			FlxG.resetGame();

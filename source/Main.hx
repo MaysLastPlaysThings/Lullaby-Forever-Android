@@ -15,9 +15,7 @@ import lime.app.Application;
 import meta.*;
 import meta.data.PlayerSettings;
 import meta.data.ScriptHandler;
-#if desktop
 import meta.data.dependency.Discord;
-#end
 import meta.data.dependency.FNFTransition;
 import meta.data.dependency.FNFUIState;
 import openfl.Assets;
@@ -29,7 +27,6 @@ import openfl.events.UncaughtErrorEvent;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
-import lime.system.System;
 
 // Here we actually import the states and metadata, and just the metadata.
 // It's nice to have modularity so that we don't have ALL elements loaded at the same time.
@@ -72,9 +69,9 @@ class Main extends Sprite
 	// class action variables
 	public static var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	public static var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
-        public static var path:String = System.applicationStorageDirectory;
+
 	public static var mainClassState:Class<FlxState> = Init; // Determine the main class state of the game
-	public static var framerate:Int = 60; // How many frames per second the game should run at.
+	public static var framerate:Int = 120; // How many frames per second the game should run at.
 
 	public static var gameVersion:String = '0.3.1';
 
@@ -93,22 +90,11 @@ class Main extends Sprite
 		Enough of that, here's how it works
 		[ [songs to use], [characters in songs], [color of week], name of week ]
 	**/
-
 	public static var gameWeeks:Array<Array<String>> = [
 		['Safety-Lullaby', 'Left-Unchecked', 'Lost-Cause'],
 		['Frostbite', 'Insomnia', 'Monochrome'],
 		['Missingno', 'Brimstone'],
-		[
-			'Amusia',
-			'Dissension',
-			'Purin',
-			'Death-Toll',
-			'Isotope',
-			'Bygone-Purpose',
-			'Pasta-Night',
-			'Shinto',
-			'Shitno'
-		]
+		['Amusia', 'Dissension', 'Purin', 'Death-Toll', 'Isotope', 'Bygone-Purpose', 'Pasta-Night', 'Shinto', 'Shitno']
 	];
 
 	// most of these variables are just from the base game!
@@ -124,9 +110,6 @@ class Main extends Sprite
 	{
 		super();
 
-                SUtil.doTheCheck();
-                SUtil.gameCrashCheck();
-
 		/**
 			ok so, haxe html5 CANNOT do 120 fps. it just cannot.
 			so here i just set the framerate to 60 if its complied in html5.
@@ -134,7 +117,7 @@ class Main extends Sprite
 			note studders and shit its weird.
 		**/
 
-		//Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash); //this cant send to SUtil onError ig
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 
 		// simply said, a state is like the 'surface' area of the window where everything is drawn.
 		// if you've used gamemaker you'll probably understand the term surface better
@@ -155,19 +138,17 @@ class Main extends Sprite
 		}
 
 		FlxTransitionableState.skipNextTransIn = true;
-
+		
 		// here we set up the base game
 		var gameCreate:FlxGame;
-		gameCreate = new FlxGame(gameWidth, gameHeight, mainClassState, framerate, framerate, skipSplash);
+		gameCreate = new FlxGame(gameWidth, gameHeight, mainClassState, zoom, framerate, framerate, skipSplash);
 		addChild(gameCreate); // and create it afterwards
 
 		// default game FPS settings, I'll probably comment over them later.
 		// addChild(new FPS(10, 3, 0xFFFFFF));
 
-		
-
 		// begin the discord rich presence
-		#if desktop
+		#if !html5
 		Discord.initializeRPC();
 		Discord.changePresence('');
 		#end
@@ -198,15 +179,14 @@ class Main extends Sprite
 		if (!FlxTransitionableState.skipNextTransIn)
 		{
 			curState.openSubState(new FNFTransition(0.35, false));
-			FNFTransition.finishCallback = function()
-			{
+			FNFTransition.finishCallback = function() {
 				FlxG.switchState(target);
 			};
 			return trace('changed state');
 		}
 		FlxTransitionableState.skipNextTransIn = false;
 		// load the state
-		FlxG.switchState(target);
+		FlxG.switchState(target);		
 	}
 
 	public static function updateFramerate(newFramerate:Int)
@@ -234,7 +214,7 @@ class Main extends Sprite
 		dateNow = StringTools.replace(dateNow, " ", "_");
 		dateNow = StringTools.replace(dateNow, ":", "'");
 
-		path = Main.path + "./crash/" + "FE_" + dateNow + ".txt";
+		path = "./crash/" + "FE_" + dateNow + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -249,8 +229,8 @@ class Main extends Sprite
 
 		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/Yoshubs/Forever-Engine";
 
-		if (!Assets.exists("./crash/"))
-			FileSystem.createDirectory(Main.path + "./crash/");
+		if (!FileSystem.exists("./crash/"))
+			FileSystem.createDirectory("./crash/");
 
 		File.saveContent(path, errMsg + "\n");
 
@@ -263,7 +243,7 @@ class Main extends Sprite
 		crashDialoguePath += ".exe";
 		#end
 
-		if (Assets.exists("./" + crashDialoguePath))
+		if (FileSystem.exists("./" + crashDialoguePath))
 		{
 			Sys.println("Found crash dialog: " + crashDialoguePath);
 

@@ -1,6 +1,5 @@
 package meta.data;
 
-import meta.data.dependency.RealPoint;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.tile.FlxGraphicsShader;
@@ -30,7 +29,7 @@ import openfl.display.Shader;
 import openfl.filters.ShaderFilter;
 import sys.FileSystem;
 import sys.io.File;
-import lime.utils.Assets;
+
 using StringTools;
 
 /**
@@ -63,7 +62,7 @@ class ScriptHandler
 		exp.set("FlxG", FlxG);
 		exp.set("FlxSprite", FlxSprite);
 		exp.set("FlxMath", FlxMath);
-		exp.set("FlxPoint", RealPoint);
+		exp.set("FlxPoint", FlxPoint);
 		exp.set("FlxRect", FlxRect);
 		exp.set("FlxTween", FlxTween);
 		exp.set("FlxTimer", FlxTimer);
@@ -74,11 +73,11 @@ class ScriptHandler
 		exp.set("FlxGraphicsShader", FlxGraphicsShader);
 		exp.set("FlxColor", RealColor); // lol
 		exp.set("FlxGroup", FlxGroup);
-
+		
 		// Classes (Forever)
 		exp.set("Init", Init);
 		exp.set("Paths", Paths);
-		exp.set("Note", Note);
+        exp.set("Note", Note);
 		exp.set("Strumline", Strumline);
 		exp.set("Events", Events);
 		exp.set("Conductor", Conductor);
@@ -87,10 +86,10 @@ class ScriptHandler
 		exp.set("Boyfriend", Boyfriend);
 		exp.set("FNFSprite", FNFSprite);
 		exp.set("HealthIcon", HealthIcon);
-		exp.set("PlayState", PlayState);
+        exp.set("PlayState", PlayState);
 		exp.set("CelebiNote", CelebiNote);
-
-		//
+        
+        //
 		parser.allowTypes = true;
 	}
 
@@ -98,7 +97,7 @@ class ScriptHandler
 	{
 		// trace('Loading Module $path');
 		var modulePath:String = Paths.module(path);
-		return new ForeverModule(parser.parseString(Assets.getText(modulePath), modulePath), extraParams);
+		return new ForeverModule(parser.parseString(File.getContent(modulePath), modulePath), extraParams);
 	}
 }
 

@@ -1,9 +1,8 @@
 package meta.data.dependency;
 
-#if desktop
-import discord_rpc.DiscordRpc;
 import lime.app.Application;
 import meta.state.PlayState;
+import discord_rpc.DiscordRpc;
 
 /**
 	Discord Rich Presence, both heavily based on Izzy Engine and the base game's, as well as with a lot of help 
@@ -14,8 +13,6 @@ class Discord
 	// set up the rich presence initially
 	public static function initializeRPC()
 	{
-
-
 		DiscordRpc.start({
 			clientID: "975119671005155408",
 			onReady: onReady,
@@ -58,7 +55,7 @@ class Discord
 			endTimestamp = startTimestamp + endTimestamp;
 		if (PlayState.SONG != null && PlayState.SONG.song.toLowerCase() == 'sansno')
 			endTimestamp = Math.POSITIVE_INFINITY;
-        
+
 		DiscordRpc.presence({
 			details: details,
 			state: state,
@@ -79,4 +76,3 @@ class Discord
 		DiscordRpc.shutdown();
 	}
 }
-#end

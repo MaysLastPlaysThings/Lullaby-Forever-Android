@@ -7,11 +7,10 @@ function eventFunction(params) {
 		val1 = 1;
     //
     trace('this thing fades the hud why doesnt it work');
-	trace(val1 * (Conductor.stepCrochet / 1000));
 	FlxTween.tween(PlayState.camHUD, {alpha: 1}, 
-	    0.85, {ease: FlxEase.linear});
+	    val1 * (Conductor.stepCrochet / 1000), {ease: FlxEase.linear});
 	FlxTween.tween(PlayState.uiHUD, {alpha: 0.6}, 
-		0.85, {ease: FlxEase.linear});
+		val1 * (Conductor.stepCrochet / 1000), {ease: FlxEase.linear});
     //
 	for (i in PlayState.strumHUD) {
 		FlxTween.tween(i, {alpha: 0.8}, 

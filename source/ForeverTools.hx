@@ -1,25 +1,10 @@
 package;
 
 import flixel.FlxG;
-import flixel.graphics.FlxGraphic;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
-import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
 import flixel.system.FlxSound;
-import flxanimate.data.SpriteMapData.AnimateAtlas;
-import haxe.Json;
-import haxe.io.Path;
-import haxe.xml.Access;
 import meta.data.*;
-import openfl.display.BitmapData;
-import openfl.display.PNGEncoderOptions;
-import openfl.geom.Rectangle;
 import openfl.utils.Assets;
 import sys.FileSystem;
-import sys.io.File;
-
-using StringTools;
 
 /**
 	This class is used as an extension to many other forever engine stuffs, please don't delete it as it is not only exclusively used in forever engine
@@ -47,10 +32,10 @@ class ForeverTools
 			?defaultChangeableSkin:String = 'default', ?defaultBaseAsset:String = 'base'):String
 	{
 		var realAsset = '$baseLibrary/$assetModifier/$asset';
-		if (!Assets.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
+		if (!FileSystem.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
 		{
 			realAsset = '$baseLibrary/$assetModifier/$asset';
-			if (!Assets.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
+			if (!FileSystem.exists(Paths.getPath('images/' + realAsset + '.png', IMAGE)))
 				realAsset = '$baseLibrary/$defaultBaseAsset/$asset';
 		}
 
@@ -66,105 +51,5 @@ class ForeverTools
 			songsArray[i].stop();
 			songsArray[i].destroy();
 		}
-	}
-
-	public static function optimizeImages()
-	{
-		var parent = '';
-		var directories = [
-			"assets/images/menus",
-			"assets/images/shop",
-			"assets/images/UI",
-			"assets/stages",
-			"shitpost/images"
-		];
-		for (directory in directories)
-		{
-			optimizeFolder(Path.join([parent, directory]));
-		}
-	}
-
-	static function optimizeFolder(folder:String)
-	{
-		var count = 0;
-		for (file in HSys.readDirectory(folder))
-		{
-			var fullPath = Path.join([folder, file]);
-			if (FileSystem.exists(Main.path + fullPath)) // FileSystem.exists works almost the same as isDirectory 
-			{
-				optimizeFolder(fullPath);
-			}
-			else if (file.endsWith('.png'))
-			{
-				var fileName = Path.withoutExtension(fullPath);
-				if (Assets.exists('$fileName.xml'))
-				{
-					var graphic = FlxG.bitmap.add(BitmapData.fromFile(fullPath), false, fullPath);
-					optimizeImage(fullPath, FlxAtlasFrames.fromSparrow(graphic, Assets.getText('$fileName.xml')));
-					count++;
-				}
-				else if (Assets.exists('$fileName.json'))
-				{
-					var graphic = FlxG.bitmap.add(BitmapData.fromFile(fullPath), false, fullPath);
-					var frames = new FlxAtlasFrames(graphic);
-					var curJson:AnimateAtlas = Json.parse(Assets.getText('$fileName.json').replace(String.fromCharCode(0xFEFF), ""));
-					if (curJson != null && curJson.ATLAS != null && curJson.ATLAS.SPRITES != null)
-					{
-						for (curSprite in curJson.ATLAS.SPRITES)
-						{
-							var sprite = curSprite.SPRITE;
-
-							var rect = FlxRect.get(sprite.x, sprite.y, sprite.w, sprite.h);
-
-							var size = new Rectangle(0, 0, rect.width, rect.height);
-							var sourceSize = FlxPoint.get(size.width, size.height);
-							if (sprite.rotated)
-								sourceSize.set(size.height, size.width);
-
-							var offset = FlxPoint.get();
-
-							var angle = sprite.rotated ? FlxFrameAngle.ANGLE_NEG_90 : FlxFrameAngle.ANGLE_0;
-
-							frames.addAtlasFrame(rect, sourceSize, offset, sprite.name, angle);
-						}
-						optimizeImage(fullPath, frames);
-						count++;
-					}
-					else
-					{
-						FlxG.bitmap.remove(graphic);
-						frames.destroy();
-					}
-				}
-			}
-		}
-		if (count > 0)
-		{
-			trace('Optimized $count images in $folder');
-		}
-	}
-
-	static function optimizeImage(path:String, frames:FlxAtlasFrames)
-	{
-		var maxX:Float = 0;
-		var maxY:Float = 0;
-		for (frame in frames.frames)
-		{
-			var maxMemberX:Float = frame.frame.x + frame.frame.width;
-			var maxMemberY:Float = frame.frame.y + frame.frame.height;
-
-			if (maxMemberX > maxX)
-				maxX = maxMemberX;
-			if (maxMemberY > maxY)
-				maxY = maxMemberY;
-		}
-
-		var newWidth = Math.ceil(maxX);
-		var newHeight = Math.ceil(maxY);
-
-		File.saveBytes(path, frames.parent.bitmap.encode(new Rectangle(0, 0, newWidth, newHeight), new PNGEncoderOptions(false)));
-
-		FlxG.bitmap.remove(frames.parent);
-		frames.destroy();
 	}
 }
