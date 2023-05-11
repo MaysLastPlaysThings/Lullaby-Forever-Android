@@ -3907,7 +3907,7 @@ class PlayState extends MusicBeatState
 				&& camZooming
 				&& (!Init.trueSettings.get('Reduced Movements')))
 			{
-				 += defaultForeverZoom * (0.015 * bopIntensity);
+				 FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
 				camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 				for (hud in strumHUD)
 					hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
