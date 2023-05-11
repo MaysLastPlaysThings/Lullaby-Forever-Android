@@ -1553,7 +1553,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var cameraValueMissingno(default, set):Float = defaultForeverZoom * defaultCamZoom;
+	public var cameraValueMissingno(default, set):Float = (defaultForeverZoom * defaultCamZoom);
 	public var missingnoZoomIn:Bool = false;
 	public var missingnoZoomIntensity(default, set):Float = 0;
 
