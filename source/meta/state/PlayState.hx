@@ -1553,7 +1553,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var cameraValueMissingno(default, set):Float = defaultCamZoom;
+	public var cameraValueMissingno(default, set):Float = defaultForeverZoom * defaultCamZoom;
 	public var missingnoZoomIn:Bool = false;
 	public var missingnoZoomIntensity(default, set):Float = 0;
 
@@ -3907,7 +3907,7 @@ class PlayState extends MusicBeatState
 				&& camZooming
 				&& (!Init.trueSettings.get('Reduced Movements')))
 			{
-				FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
+				 += defaultForeverZoom * (0.015 * bopIntensity);
 				camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 				for (hud in strumHUD)
 					hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
@@ -4239,7 +4239,7 @@ class PlayState extends MusicBeatState
 									remove(ds2);
 									new FlxTimer().start(0.5, function(tmr:FlxTimer)
 									{
-										FlxTween.tween(FlxG.camera, {zoom: 0.75}, 1.35, {
+										FlxTween.tween(FlxG.camera, {zoom: defaultForeverZoom * 0.75}, 1.35, {
 											ease: FlxEase.backIn,
 											onComplete: function(tween:FlxTween)
 											{
@@ -4255,7 +4255,7 @@ class PlayState extends MusicBeatState
 										});
 										for (i in 0...strumHUD.length)
 										{
-											FlxTween.tween(strumHUD[i], {zoom: 1}, 1.5, {
+											FlxTween.tween(strumHUD[i], {zoom: defaultForeverZoom * 1}, 1.5, {
 												ease: FlxEase.backIn,
 											});
 										}
