@@ -1553,7 +1553,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public var cameraValueMissingno(default, set):Float = (defaultForeverZoom * defaultCamZoom);
+	public var cameraValueMissingno(default, set):Float = defaultCamZoom;
 	public var missingnoZoomIn:Bool = false;
 	public var missingnoZoomIntensity(default, set):Float = 0;
 
@@ -3907,7 +3907,7 @@ class PlayState extends MusicBeatState
 				&& camZooming
 				&& (!Init.trueSettings.get('Reduced Movements')))
 			{
-				 FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
+				 += defaultForeverZoom * (0.015 * bopIntensity);
 				camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 				for (hud in strumHUD)
 					hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
