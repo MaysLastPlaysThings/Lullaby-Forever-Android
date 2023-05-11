@@ -37,7 +37,7 @@ function onCreate() {
 	} else {
 		var consistentPosition:Array<Float> = [-800, -300];
 		var resizeBG:Float = 0.7;
-		PlayState.defaultCamZoom = 0.65;
+		PlayState.defaultCamZoom = 0.6;
 		var background:FlxSprite = new FlxSprite(consistentPosition[0], consistentPosition[1]);
 		background.loadGraphic(Paths.image('BACKGROUND'));
 		background.setGraphicSize(Std.int(background.width * resizeBG));
