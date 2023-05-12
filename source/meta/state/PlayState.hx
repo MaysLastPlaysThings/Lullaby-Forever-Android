@@ -1811,10 +1811,11 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		//for update cam num
-		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height; //hope this show the value
+		textDebug.text = ": " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height; //hope this show the value
 		
 		/*camGame.zoom = 60 * (defaultCamZoom - 0.8);
 		camHUD.zoom = 60 * (defaultCamZoom - 0.8);*/
+		camGame.zoom = defaultCamZoom;
 		
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
