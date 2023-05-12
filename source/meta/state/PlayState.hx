@@ -80,7 +80,7 @@ enum abstract GameModes(String) to String
 class PlayState extends MusicBeatState
 {
 	//additions
-	public var defaultForeverZoom:Dynamic = 60.0;
+	public var defaultForever:Dynamic = 60.0;
 	
 	public var startTimer:FlxTimer;
 
@@ -404,7 +404,7 @@ class PlayState extends MusicBeatState
 		ratingPosition = new FlxPoint(0, 0);
 		alexis = false;
 
-		defaultCamZoom = 1.05;
+		defaultCamZoom = defaultForeverZoom * 1.05;
 		cameraSpeed = 1;
 		cameraCentered = false;
 		forceZoom = [0, 0, 0, 0];
@@ -1811,14 +1811,15 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		//for update cam num
-		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height; //hope this show the value
+		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height + "\nChar Zoom: " + characterZoom; //hope this show the value
 		
-		/*camGame.zoom = 60 * (defaultCamZoom - 0.8);
+		/*camGame. = 60 * (defaultCamZoom - 0.8);
 		camHUD.zoom = 60 * (defaultCamZoom - 0.8);*/
-		if (SONG.song.toLowerCase() == 'safety-lullaby' && SONG.song.toLowerCase() == 'left-unchecked') {
+
+		/*if (SONG.song.toLowerCase() == 'safety-lullaby' && SONG.song.toLowerCase() == 'left-unchecked') {
 		  camGame.zoom = defaultCamZoom;
       defaultCamZoom = 37;
-		}
+		}*/
 
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
@@ -2746,7 +2747,7 @@ class PlayState extends MusicBeatState
 
 		new FlxTimer().start(0.7, function(tmr:FlxTimer)
 		{
-			FlxTween.tween(FlxG.camera, {zoom: 0.4}, 2.5, {ease: FlxEase.quadOut});
+			FlxTween.tween(FlxG.camera, {zoom: defaultForeverZoom * 0.4}, 2.5, {ease: FlxEase.quadOut});
 			FlxTween.tween(ds1.scale, {x: 0.72, y: 0.72}, 2.5, {
 				ease: FlxEase.quadOut,
 				onComplete: function(tween:FlxTween)
