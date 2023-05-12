@@ -1107,7 +1107,7 @@ class PlayState extends MusicBeatState
 
 		// actually set the camera up
 		FlxG.camera.follow(camFollowPos, LOCKON, 1);
-		FlxG.camera.zoom = defaultCamZoom;
+		FlxG.camera.zoom = defaultForeverZoom * defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
@@ -2307,7 +2307,7 @@ class PlayState extends MusicBeatState
 			var easeLerp = 1 * (1 - (elapsed * 3.125));
 			// camera stuffs
 			if (camZooming) {
-				FlxG.camera.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
+				//FlxG.camera.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[1]), hud.zoom, easeLerp);
 			} // Under Testing Cameras - Ralsei
