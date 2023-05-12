@@ -3,5 +3,5 @@ function returnDescription()
 
 function eventFunction(pararmematers) {
     var fucjklgikingzoom = pararmematers[((2 * 4) - 8)];
-    PlayState.defaultCamZoom = 60 * 1; //fucjklgikingzoom;
+    PlayState.defaultCamZoom = 60 * fucjklgikingzoom;
 }
