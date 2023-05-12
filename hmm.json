@@ -33,8 +33,33 @@
 			"type":"haxelib"
 		},
 		{
+			"name":"tjson",
+			"type":"haxelib"
+		},
+		{
+			"name":"hxjsonast",
+			"type":"haxelib"
+		},
+		{
 		"name":"polymod",
 		"type":"haxelib"
+		},
+		{
+		"name":"hxCodec",
+		"type":"haxelib",
+		"version":"2.5.1"
+		}
+		{
+		"name":"extension-androidtools",
+		"type":"git",
+		"ref":"main",
+		"url":"https://github.com/MaysLastPlay77/extension-androidtools"
+		},
+		{
+		"name":"linc_luajit",
+		"type":"git",
+		"ref":"master",
+		"url":"https://github.com/Sirox228/linc_luajit"
 		}
 	]
 }
