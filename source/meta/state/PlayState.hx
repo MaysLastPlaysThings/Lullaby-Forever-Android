@@ -1815,8 +1815,11 @@ class PlayState extends MusicBeatState
 		
 		/*camGame.zoom = 60 * (defaultCamZoom - 0.8);
 		camHUD.zoom = 60 * (defaultCamZoom - 0.8);*/
-		camGame.zoom = defaultCamZoom;
-		
+		if (SONG.song.toLowerCase() == 'safety-lullaby' && SONG.song.toLowerCase() == 'left-unchecked') {
+		  camGame.zoom = defaultCamZoom;
+      defaultcamZoom = 37;
+		}
+
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
 			if (startingSong)
