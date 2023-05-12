@@ -80,7 +80,7 @@ enum abstract GameModes(String) to String
 class PlayState extends MusicBeatState
 {
 	//additions
-	public var defaultForever:Dynamic = 60.0;
+	public var defaultForeverZoom:Dynamic = 60.0;
 	
 	public var startTimer:FlxTimer;
 
