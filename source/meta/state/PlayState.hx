@@ -2307,7 +2307,7 @@ class PlayState extends MusicBeatState
 			var easeLerp = 1 * (1 - (elapsed * 3.125));
 			// camera stuffs
 			if (camZooming) {
-				//FlxG.camera.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
+				FlxG.camera.zoom = FlxMath.lerp(defaultForeverZoom * (defaultCamZoom + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[1]), hud.zoom, easeLerp);
 			} // Under Testing Cameras - Ralsei
@@ -3912,7 +3912,7 @@ class PlayState extends MusicBeatState
 				&& camZooming
 				&& (!Init.trueSettings.get('Reduced Movements')))
 			{
-				//FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
+				FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
 				camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 				for (hud in strumHUD)
 					hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
