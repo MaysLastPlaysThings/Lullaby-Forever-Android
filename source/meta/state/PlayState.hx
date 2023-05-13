@@ -1816,8 +1816,8 @@ class PlayState extends MusicBeatState
 		/*camGame. = 60 * (defaultCamZoom - 0.8);
 		camHUD.zoom = 60 * (defaultCamZoom - 0.8);*/
 
-		  camGame.zoom = defaultCamZoom;
-      defaultCamZoom = 36;
+		 /* camGame.zoom = defaultCamZoom;
+      defaultCamZoom = 36;*/
 
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
