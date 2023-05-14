@@ -1,5 +1,6 @@
 var hypnoEntrance:FlxSprite;
 var hypnoJumpscare:FlxSprite;
+var defaultForeverZoomHXS:Dynamic = 60.0;
 
 function onCreate() {
     PlayState.defaultCamZoom = 0.8;
@@ -87,7 +88,7 @@ function onEvent(eventName) {
 					PlayState.dadOpponent.visible = true;
 				}
 			}
-			FlxTween.tween(FlxG.camera, {zoom: 0.52}, 0.3);	
+			FlxTween.tween(FlxG.camera, {zoom: defaultForeverZoomHXS * 0.52}, 0.3);	
 			FlxTween.tween(PlayState.camHUD, {alpha: 0}, 0.2);	
 			FlxTween.tween(PlayState.uiHUD, {alpha: 0}, 0.2);
 			for (i in 0...PlayState.strumHUD.length) 
