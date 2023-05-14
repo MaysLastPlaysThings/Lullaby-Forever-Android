@@ -99,7 +99,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: Lullaby-AndroidRelease
-          path: export//android/bin/app/build/outputs/apk/debug
+          path: export/release/android/bin/app/build/outputs/apk/debug
           if-no-files-found: warn
   BuildDebug:
     runs-on: ubuntu-latest
