@@ -2,7 +2,8 @@
 	"dependencies":[
 		{
 			"name":"hxcpp",
-			"type":"haxelib"
+			"type": "haxelib",
+			"version": "4.3.6"
 		},
 		{
 			"name":"lime",
