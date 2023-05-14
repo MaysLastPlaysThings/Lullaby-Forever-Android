@@ -3,7 +3,7 @@
 		{
 			"name":"hxcpp",
 			"type": "haxelib",
-			"version": "4.3.6"
+			"version": "4.3.1"
 		},
 		{
 			"name":"lime",
