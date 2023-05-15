@@ -24,5 +24,5 @@ void main() {
 	float rx = (px - qx) * lum + uv.x;
 	float ry = (py - qy) * lum + uv.y;
 	
-	gl_FragColor = tex(bitmap, vec2(rx, ry));
+	gl_FragColor = texture2D(bitmap, vec2(rx, ry));
 }
