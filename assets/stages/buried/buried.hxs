@@ -205,7 +205,7 @@ function onEvent(eventName) {
                     whiteHand.visible = false;
                     apparition.visible = true;
                     PlayState.camGame.zoom = PlayState.defaultCamZoom;
-                    PlayState.defaultCamZoom = 0.55;
+                    PlayState.defaultCamZoom = 0.55; //let's see if it's will do smth ig
                 }
             }
         case 'Brimstone Background Desaturate':
