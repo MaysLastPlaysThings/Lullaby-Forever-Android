@@ -81,7 +81,7 @@ function onEvent(event) {
 		case 'Glitchy Red Speech':
 			//snaps the camrea into the correct position
 			PlayState.defaultCamZoom = 1.25;
-			PlayState.camGame.zoom = 1.25;
+			PlayState.camGame.zoom = PlayState.defaultForeverZoom * 1.25;
 			PlayState.camGame.alpha = 0.001;
 			PlayState.camHUD.visible = false;
 			new FlxTimer().start(1.0, function(tmr:FlxTimer)
@@ -107,11 +107,11 @@ function onEvent(event) {
 				PlayState.camGame.visible = false;
 				PlayState.camHUD.visible = false;
 				PlayState.defaultCamZoom = 0.7;
-				PlayState.camGame.zoom = 0.7;
+				PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.7;
 
 				new FlxTimer().start(0.5, function(tmr:FlxTimer)
 					{
-						PlayState.camGame.zoom = 0.9;
+						PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.9;
 						PlayState.camGame.alpha = 1.0;
 						PlayState.camGame.visible = true;
 						PlayState.camHUD.visible = true;
