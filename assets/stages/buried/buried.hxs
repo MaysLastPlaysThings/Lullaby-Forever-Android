@@ -204,6 +204,8 @@ function onEvent(eventName) {
                 if (name == 'transform') {
                     whiteHand.visible = false;
                     apparition.visible = true;
+                    PlayState.camGame.zoom = PlayState.defaultCamZoom;
+                    PlayState.defaultCamZoom = 0.55;
                 }
             }
         case 'Brimstone Background Desaturate':
