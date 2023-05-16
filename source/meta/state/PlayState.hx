@@ -603,6 +603,15 @@ class PlayState extends MusicBeatState
 			buriedNotes = true;
 		}
 
+   if (SONG.song.toLowerCase() == 'brimstone')
+   {
+     if (dadOpponent.curCharacter == 'the-apparition')
+     {
+     defaultCamZoom == 33;
+     camGame.zoom = defaultCamZoom;
+     }
+   }
+
 		// strum setup
 		strumLines = new FlxTypedGroup<Strumline>();
 		Note.swagWidth = 160 * 0.7;
