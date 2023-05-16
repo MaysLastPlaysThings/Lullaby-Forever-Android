@@ -21,7 +21,6 @@ function onCreate() {
     var consistentPosition:Array<Float> = [-1130, -350];
     var resizeBG:Float = PlayState.daPixelZoom;
     PlayState.defaultCamZoom = 0.55;
-    PlayState.camGame.zoom = 33;
     brimstoneBackground = new FlxSprite(consistentPosition[0], consistentPosition[1]);
     brimstoneBackground.loadGraphic(Paths.image('brimstoneBack'));
     brimstoneBackground.setGraphicSize(Std.int(brimstoneBackground.width * resizeBG));
@@ -198,7 +197,6 @@ function onEvent(eventName) {
         default:
             trace('an event was called in brimstone. woohoo');
         case 'Apparition Summon':
-            PlayState.camGame.zoom = 33;
             apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
@@ -206,7 +204,6 @@ function onEvent(eventName) {
                 if (name == 'transform') {
                     whiteHand.visible = false;
                     apparition.visible = true;
-                    PlayState.camGame.zoom = 33;
                 }
             }
         case 'Brimstone Background Desaturate':
