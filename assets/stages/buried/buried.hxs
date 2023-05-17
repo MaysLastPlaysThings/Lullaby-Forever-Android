@@ -20,7 +20,8 @@ var targetGBvalue:Float = 0.0;
 function onCreate() {
     var consistentPosition:Array<Float> = [-1130, -350];
     var resizeBG:Float = PlayState.daPixelZoom;
-    PlayState.defaultCamZoom = PlayState.defaultForeverZoom * 0.55;
+    PlayState.defaultCamZoom = 0.55;
+
     brimstoneBackground = new FlxSprite(consistentPosition[0], consistentPosition[1]);
     brimstoneBackground.loadGraphic(Paths.image('brimstoneBack'));
     brimstoneBackground.setGraphicSize(Std.int(brimstoneBackground.width * resizeBG));
@@ -158,6 +159,10 @@ function onCreatePost() {
 
 var haventdone = true;
 function onUpdate(elapsed) {
+
+  if (whiteHand != null && whiteHand.animation.curAnim.name == 'transform') || (apparition != null && apparition.visible)) {
+  PlayState.camGame.zoom = 33;
+  }
 
 	if (whiteHand != null && whiteHand.visible) {
 		whiteHand.y = handY + Math.sin((180 / Math.PI) * ((Conductor.songPosition / 1000) / 48)) * 32;
