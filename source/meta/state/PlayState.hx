@@ -605,11 +605,8 @@ class PlayState extends MusicBeatState
 
    if (SONG.song.toLowerCase() == 'brimstone')
    {
-     if (dadOpponent.curCharacter == 'the-apparition')
-     {
      defaultCamZoom == 33;
      camGame.zoom = defaultCamZoom;
-     }
    }
 
 		// strum setup
