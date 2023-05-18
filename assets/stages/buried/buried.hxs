@@ -161,7 +161,7 @@ var haventdone = true;
 function onUpdate(elapsed) {
 
   if (whiteHand != null && whiteHand.animation.curAnim.name == 'transform') || (apparition != null && apparition.visible)) {
-  PlayState.camGame.zoom = 33;
+  PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.55;
   }
 
 	if (whiteHand != null && whiteHand.visible) {
