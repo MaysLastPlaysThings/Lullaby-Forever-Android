@@ -160,7 +160,7 @@ function onCreatePost() {
 var haventdone = true;
 function onUpdate(elapsed) {
 
-  if ((whiteHand != null && whiteHand.animation.curAnim.name == 'transform') || (apparition != null && apparition.visible)) {
+  if (whiteHand != null && whiteHand.animation.curAnim.name == 'transform') {
   PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.55;
   }
 
@@ -169,7 +169,7 @@ function onUpdate(elapsed) {
 		handShadow.x = whiteHand.x - (whiteHand.width / 2) + (whiteHand.width / 12);
 	}
     //
-	if (whiteHand != null && whiteHand.animation.curAnim.name == 'transform') {
+	if ((whiteHand != null && whiteHand.animation.curAnim.name == 'transform') || (apparition != null && apparition.visible)) {
 		apparition.y = apparitionY + Math.sin((180 / Math.PI) * ((Conductor.songPosition / 1000) / 48)) * 32;
 	    apparition.x = apparitionX + Math.cos((180 / Math.PI) * ((Conductor.songPosition / 1000) / 48)) * 32;
 		handShadow.x = apparition.x - (handShadow.width / 2) + (handShadow.width / 9);
