@@ -57,7 +57,7 @@ class Init extends FlxState
 			'Whether to have the strumline vertically flipped in gameplay.',
 			NOT_FORCED
 		],
-		'Extra Hitbox Position' => [
+		'HPos' => [
 			'Middle',
 			Selector,
 			'Choose whether you want to display the extra hitbox.',
