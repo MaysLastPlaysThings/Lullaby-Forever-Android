@@ -1144,9 +1144,9 @@ class PlayState extends MusicBeatState
 		{
 		  case 'alley' | 'cave' | 'mountain':
 		  if(gameplayMode != PUSSY_MODE){
-		   addMobileControls(true, true); 
+		   addMobileControls(true, false); 
 		  }else{
-		   addMobileControls(false, true);  
+		   addMobileControls(false, false);  
 		  }
 		  
 		  default: //What other songs use 5keys? 
