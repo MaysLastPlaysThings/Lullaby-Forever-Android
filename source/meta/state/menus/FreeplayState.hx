@@ -62,6 +62,10 @@ class FreeplayState extends MusicBeatState
 	{
 		super.create();
 
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
 		mutex = new Mutex();
 
 
