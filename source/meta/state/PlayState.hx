@@ -61,6 +61,7 @@ import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
 import vlc.MP4Handler;
+import mobile.MobileControls;
 
 using StringTools;
 
@@ -1674,6 +1675,12 @@ class PlayState extends MusicBeatState
 
 	var keysArray:Array<Dynamic>;
 
+		#if mobile
+		addMobileControls(false, true);  
+    mobileControls.visible = false;
+	
+		#end
+
 	public function onKeyPress(event:KeyboardEvent):Void
 	{
 		var eventKey:FlxKey = event.keyCode;
@@ -2151,7 +2158,7 @@ class PlayState extends MusicBeatState
 		if (!inCutscene && generatedMusic)
 		{
 			// pause the game if the game is allowed to pause and enter is pressed
-			if (FlxG.keys.justPressed.ENTER
+			if (FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end
 				&& startedCountdown
 				&& (accuracySound == null || (accuracySound != null && !accuracySound.playing))
 				&& canPause
@@ -4023,6 +4030,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+	        #if mobile
+                mobileControls.visible = false;
+           #end
 		if (!songLoops)
 		{
 			canPause = false;
@@ -4284,6 +4294,9 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown():Void
 	{
+	        #if mobile
+                mobileControls.visible = true;
+          #end
 		inCutscene = false;
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
