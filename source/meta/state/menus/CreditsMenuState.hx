@@ -166,6 +166,10 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
     override public function create() {
         super.create();
 
+		#if mobile
+		addVirtualPad(LEFT_FULL, B);
+		#end
+
 		// initialize shop music
 		FlxG.sound.playMusic(Paths.music('creditsTheme'), 0.5, true);
 		// FlxG.sound.music.fadeIn(0.5, 0, 1);
