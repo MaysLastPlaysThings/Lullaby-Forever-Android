@@ -12,6 +12,10 @@ class GalleryState extends MusicBeatState {
     override public function create() {
         super.create();
 
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
         topBar = new FlxSprite().makeGraphic(1, 1);
         topBar.setGraphicSize(FlxG.width, 64);
 		topStrip = new FlxTiledSprite(Paths.image('gallery/topstrip'), FlxG.width, 0);
