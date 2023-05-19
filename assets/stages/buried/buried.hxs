@@ -20,7 +20,7 @@ var targetGBvalue:Float = 0.0;
 function onCreate() {
     var consistentPosition:Array<Float> = [-1130, -350];
     var resizeBG:Float = PlayState.daPixelZoom;
-    PlayState.defaultCamZoom = 0.55;
+    PlayState.defaultCamZoom = PlayState.defaultForeverZoom * 0.55;
 
     brimstoneBackground = new FlxSprite(consistentPosition[0], consistentPosition[1]);
     brimstoneBackground.loadGraphic(Paths.image('brimstoneBack'));
