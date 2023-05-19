@@ -161,12 +161,7 @@ var haventdone = true;
 function onUpdate(elapsed) {
 
   if (whiteHand != null && whiteHand.animation.curAnim.name == 'transform') {
-  PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.55;
-  }
-
-  if (!whiteHand.animation.curAnim.name == 'transform' && apparition != null && apparition.visible) {
-  PlayState.camGame.zoom = PlayState.defaultCamZoom;
-  PlayState.defaultCamZoom = 33;
+  //PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.55;
   }
 
 	if (whiteHand != null && whiteHand.visible) {
@@ -210,6 +205,7 @@ function onEvent(eventName) {
             apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
+            
             whiteHand.animation.finishCallback = function(name:String) {
                 if (name == 'transform') {
                     whiteHand.visible = false;
