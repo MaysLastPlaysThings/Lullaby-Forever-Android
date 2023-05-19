@@ -1150,7 +1150,7 @@ class PlayState extends MusicBeatState
 		  }
 		  
 		  default: //What other songs use 5keys? 
-		  addMobileControls(false, true); 
+		  addMobileControls(false, false); 
 		}
 		
 		//fixed for ya
