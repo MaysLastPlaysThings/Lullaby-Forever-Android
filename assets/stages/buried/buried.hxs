@@ -164,6 +164,11 @@ function onUpdate(elapsed) {
   PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.55;
   }
 
+  if (!whiteHand.animation.curAnim.name == 'transform' && apparition != null && apparition.visible) {
+  PlayState.camGame.zoom = PlayState.defaultCamZoom;
+  PlayState.defaultCamZoom = 33;
+  }
+
 	if (whiteHand != null && whiteHand.visible) {
 		whiteHand.y = handY + Math.sin((180 / Math.PI) * ((Conductor.songPosition / 1000) / 48)) * 32;
 		handShadow.x = whiteHand.x - (whiteHand.width / 2) + (whiteHand.width / 12);
