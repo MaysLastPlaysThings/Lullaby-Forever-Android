@@ -1132,17 +1132,30 @@ class PlayState extends MusicBeatState
 				copyKey(Init.gameControls.get('RIGHT')[0])
 			];
 		}
-
-		#if mobile
-		addMobileControls(false, true);  
-    mobileControls.visible = false;
-		#end
-
+		
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
 		moneySound = new FlxSound().loadEmbedded(Paths.sound('MoneyBagGet'), false, true);
 		FlxG.sound.list.add(moneySound);
+		
+		#if mobile
+		switch(curStage) //better than cursong
+		{
+		  case 'alley' | 'cave' | 'mountain':
+		  if(gameplayMode != PUSSY_MODE){
+		   addMobileControls(true, true); 
+		  }else{
+		   addMobileControls(false, true);  
+		  }
+		  
+		  default: //What other songs use 5keys? 
+		  addMobileControls(false, true); 
+		}
+		
+		//fixed for ya
+    mobileControls.visible = false;
+		#end
 
 		GameOverSubstate.preload();
 		Paths.clearUnusedMemory();
@@ -1679,6 +1692,7 @@ class PlayState extends MusicBeatState
 	}
 
 	var keysArray:Array<Dynamic>;
+
 
 	public function onKeyPress(event:KeyboardEvent):Void
 	{
@@ -4029,9 +4043,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-	        #if mobile
-                mobileControls.visible = false;
-           #end
+	  #if mobile
+    mobileControls.visible = false;
+    #end
 		if (!songLoops)
 		{
 			canPause = false;
@@ -4293,9 +4307,9 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown():Void
 	{
-	        #if mobile
-                mobileControls.visible = true;
-          #end
+	#if mobile
+  mobileControls.visible = true;
+  #end
 		inCutscene = false;
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
