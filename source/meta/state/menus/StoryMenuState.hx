@@ -48,6 +48,10 @@ class StoryMenuState extends MusicBeatState {
     override public function create() {
         super.create();
 
+       #if mobile
+       addVirtualPad(LEFT_RIGHT, A_B);
+       #end
+
 		// "Simply use setProperty()" - BAnims
 
 		#if desktop
