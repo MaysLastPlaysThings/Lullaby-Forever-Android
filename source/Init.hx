@@ -273,6 +273,9 @@ class Init extends FlxState
 
 	override public function create():Void
 	{
+		#if mobile
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
 		/*
 			for (i in pathsArray) {
 				var singularArray:Array<String> = i.split('/');
