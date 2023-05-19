@@ -72,6 +72,10 @@ class MainMenuState extends MusicBeatState
 	override public function create() {
 		super.create();
 
+		#if mobile
+		addVirtualPad(UP_DOWN, A_B);
+		#end
+
 		ForeverTools.resetMenuMusic();
 		#if desktop
 		Discord.changePresence('MAIN MENU', 'Main Menu');
