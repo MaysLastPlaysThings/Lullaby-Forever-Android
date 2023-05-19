@@ -35,9 +35,6 @@ class OptionsMenuState extends MusicBeatState
 	{
 		super.create();
 
-		#if mobile
-		addVirtualPad(LEFT_FULL, A_B);
-		#end
 
 		// define the categories
 		/* 
@@ -149,6 +146,10 @@ class OptionsMenuState extends MusicBeatState
 		infoText.textField.background = true;
 		infoText.textField.backgroundColor = FlxColor.BLACK;
 		add(infoText);
+		
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 
 		loadSubgroup('main');
 	}
