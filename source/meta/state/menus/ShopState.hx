@@ -148,6 +148,10 @@ class ShopState extends MusicBeatState
 	{
 		super.create();
 
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
 		#if desktop
 		if (!freeplaySelected)
 			Discord.changePresence('BROWSING THE SHOP', 'Freeplay Menu');
