@@ -37,7 +37,7 @@ class FlxHitbox extends FlxSpriteGroup
 
 		super();
 		
-		spacepos = Init.trueSettings.get('Extra Hitbox Position');
+		spacepos = Init.trueSettings.get('HPos');
 
 		switch (type)
 		{
