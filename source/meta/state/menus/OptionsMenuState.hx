@@ -35,6 +35,10 @@ class OptionsMenuState extends MusicBeatState
 	{
 		super.create();
 
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
 		// define the categories
 		/* 
 			To explain how these will work, each main category is just any group of options, the options in the category are defined
@@ -580,7 +584,7 @@ class OptionsMenuState extends MusicBeatState
 			lockedMovement = true;
 			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
 			{
-				openSubState(new OptionsSubstate());
+				openSubState(new mobile.MobileControlsSubState());
 				lockedMovement = false;
 			});
 		}
