@@ -1133,6 +1133,11 @@ class PlayState extends MusicBeatState
 			];
 		}
 
+		#if mobile
+		addMobileControls(false, true);  
+    mobileControls.visible = false;
+		#end
+
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
@@ -1674,12 +1679,6 @@ class PlayState extends MusicBeatState
 	}
 
 	var keysArray:Array<Dynamic>;
-
-		#if mobile
-		addMobileControls(false, true);  
-    mobileControls.visible = false;
-	
-		#end
 
 	public function onKeyPress(event:KeyboardEvent):Void
 	{
