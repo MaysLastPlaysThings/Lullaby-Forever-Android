@@ -1143,7 +1143,7 @@ class PlayState extends MusicBeatState
 		#if mobile
 		switch(curStage) //better than cursong
 		{
-		  case 'alley' | 'cave' | 'mountain':
+		  case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
 		  if(gameplayMode != PUSSY_MODE){
 		   addMobileControls(true, false); 
 		  }else{
