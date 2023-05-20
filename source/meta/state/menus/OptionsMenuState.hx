@@ -65,6 +65,7 @@ class OptionsMenuState extends MusicBeatState
 					['', null],
 					['Downscroll', getFromOption],
 					['HPos', getFromOption], //i forgor
+					['Controller Mode', getFromOption], //e, idk wat is that lol
 					['Centered Notefield', getFromOption],
 					['Ghost Tapping', getFromOption],
 					['Display Accuracy', getFromOption],
