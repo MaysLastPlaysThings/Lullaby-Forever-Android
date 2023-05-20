@@ -1,4 +1,6 @@
-#pragma header
+#ifdef GL_ES
+precision mediump float;
+#endif
 
 #define PI 3.14159265
 uniform float time;
@@ -19,8 +21,8 @@ vec3 spectrum_offset( float t ) {
 }
 
 void main() {
-    vec2 uv = openfl_TextureCoordv;
-    float ofs = (initial / 1000) + (intensity / 1000);
+    vec2 uv = gl_FragCoord.xy / vec2( resolution ); // Substitua 'resolution' pelo nome correto da variável que armazena a resolução da tela
+    float ofs = (initial / 1000.0) + (intensity / 1000.0);
 
 	vec4 sum = vec4(0.0);
 	vec3 wsum = vec3(0.0);
@@ -30,7 +32,7 @@ void main() {
 	{
         float t = float(i) * sampleinverse;
 		uv.x = sat( uv.x + ofs * t );
-		vec4 samplecol = texture2D(bitmap, uv, -10.0 );
+		vec4 samplecol = texture2D(bitmap, uv); // Remova o parâmetro '-10.0' da função 'texture2D'
 		vec3 s = spectrum_offset( t );
 		samplecol.rgb = samplecol.rgb * s;
 		sum += samplecol;
