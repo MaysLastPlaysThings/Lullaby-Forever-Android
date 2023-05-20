@@ -62,6 +62,8 @@ import openfl.media.Sound;
 import openfl.utils.Assets;
 import vlc.MP4Handler;
 
+import mobile.MobileControls;
+
 using StringTools;
 
 #if sys
@@ -1138,6 +1140,24 @@ class PlayState extends MusicBeatState
 		moneySound = new FlxSound().loadEmbedded(Paths.sound('MoneyBagGet'), false, true);
 		FlxG.sound.list.add(moneySound);
 
+		#if mobile
+		switch(curStage) //better than cursong
+		{
+		  case 'alley' | 'cave' | 'mountain':
+		  if(gameplayMode != PUSSY_MODE){
+		   addMobileControls(true, false); 
+		  }else{
+		   addMobileControls(false, false);  
+		  }
+
+		  default: //What other songs use 5keys? 
+		  addMobileControls(false, false); 
+		}
+
+		//fixed for ya
+    mobileControls.visible = false;
+		#end
+		
 		GameOverSubstate.preload();
 		Paths.clearUnusedMemory();
 
@@ -2153,7 +2173,7 @@ class PlayState extends MusicBeatState
 		if (!inCutscene && generatedMusic)
 		{
 			// pause the game if the game is allowed to pause and enter is pressed
-			if (FlxG.keys.justPressed.ENTER
+			if (FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end
 				&& startedCountdown
 				&& (accuracySound == null || (accuracySound != null && !accuracySound.playing))
 				&& canPause
@@ -3653,6 +3673,9 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
+		#if mobile
+  mobileControls.visible = true;
+  #end
 		startingSong = false;
 
 		previousFrameTime = FlxG.game.ticks;
@@ -4025,6 +4048,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+	  #if mobile
+    mobileControls.visible = false;
+    #end
 		if (!songLoops)
 		{
 			canPause = false;
@@ -4244,7 +4270,7 @@ class PlayState extends MusicBeatState
 									remove(ds2);
 									new FlxTimer().start(0.5, function(tmr:FlxTimer)
 									{
-										FlxTween.tween(FlxG.camera, { defaultForeverZoom * 0.75}, 1.35, {
+										FlxTween.tween(FlxG.camera, {zoom: defaultForeverZoom * 0.75}, 1.35, {
 											ease: FlxEase.backIn,
 											onComplete: function(tween:FlxTween)
 											{
