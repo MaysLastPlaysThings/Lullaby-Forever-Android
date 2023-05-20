@@ -61,7 +61,6 @@ import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
 import vlc.MP4Handler;
-import mobile.MobileControls;
 
 using StringTools;
 
@@ -1132,30 +1131,12 @@ class PlayState extends MusicBeatState
 				copyKey(Init.gameControls.get('RIGHT')[0])
 			];
 		}
-		
+
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
 		moneySound = new FlxSound().loadEmbedded(Paths.sound('MoneyBagGet'), false, true);
 		FlxG.sound.list.add(moneySound);
-		
-		#if mobile
-		switch(curStage) //better than cursong
-		{
-		  case 'alley' | 'cave' | 'mountain':
-		  if(gameplayMode != PUSSY_MODE){
-		   addMobileControls(true, false); 
-		  }else{
-		   addMobileControls(false, false);  
-		  }
-		  
-		  default: //What other songs use 5keys? 
-		  addMobileControls(false, false); 
-		}
-		
-		//fixed for ya
-    mobileControls.visible = false;
-		#end
 
 		GameOverSubstate.preload();
 		Paths.clearUnusedMemory();
@@ -1693,7 +1674,6 @@ class PlayState extends MusicBeatState
 
 	var keysArray:Array<Dynamic>;
 
-
 	public function onKeyPress(event:KeyboardEvent):Void
 	{
 		var eventKey:FlxKey = event.keyCode;
@@ -1836,8 +1816,10 @@ class PlayState extends MusicBeatState
 		/*camGame. = 60 * (defaultCamZoom - 0.8);
 		camHUD.zoom = 60 * (defaultCamZoom - 0.8);*/
 
-		 /* camGame.zoom = defaultCamZoom;
-      defaultCamZoom = 36;*/
+		/*if (SONG.song.toLowerCase() == 'safety-lullaby' && SONG.song.toLowerCase() == 'left-unchecked') {
+		  camGame.zoom = defaultCamZoom;
+      defaultCamZoom = 37;
+		}*/
 
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
@@ -2171,7 +2153,7 @@ class PlayState extends MusicBeatState
 		if (!inCutscene && generatedMusic)
 		{
 			// pause the game if the game is allowed to pause and enter is pressed
-			if (FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end
+			if (FlxG.keys.justPressed.ENTER
 				&& startedCountdown
 				&& (accuracySound == null || (accuracySound != null && !accuracySound.playing))
 				&& canPause
@@ -2325,7 +2307,7 @@ class PlayState extends MusicBeatState
 			var easeLerp = 1 * (1 - (elapsed * 3.125));
 			// camera stuffs
 			if (camZooming) {
-				FlxG.camera.zoom = FlxMath.lerp(defaultForeverZoom * (defaultCamZoom + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
+				FlxG.camera.zoom = FlxMath.lerp(1 * (defaultCamZoom + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[1]), hud.zoom, easeLerp);
 			} // Under Testing Cameras - Ralsei
@@ -4043,9 +4025,6 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-	  #if mobile
-    mobileControls.visible = false;
-    #end
 		if (!songLoops)
 		{
 			canPause = false;
@@ -4265,7 +4244,7 @@ class PlayState extends MusicBeatState
 									remove(ds2);
 									new FlxTimer().start(0.5, function(tmr:FlxTimer)
 									{
-										FlxTween.tween(FlxG.camera, {zoom: defaultForeverZoom * 0.75}, 1.35, {
+										FlxTween.tween(FlxG.camera, { defaultForeverZoom * 0.75}, 1.35, {
 											ease: FlxEase.backIn,
 											onComplete: function(tween:FlxTween)
 											{
@@ -4307,9 +4286,6 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown():Void
 	{
-	#if mobile
-  mobileControls.visible = true;
-  #end
 		inCutscene = false;
 		Conductor.songPosition = -(Conductor.crochet * 5);
 		swagCounter = 0;
@@ -4498,4 +4474,26 @@ class PlayState extends MusicBeatState
 		textDebug.cameras = [camHUD];
 		add(textDebug);
 	}
+	
+	public var varTweens:
+	
+	public function zoomTween(tO:Dynamic, tV:Dynamic, dR:Float = 1.0, eS:String) {
+		if (eS != null) {
+			FlxTween.tween(tO, {zoom: tV}, dR, {ease: strToEase()})
+		}
+	}
 }
+
+Lua_helper.add_callback(lua, "doTweenZoom", function(vars:String, value:Dynamic, duration:Float, ease:String) {
+			var penisExam:Dynamic = tweenShit(tag, vars);
+			if(penisExam != null) {
+				PlayState.instance.modchartTweens.set(tag, FlxTween.tween(penisExam, {zoom: value}, duration, {ease: getFlxEaseByString(ease),
+					onComplete: function(twn:FlxTween) {
+						PlayState.instance.callOnLuas('onTweenCompleted', [tag]);
+						PlayState.instance.modchartTweens.remove(tag);
+					}
+				}));
+			} else {
+				luaTrace('doTweenZoom: Couldnt find object: ' + vars, false, false, FlxColor.RED);
+			}
+		});
