@@ -64,6 +64,12 @@ class Init extends FlxState
 			NOT_FORCED,
 			['Middle', 'Up', 'Down'] //sup
 		],
+		'Controller Mode' => [
+			true,
+			Checkmark,
+			'Do you want to have controller instead of keyboard?',
+			NOT_FORCED
+		],
 		'Auto Pause' => [true, Checkmark, '', NOT_FORCED],
 		'FPS Counter' => [true, Checkmark, 'Whether to display the FPS counter.', NOT_FORCED],
 		'Memory Counter' => [
