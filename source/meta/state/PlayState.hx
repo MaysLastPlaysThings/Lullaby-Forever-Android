@@ -4474,26 +4474,4 @@ class PlayState extends MusicBeatState
 		textDebug.cameras = [camHUD];
 		add(textDebug);
 	}
-	
-	public var varTweens:
-	
-	public function zoomTween(tO:Dynamic, tV:Dynamic, dR:Float = 1.0, eS:String) {
-		if (eS != null) {
-			FlxTween.tween(tO, {zoom: tV}, dR, {ease: strToEase()})
-		}
-	}
 }
-
-Lua_helper.add_callback(lua, "doTweenZoom", function(vars:String, value:Dynamic, duration:Float, ease:String) {
-			var penisExam:Dynamic = tweenShit(tag, vars);
-			if(penisExam != null) {
-				PlayState.instance.modchartTweens.set(tag, FlxTween.tween(penisExam, {zoom: value}, duration, {ease: getFlxEaseByString(ease),
-					onComplete: function(twn:FlxTween) {
-						PlayState.instance.callOnLuas('onTweenCompleted', [tag]);
-						PlayState.instance.modchartTweens.remove(tag);
-					}
-				}));
-			} else {
-				luaTrace('doTweenZoom: Couldnt find object: ' + vars, false, false, FlxColor.RED);
-			}
-		});
