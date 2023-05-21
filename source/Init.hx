@@ -67,7 +67,7 @@ class Init extends FlxState
 		'Touch Mode' => [
 			true,
 			Checkmark,
-			'Do you want to use the touch screen instead of keyboard?',
+			'Enable to use Touch Screen',
 			NOT_FORCED
 		], //hola
 		/*'Controller Mode' => [
