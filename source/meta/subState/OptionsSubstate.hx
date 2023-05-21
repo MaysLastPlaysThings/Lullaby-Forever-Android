@@ -28,6 +28,10 @@ class OptionsSubstate extends MusicBeatSubState
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
 		add(bg);
 
+    #if mobile
+    addVirtualPad(LEFT_RIGHT, A_B);
+		#end
+
 		super.create();
 
 		keyOptions = generateOptions();
