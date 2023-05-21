@@ -61,6 +61,7 @@ import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
 import vlc.MP4Handler;
+
 import mobile.MobileControls;
 
 using StringTools;
@@ -80,9 +81,10 @@ enum abstract GameModes(String) to String
 
 class PlayState extends MusicBeatState
 {
-	// additions
+	//additions
 	public var defaultForeverZoom:Dynamic = 60.0;
-
+	public var eventTriggers:Array<Bool> = [false, false];
+	
 	public var startTimer:FlxTimer;
 
 	public static var curStage:String = '';
@@ -431,13 +433,13 @@ class PlayState extends MusicBeatState
 		// create the hud camera (separate so the hud stays on screen)
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
-
-		// camGame.zoom == defaultCamZoom; //not working
-
+		
+		//camGame.zoom == defaultCamZoom; //not working
+		
 		FlxG.cameras.reset(camGame);
-
-		// FlxG.cameras.add(camGame, false);
-
+		
+		//FlxG.cameras.add(camGame, false);
+		
 		FlxG.cameras.add(camHUD, false);
 		allUIs.push(camHUD);
 
@@ -1133,36 +1135,30 @@ class PlayState extends MusicBeatState
 			];
 		}
 
-		if (!Init.trueSettings.get('Touch Mode'))
-		{
-			FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
-			FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
-		}
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 
 		moneySound = new FlxSound().loadEmbedded(Paths.sound('MoneyBagGet'), false, true);
 		FlxG.sound.list.add(moneySound);
 
 		#if mobile
-		switch (curStage) // better than cursong
+		switch(curStage) //better than cursong
 		{
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
-				if (gameplayMode != PUSSY_MODE)
-				{
-					addMobileControls(true, false);
-				}
-				else
-				{
-					addMobileControls(false, false);
-				}
+		  case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
+		  if(gameplayMode != PUSSY_MODE){
+		   addMobileControls(true, false); 
+		  }else{
+		   addMobileControls(false, false);  
+		  }
 
-			default: // What other songs use 5keys?
-				addMobileControls(false, false);
+		  default: //What other songs use 5keys? 
+		  addMobileControls(false, false); 
 		}
 
-		// fixed for ya
-		mobileControls.visible = false;
+		//fixed for ya
+    mobileControls.visible = false;
 		#end
-
+		
 		GameOverSubstate.preload();
 		Paths.clearUnusedMemory();
 
@@ -1171,7 +1167,7 @@ class PlayState extends MusicBeatState
 
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
-
+		
 		addCustomCode();
 	}
 
@@ -1699,29 +1695,6 @@ class PlayState extends MusicBeatState
 
 	var keysArray:Array<Dynamic>;
 
-	private function touchinput():Void // stolen from psych xd
-	{
-		var PressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-		if (PressArray.contains(true))
-		{
-			for (i in 0...PressArray.length)
-			{
-				if (PressArray[i])
-					onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
-			}
-		}
-
-		var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
-		if (ReleaseArray.contains(true))
-		{
-			for (i in 0...ReleaseArray.length)
-			{
-				if (ReleaseArray[i])
-					onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
-			}
-		}
-	}
-
 	public function onKeyPress(event:KeyboardEvent):Void
 	{
 		var eventKey:FlxKey = event.keyCode;
@@ -1729,7 +1702,7 @@ class PlayState extends MusicBeatState
 
 		if ((key >= 0)
 			&& !strumLines.members[playerLane].autoplay
-			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || Init.trueSettings.get('Touch Mode'))
+			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED))
 			&& (FlxG.keys.enabled && !paused && (FlxG.state.active || FlxG.state.persistentUpdate)))
 		{
 			if (generatedMusic && !inCutscene)
@@ -1858,22 +1831,16 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		// for update cam num
-		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height
-			+ "\nChar Zoom: " + characterZoom; // hope this show the value
-
+		//for update cam num
+		textDebug.text = "CamGame: " + camGame.zoom + "\nCamHUD: " + camHUD.zoom + "\nCamGame Width and Height: " + camGame.width + " | " + camGame.height + "\nChar Zoom: " + characterZoom + "\nEvent Triggers: " + eventTriggers[0] + " | " + eventTriggers[1]; //hope this show the value
+		
 		/*camGame. = 60 * (defaultCamZoom - 0.8);
-			camHUD.zoom = 60 * (defaultCamZoom - 0.8); */
-		/*if (SONG.song.toLowerCase() == 'safety-lullaby' && SONG.song.toLowerCase() == 'left-unchecked') {
-					  camGame.zoom = defaultCamZoom;
-			defaultCamZoom = 37;
-		}*/
+		camHUD.zoom = 60 * (defaultCamZoom - 0.8);*/
 
-		if (generatedMusic && !inCutscene) // so
-		{
-			if (Init.trueSettings.get('Touch Mode'))
-				touchinput();
-		}
+		/*if (SONG.song.toLowerCase() == 'safety-lullaby' && SONG.song.toLowerCase() == 'left-unchecked') {
+		  camGame.zoom = defaultCamZoom;
+      defaultCamZoom = 37;
+		}*/
 
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
@@ -2207,7 +2174,8 @@ class PlayState extends MusicBeatState
 		if (!inCutscene && generatedMusic)
 		{
 			// pause the game if the game is allowed to pause and enter is pressed
-			if (FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end && startedCountdown
+			if (FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end
+				&& startedCountdown
 				&& (accuracySound == null || (accuracySound != null && !accuracySound.playing))
 				&& canPause
 				&& !deadstone)
@@ -2359,9 +2327,8 @@ class PlayState extends MusicBeatState
 
 			var easeLerp = 1 * (1 - (elapsed * 3.125));
 			// camera stuffs
-			if (camZooming)
-			{
-				// FlxG.camera.zoom = FlxMath.lerp(1 * (defaultCamZoom + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
+			if (camZooming) {
+				//FlxG.camera.zoom = FlxMath.lerp(1 * (defaultCamZoom + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
 				camGame.zoom = FlxMath.lerp(1 * (defaultCamZoom + forceZoom[0] + characterZoom), FlxG.camera.zoom, easeLerp);
 				for (hud in allUIs)
 					hud.zoom = FlxMath.lerp(defaultForeverZoom * (1 + forceZoom[1]), hud.zoom, easeLerp);
@@ -3480,10 +3447,10 @@ class PlayState extends MusicBeatState
 	public static function updateRPC(pausedRPC:Bool)
 	{
 		var displayRPC:String = (pausedRPC) ? detailsPausedText : songDetails;
-		#if desktop
+		    #if desktop
 		if (health > 0)
 			Discord.changePresence(displayRPC, detailsSub, iconRPC);
-		#end
+			#end
 	}
 
 	var animationsPlay:Array<Note> = [];
@@ -3684,7 +3651,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 			rating.alpha = 0.0001; // uh hopefully this dont break ig
-
+		
 		switch (daRating)
 		{
 			case 'good':
@@ -3709,8 +3676,8 @@ class PlayState extends MusicBeatState
 	function startSong():Void
 	{
 		#if mobile
-		mobileControls.visible = true;
-		#end
+  mobileControls.visible = true;
+  #end
 		startingSong = false;
 
 		previousFrameTime = FlxG.game.ticks;
@@ -3964,18 +3931,18 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
-		if (bopFrequency != 0)
+ 		if (bopFrequency != 0)
 		{
 			if ((FlxG.camera.zoom < (defaultForeverZoom * 1.35) && curBeat % (4 / bopFrequency) == 0)
 				&& camZooming
 				&& (!Init.trueSettings.get('Reduced Movements')))
 			{
-				// FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
-				// camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
-				// for (hud in strumHUD)
-				// hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
+				//FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
+				//camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
+				//for (hud in strumHUD)
+					//hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 			}
-		} // [TEMPORARY DISABLED.]
+		} //[TEMPORARY DISABLED.]
 
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
@@ -4083,9 +4050,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-		#if mobile
-		mobileControls.visible = false;
-		#end
+	  #if mobile
+    mobileControls.visible = false;
+    #end
 		if (!songLoops)
 		{
 			canPause = false;
@@ -4529,9 +4496,8 @@ class PlayState extends MusicBeatState
 			//
 		}
 	}
-
-	function addCustomCode()
-	{
+	
+	function addCustomCode() {
 		textDebug = new FlxText(20, 300, 0, dText, 20, false);
 		textDebug.cameras = [camHUD];
 		add(textDebug);
