@@ -115,6 +115,7 @@ class PauseSubState extends MusicBeatSubState
 
 		#if mobile
 		addVirtualPad(UP_DOWN, A);
+		addVirtualPadCamera(false);
 		#end
 	}
 
@@ -218,7 +219,7 @@ class PauseSubState extends MusicBeatSubState
 				var downP = controls.UI_DOWN_P;
 				var accepted = controls.ACCEPT;
 				//
-				if (accepted)
+				if (#if !mobile accepted #else virtualPad.buttonA.justPressed #end)
 				{
 					switch (menuItems[curSelected].toLowerCase())
 					{
@@ -236,9 +237,9 @@ class PauseSubState extends MusicBeatSubState
 					lockControls = true;
 				}
 
-				if (upP)
+				if ( #if !mobile upP #else virtualPad.buttonUp.justPressed #end)
 					curSelected--;
-				if (downP)
+				if (# if !mobile downP #else virtualPad.buttonA.justPressed #end)
 					curSelected++;
 				if (curSelected < 0)
 					curSelected = menuItems.length - 1;
