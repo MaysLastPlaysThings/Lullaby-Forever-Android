@@ -1696,7 +1696,7 @@ class PlayState extends MusicBeatState
 	
 	private function touchinput():Void //stolen from psych xd
 	{
-			var PressArray:Array<Bool> = [controls.NOTE_LEFT_P, controls.NOTE_DOWN_P, controls.NOTE_UP_P, controls.NOTE_RIGHT_P];
+			var PressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
 			if(PressArray.contains(true))
 			{
 				for (i in 0...PressArray.length)
@@ -1706,7 +1706,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 		
-			var ReleaseArray:Array<Bool> = [controls.NOTE_LEFT_R, controls.NOTE_DOWN_R, controls.NOTE_UP_R, controls.NOTE_RIGHT_R];
+			var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 			if(ReleaseArray.contains(true))
 			{
 				for (i in 0...ReleaseArray.length)
