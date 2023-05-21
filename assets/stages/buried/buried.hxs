@@ -205,12 +205,12 @@ function onEvent(eventName) {
             apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
-            PlayState.defaultCamZoom = 0.9;
+            PlayState.defaultCamZoom = 10.0;
             whiteHand.animation.finishCallback = function(name:String) {
                 if (name == 'transform') {
                     whiteHand.visible = false;
                     apparition.visible = true;
-                    PlayState.defaultCamZoom = 0.55;
+                    PlayState.defaultCamZoom = 10.0;
                 }
             }
         case 'Brimstone Background Desaturate':
