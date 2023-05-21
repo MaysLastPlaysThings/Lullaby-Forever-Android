@@ -266,6 +266,14 @@ class OptionsMenuState extends MusicBeatState
 	{
 		super.update(elapsed);
 
+                #if mobile
+		if (virtualPad.buttonC.justPressed)
+		{
+			removeVirtualPad();
+			openSubState(new mobile.MobileControlsSubState());
+		}
+		#end
+
 		// just uses my outdated code for the main menu state where I wanted to implement
 		// hold scrolling but I couldnt because I'm dumb and lazy
 		if (!lockedMovement)
