@@ -3938,7 +3938,7 @@ class PlayState extends MusicBeatState
 			{
 				//FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
 				//camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
-				for (hud in strumHUD)
+				//for (hud in strumHUD)
 					//hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 			}
 		} //[TEMPORARY DISABLED.]
