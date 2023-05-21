@@ -237,7 +237,7 @@ class PauseSubState extends MusicBeatSubState
 					lockControls = true;
 				}
 
-				if ( #if !mobile upP #else virtualPad.buttonUp.justPressed #end)
+				if (#if !mobile upP #else virtualPad.buttonUp.justPressed #end)
 					curSelected--;
 				if (#if !mobile downP #else virtualPad.buttonDown.justPressed #end)
 					curSelected++;
