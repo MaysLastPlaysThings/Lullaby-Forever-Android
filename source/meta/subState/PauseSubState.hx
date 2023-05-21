@@ -239,7 +239,7 @@ class PauseSubState extends MusicBeatSubState
 
 				if ( #if !mobile upP #else virtualPad.buttonUp.justPressed #end)
 					curSelected--;
-				if (# if !mobile downP #else virtualPad.buttonDown.justPressed #end)
+				if (#if !mobile downP #else virtualPad.buttonDown.justPressed #end)
 					curSelected++;
 				if (curSelected < 0)
 					curSelected = menuItems.length - 1;
