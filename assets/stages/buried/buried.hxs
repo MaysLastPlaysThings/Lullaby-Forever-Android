@@ -205,9 +205,10 @@ function onEvent(eventName) {
             apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
-            
+            PlayState.eventTriggers[0] = true;
             whiteHand.animation.finishCallback = function(name:String) {
                 if (name == 'transform') {
+                    PlayState.eventTriggers[1] = true;
                     whiteHand.visible = false;
                     apparition.visible = true;
                 }
