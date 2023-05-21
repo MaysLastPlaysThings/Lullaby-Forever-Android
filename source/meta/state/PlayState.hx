@@ -1133,10 +1133,10 @@ class PlayState extends MusicBeatState
 				copyKey(Init.gameControls.get('RIGHT')[0])
 			];
 		}
-    if (!Init.trueSettings.get('Touch Mode')){
+
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
-    }
+
 		moneySound = new FlxSound().loadEmbedded(Paths.sound('MoneyBagGet'), false, true);
 		FlxG.sound.list.add(moneySound);
 
@@ -1693,30 +1693,6 @@ class PlayState extends MusicBeatState
 	}
 
 	var keysArray:Array<Dynamic>;
-	
-	private function touchinput():Void //stolen from psych xd
-	{
-			var PressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
-			if(PressArray.contains(true))
-			{
-				for (i in 0...PressArray.length)
-				{
-					if(PressArray[i])
-						onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
-				}
-			}
-		
-			var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
-			if(ReleaseArray.contains(true))
-			{
-				for (i in 0...ReleaseArray.length)
-				{
-					if(ReleaseArray[i])
-						onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
-				}
-			}
-		
-	}
 
 	public function onKeyPress(event:KeyboardEvent):Void
 	{
@@ -1725,7 +1701,7 @@ class PlayState extends MusicBeatState
 
 		if ((key >= 0)
 			&& !strumLines.members[playerLane].autoplay
-			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || Init.trueSettings.get('Touch Mode'))
+			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED))
 			&& (FlxG.keys.enabled && !paused && (FlxG.state.active || FlxG.state.persistentUpdate)))
 		{
 			if (generatedMusic && !inCutscene)
@@ -1819,10 +1795,8 @@ class PlayState extends MusicBeatState
 
 	override public function destroy()
 	{
-	  if (!Init.trueSettings.get('Touch Mode')){
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
-	  }
 
 		super.destroy();
 	}
@@ -1866,12 +1840,6 @@ class PlayState extends MusicBeatState
 		  camGame.zoom = defaultCamZoom;
       defaultCamZoom = 37;
 		}*/
-		
-		if(generatedMusic && !inCutscene) //so
-		{
-		  	if (Init.trueSettings.get('Touch Mode'))
-		    touchinput();
-		}
 
 		if (!inCutscene && generatedMusic && !deadstone)
 		{
@@ -3968,12 +3936,12 @@ class PlayState extends MusicBeatState
 				&& camZooming
 				&& (!Init.trueSettings.get('Reduced Movements')))
 			{
-				FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
-				camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
+				//FlxG.camera.zoom += defaultForeverZoom * (0.015 * bopIntensity);
+				//camHUD.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 				for (hud in strumHUD)
-					hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
+					//hud.zoom += defaultForeverZoom * (0.05 * bopIntensity);
 			}
-		} //test №2
+		} //[TEMPORARY DISABLED.]
 
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
