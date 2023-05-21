@@ -21,8 +21,8 @@ vec3 spectrum_offset( float t ) {
 }
 
 void main() {
-    vec2 uv = gl_FragCoord.xy / vec2( resolution ); // Substitua 'resolution' pelo nome correto da variável que armazena a resolução da tela
-    float ofs = (initial / 1000.0) + (intensity / 1000.0);
+    vec2 uv = openfl_TextureCoordv; // Substitua 'resolution' pelo nome correto da variável que armazena a resolução da tela
+    float ofs = (initial / 1000) + (intensity / 1000);
 
 	vec4 sum = vec4(0.0);
 	vec3 wsum = vec3(0.0);
