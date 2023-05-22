@@ -17,6 +17,8 @@ var pukeCooldown:Int = 80;
 var currentGB:Float = 0.0;
 var targetGBvalue:Float = 0.0;
 
+var forceZoomR:Bool = false;
+
 function onCreate() {
     var consistentPosition:Array<Float> = [-1130, -350];
     var resizeBG:Float = PlayState.daPixelZoom;
@@ -159,11 +161,9 @@ function onCreatePost() {
 
 var haventdone = true;
 function onUpdate(elapsed) {
-
-  if (whiteHand != null && whiteHand.animation.curAnim.name == 'transform') {
-  //PlayState.camGame.zoom = PlayState.defaultForeverZoom * 0.55;
-  }
-
+	if (forceZoomR) {
+		PlayState.defaultCamZoom = 0.9;
+	} //force method
 	if (whiteHand != null && whiteHand.visible) {
 		whiteHand.y = handY + Math.sin((180 / Math.PI) * ((Conductor.songPosition / 1000) / 48)) * 32;
 		handShadow.x = whiteHand.x - (whiteHand.width / 2) + (whiteHand.width / 12);
@@ -202,17 +202,17 @@ function onEvent(eventName) {
         default:
             trace('an event was called in brimstone. woohoo');
         case 'Apparition Summon':
-            /*apparitionX = whiteHand.x - 15;
+            apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
-            PlayState.defaultCamZoom = 10.0;
+            forceZoomR = true;
             whiteHand.animation.finishCallback = function(name:String) {
                 if (name == 'transform') {
                     whiteHand.visible = false;
                     apparition.visible = true;
-                    PlayState.defaultCamZoom = 10.0;
+                   forceZoomR = false;
                 }
-            }*/
+            }
         case 'Brimstone Background Desaturate':
             // get muk outta here
             if (muk != null) {
