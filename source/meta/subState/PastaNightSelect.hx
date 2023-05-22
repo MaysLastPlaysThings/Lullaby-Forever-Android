@@ -22,6 +22,10 @@ class PastaNightSelect extends MusicBeatSubState {
 	{
 		super.create();
 
+   #if mobile
+   addVirtualPad(LEFT_RIGHT, A);
+   #end
+
 		FlxG.sound.playMusic(Paths.music('PastaNightSelect'), 1, true);
 		
 		selector = -1;
