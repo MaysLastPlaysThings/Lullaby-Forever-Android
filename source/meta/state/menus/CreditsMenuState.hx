@@ -167,7 +167,8 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
         super.create();
 
 		#if mobile
-		addVirtualPad(LEFT_FULL, B);
+		addVirtualPad(LEFT_FULL, A);
+		addVirtualPadCamera(false)
 		#end
 
 		// initialize shop music
@@ -310,7 +311,7 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 		backdrop.x += (elapsed / (1 / 60)) / 2;
 		backdrop.y = Math.sin(backdrop.x / 48) * 48;
 
-		if (controls.BACK)
+		if (controls.ACCEPT)
 			Main.switchState(this, new MainMenuState());  
         
 		// controls
