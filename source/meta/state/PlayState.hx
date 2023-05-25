@@ -1704,7 +1704,9 @@ class PlayState extends MusicBeatState
 		{
 		  case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
 		var PressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P, controls.SPACE_P];
-		}else{
+		}
+		else
+   {
 		var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 		}
 
@@ -1720,8 +1722,9 @@ class PlayState extends MusicBeatState
 		switch(curStage)
 		{
 		  case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
-		var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R, controls.SPACE_R];
-		}else{
+		var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R, controls.SPACE_R];}
+		else
+    {
 		var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 		}
 
