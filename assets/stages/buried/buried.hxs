@@ -179,7 +179,7 @@ function onUpdate(elapsed) {
 			handShadow.y = handY - whiteHand.height / 2;
 	}
 	if (whiteHand !=null && whiteHand.animation.curAnim.name == 'transform') {
-	PlayState.defaultCamZoom = 0.9;
+	PlayState.defaultCamZoom = PlayState.defaultForeverZoom * 0.9;
 	}
 
     PlayState.strumLines.members[PlayState.playerLane].allNotes.forEachAlive(function(daNote:Note)
