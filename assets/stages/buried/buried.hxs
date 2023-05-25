@@ -179,8 +179,13 @@ function onUpdate(elapsed) {
 			handShadow.y = handY - whiteHand.height / 2;
 	}
 	if (whiteHand !=null && whiteHand.animation.curAnim.name == 'transform') {
-	PlayState.defaultCamZoom = 0.9;
+	PlayState.defaultCamZoom = 53; //for idk what reason it's ded on 0.9 so I'll set it to 53 - Mays
 	 }
+
+	if (whiteHand ==null && whiteHand.animation.curAnim.name != 'transform' && apparition != null && apparition.visible)
+	{
+	PlayState.defaultCamZoom = 33; //because yes. - Mays
+	}
 
     PlayState.strumLines.members[PlayState.playerLane].allNotes.forEachAlive(function(daNote:Note)
         {
