@@ -73,7 +73,7 @@ class MainMenuState extends MusicBeatState
 		super.create();
 
 		#if mobile
-		addVirtualPad(UP_DOWN, A_B);
+		addVirtualPad(UP_DOWN, A_B_C);
 		#end
 
 		ForeverTools.resetMenuMusic();
@@ -230,7 +230,7 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.justPressed.SEVEN) //(Main.hypnoDebug && FlxG.keys.justPressed.SEVEN) //DEBUG UNLOCKS ALL PROGRESSION
+		if (FlxG.keys.justPressed.SEVEN #if mobile || virtualPad.buttonC.justPressed #end) //(Main.hypnoDebug && FlxG.keys.justPressed.SEVEN) //DEBUG UNLOCKS ALL PROGRESSION
 			{
 				FlxG.save.data.mainMenuOptionsUnlocked = ['story', 'freeplay', 'credits', 'pokedex', 'options'];
 				FlxG.save.data.cartridgesOwned = ['HypnoWeek', 'LostSilverWeek', 'GlitchWeek'];
