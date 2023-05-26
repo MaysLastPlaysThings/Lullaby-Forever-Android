@@ -205,12 +205,12 @@ function onEvent(eventName) {
             apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
-            forceZoomR = true;
+            //forceZoomR = true;
             whiteHand.animation.finishCallback = function(name:String) {
                 if (name == 'transform') {
                     whiteHand.visible = false;
                     apparition.visible = true;
-                   forceZoomR = false;
+                   //forceZoomR = false;
                 }
             }
         case 'Brimstone Background Desaturate':
@@ -363,6 +363,14 @@ function onEvent(eventName) {
                 targetGBvalue = 1.0;
 
                 if (currentGB >= 0.99) targetGBvalue = 0.0;
+            }
+        case 'Test Cam 1';
+            {
+                PlayState.defaultCamZoom = 0.9;
+            }
+        case 'Test Cam 2';
+            {
+                PlayState.defaultCamZoom = 0.55;
             }
     }
 }
