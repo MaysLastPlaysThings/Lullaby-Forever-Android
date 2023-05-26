@@ -162,7 +162,7 @@ function onCreatePost() {
 var haventdone = true;
 function onUpdate(elapsed) {
 	if (forceZoomR) {
-		//PlayState.defaultCamZoom = 0.9;
+		PlayState.defaultCamZoom = 0.9;
 	} //force method
 	if (whiteHand != null && whiteHand.visible) {
 		whiteHand.y = handY + Math.sin((180 / Math.PI) * ((Conductor.songPosition / 1000) / 48)) * 32;
@@ -177,14 +177,6 @@ function onUpdate(elapsed) {
 	} else {
 		if (whiteHand != null && whiteHand.visible)
 			handShadow.y = handY - whiteHand.height / 2;
-	}
-	if (whiteHand !=null && whiteHand.animation.curAnim.name == 'transform') {
-	PlayState.defaultCamZoom = 53; //for idk what reason it's ded on 0.9 so I'll set it to 53 - Mays
-	 }
-
-	if (whiteHand ==null && whiteHand.animation.curAnim.name != 'transform' && apparition != null && apparition.visible)
-	{
-	PlayState.defaultCamZoom = 33; //because yes. - Mays
 	}
 
     PlayState.strumLines.members[PlayState.playerLane].allNotes.forEachAlive(function(daNote:Note)
@@ -213,12 +205,12 @@ function onEvent(eventName) {
             apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
-            //forceZoomR = true;
+            forceZoomR = true;
             whiteHand.animation.finishCallback = function(name:String) {
                 if (name == 'transform') {
                     whiteHand.visible = false;
                     apparition.visible = true;
-                   //forceZoomR = false;
+                   forceZoomR = false;
                 }
             }
         case 'Brimstone Background Desaturate':
