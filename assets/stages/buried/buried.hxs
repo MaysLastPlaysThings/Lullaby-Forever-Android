@@ -202,7 +202,7 @@ function onEvent(eventName) {
         default:
             trace('an event was called in brimstone. woohoo');
         case 'Apparition Summon':
-            apparitionX = whiteHand.x - 15;
+            /*apparitionX = whiteHand.x - 15;
             apparitionY = handY - 48;
             whiteHand.playAnim('transform');
             //forceZoomR = true;
@@ -211,7 +211,7 @@ function onEvent(eventName) {
                     whiteHand.visible = false;
                     apparition.visible = true;
                    //forceZoomR = false;
-                }
+                }*/
             }
         case 'Brimstone Background Desaturate':
             // get muk outta here
