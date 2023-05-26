@@ -22,7 +22,7 @@ var forceZoomR:Bool = false;
 function onCreate() {
     var consistentPosition:Array<Float> = [-1130, -350];
     var resizeBG:Float = PlayState.daPixelZoom;
-    PlayState.defaultCamZoom = 0.55;
+    PlayState.defaultCamZoom = 0.55 * 2.0;
 
     brimstoneBackground = new FlxSprite(consistentPosition[0], consistentPosition[1]);
     brimstoneBackground.loadGraphic(Paths.image('brimstoneBack'));
@@ -364,14 +364,14 @@ function onEvent(eventName) {
 
                 if (currentGB >= 0.99) targetGBvalue = 0.0;
             }
-        case 'Test Cam 1';
+        /*case 'Test Cam 1';
             {
                 PlayState.defaultCamZoom = 0.9;
             }
         case 'Test Cam 2';
             {
                 PlayState.defaultCamZoom = 0.55;
-            }
+            }*/ // [TEMPORARILY DISABLED.]
     }
 }
 
