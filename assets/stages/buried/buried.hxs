@@ -211,8 +211,8 @@ function onEvent(eventName) {
                     whiteHand.visible = false;
                     apparition.visible = true;
                    //forceZoomR = false;
-                }*/
-            }
+                }
+            }*/
         case 'Brimstone Background Desaturate':
             // get muk outta here
             if (muk != null) {
