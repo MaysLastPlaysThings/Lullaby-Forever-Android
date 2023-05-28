@@ -1700,31 +1700,6 @@ class PlayState extends MusicBeatState
 
 	private function touchinput():Void // stolen from psych xd
 	{
-		var PressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P, controls.SPACE_P];
-
-		if (PressArray.contains(true))
-		{
-			for (i in 0...PressArray.length)
-			{
-				if (PressArray[i])
-					onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
-			}
-		}
-
-		var ReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R, controls.SPACE_R];
-
-		if (ReleaseArray.contains(true))
-		{
-			for (i in 0...ReleaseArray.length)
-			{
-				if (ReleaseArray[i])
-					onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
-			}
-		}
-	}
-
-	private function touchinputD():Void // stolen from psych xd
-	{
 		var PressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
 
 		if (PressArray.contains(true))
@@ -1897,12 +1872,6 @@ class PlayState extends MusicBeatState
 
 		if (generatedMusic && !inCutscene) // so
 		{
-				switch(curStage)
-				{
-					  case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
-			if (Init.trueSettings.get('Touch Mode'))
-				touchinputD();
-				}
 			if (Init.trueSettings.get('Touch Mode'))
 			  touchinput();
 		}
