@@ -1901,10 +1901,10 @@ class PlayState extends MusicBeatState
 				{
 					  case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
 			if (Init.trueSettings.get('Touch Mode'))
-				touchinput();
+				touchinputD();
 				}
 			if (Init.trueSettings.get('Touch Mode'))
-			  touchinputD();
+			  touchinput();
 		}
 
 		if (!inCutscene && generatedMusic && !deadstone)
