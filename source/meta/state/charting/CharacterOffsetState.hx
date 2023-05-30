@@ -63,7 +63,7 @@ class CharacterOffsetState extends MusicBeatState {
 		add(spriteDisplay);
         
 		FlxG.camera.bgColor = FlxColor.GRAY;
-        FlxG.camera.zoom = 1;
+        FlxG.camera.zoom = 0.9 * 60.0;
     }
 
     var isBack:Bool = false;
