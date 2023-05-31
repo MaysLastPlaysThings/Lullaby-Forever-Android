@@ -31,7 +31,7 @@ function eventFunction(params) {
 				PlayState.instance.vignette = new ShaderFilter(new GraphicsShader("", Paths.shader('brimstone/vignetteApparition')));
 				PlayState.vignetteCam.setFilters([PlayState.instance.vignette]);
 			}
-			FlxTween.tween(PlayState.camGame, {zoom: PlayState.defaultCamZoom}, (Conductor.stepCrochet * 32) / 1000,
+			//FlxTween.tween(PlayState.camGame, {zoom: PlayState.defaultCamZoom}, (Conductor.stepCrochet * 32) / 1000,
 				{ease: FlxEase.sineOut, startDelay: (Conductor.stepCrochet * 16) / 1000});
 			FlxTween.tween(PlayState.instance.manualCameraPosition, {
 				x: originalCameraPlacement.x,
@@ -42,6 +42,6 @@ function eventFunction(params) {
 				}});
 		}
 	});
-	FlxTween.tween(PlayState.camGame, {zoom: 0.9 * PlayState.defaultForeverZoom}, (Conductor.stepCrochet * 32) / 1000, {ease: FlxEase.sineIn});
+	//FlxTween.tween(PlayState.camGame, {zoom: 0.9 * PlayState.defaultForeverZoom}, (Conductor.stepCrochet * 32) / 1000, {ease: FlxEase.sineIn});
 }
 
